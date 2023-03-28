@@ -1,0 +1,13 @@
+.layout-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  border: 1px solid red;
+}
+.layout-element:first-child {
+  min-width: max-content;
+}
+.layout-element:nth-child(2) {
+  width: 100%;
+  max-width: 100rem;
+}
