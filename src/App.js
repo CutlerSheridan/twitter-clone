@@ -4,7 +4,7 @@ import Layout from './components/Layout.js';
 import Home from './components/Home.js';
 import Profile from './components/Profile';
 
-function App() {
+const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -13,6 +13,6 @@ function App() {
       </Route>
     </Routes>
   );
-}
+};
 
 export default App;
