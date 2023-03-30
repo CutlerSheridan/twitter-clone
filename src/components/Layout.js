@@ -1,5 +1,6 @@
 import Navbar from './Navbar';
 import SignIn from './SignIn';
+import { UserContext } from '../UserContext';
 import { Outlet } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, checkIfUserIsNew } from '../FirebaseController';
@@ -17,9 +18,11 @@ const Layout = () => {
 
   return (
     <div className="layout-wrapper">
-      <Navbar />
-      <Outlet />
-      <SignIn user={user} />
+      <UserContext.Provider value={user}>
+        <Navbar />
+        <Outlet />
+        <SignIn />
+      </UserContext.Provider>
     </div>
   );
 };

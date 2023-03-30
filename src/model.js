@@ -7,7 +7,7 @@ const User = (userAuth) => {
     avi: userAuth.photoURL || null,
     banner: null,
     bio: null,
-    joinedDate: null,
+    joinDate: null,
     following: [],
     followers: [],
     isPrivate: false,

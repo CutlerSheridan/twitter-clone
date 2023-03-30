@@ -54,23 +54,33 @@ const checkIfUserIsNew = async (userAuth) => {
         const userDoc = await transaction.get(docRef);
         if (!userDoc.exists()) {
           transaction.set(docRef, model.User(userAuth));
-          transaction.update(docRef, { joinedDate: serverTimestamp() });
+          transaction.update(docRef, { joinDate: serverTimestamp() });
         }
       });
     } catch (e) {
       console.error('Transaction failed: ', e);
     }
-    // const docRef = await getDoc(doc(db, 'users', userAuth.uid));
-    // if (!docRef.data()) {
-    //   await addUserToDB(userAuth);
-    // }
   }
 };
-const addUserToDB = async (userAuth) => {
-  const newUser = model.User(userAuth);
-  const docRef = doc(db, 'users', userAuth.uid);
-  await setDoc(docRef, newUser);
-  await updateDoc(docRef, { joinedDate: serverTimestamp() });
+const getUserInfo = async (userId) => {
+  return (await getDoc(doc(db, 'users', userId))).data();
+};
+const getUserTweets = async (userId) => {
+  const querySnapshot = await getDocs(
+    query(collection(db, 'users', userId, 'tweets'), orderBy('creationDate'))
+  );
+  const tweetsArray = [];
+  querySnapshot.forEach((tweet) => {
+    tweetsArray.push(tweet.data());
+  });
+  return tweetsArray;
 };
 
-export { auth, signInWithGoogle, checkIfUserIsNew, signOutUser };
+export {
+  auth,
+  signInWithGoogle,
+  checkIfUserIsNew,
+  signOutUser,
+  getUserInfo,
+  getUserTweets,
+};

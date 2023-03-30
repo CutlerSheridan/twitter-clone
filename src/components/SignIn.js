@@ -1,7 +1,10 @@
 import './SignIn.css';
 import { signInWithGoogle, signOutUser } from '../FirebaseController';
+import { useContext } from 'react';
+import { UserContext } from '../UserContext';
 
-const SignIn = ({ user }) => {
+const SignIn = () => {
+  const user = useContext(UserContext);
   return (
     <div className="signIn-wrapper">
       {user ? (

@@ -6,11 +6,13 @@
 
 #### TODO NEXT
 
-- add new user to database
+- write tweet constructor
 
 #### TODO LATER
 
 ##### Features
+
+- add handle field in user object and generate random handle that hasn't been used before upon creation
 
 ##### Behavior
 
@@ -19,6 +21,14 @@
 - add credit
 
 #### DONE
+
+_0.2.0_
+
+- Make profile display user's tweets
+
+_0.1.2_
+
+- add logic to create new user object and upload to db upon signing in
 
 _0.1.1_
 
