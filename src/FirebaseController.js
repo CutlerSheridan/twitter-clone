@@ -16,7 +16,12 @@ import {
   query,
   orderBy,
   getDoc,
+  setDoc,
+  updateDoc,
+  serverTimestamp,
+  runTransaction,
 } from 'firebase/firestore/lite';
+import * as model from './model';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -42,30 +47,30 @@ const signOutUser = () => {
 };
 
 const checkIfUserIsNew = async (userAuth) => {
-  if (userAuth.uid) {
-    const docRef = await getDoc(doc(db, 'users', userAuth.uid));
-    if (!docRef.data()) {
-      addUserToDB(userAuth);
+  if (userAuth) {
+    try {
+      await runTransaction(db, async (transaction) => {
+        const docRef = doc(db, 'users', userAuth.uid);
+        const userDoc = await transaction.get(docRef);
+        if (!userDoc.exists()) {
+          transaction.set(docRef, model.User(userAuth));
+          transaction.update(docRef, { joinedDate: serverTimestamp() });
+        }
+      });
+    } catch (e) {
+      console.error('Transaction failed: ', e);
     }
+    // const docRef = await getDoc(doc(db, 'users', userAuth.uid));
+    // if (!docRef.data()) {
+    //   await addUserToDB(userAuth);
+    // }
   }
 };
-const addUserToDB = (userAuth) => {
-  console.log(UserObject(userAuth));
-};
-const UserObject = (userAuth) => {
-  let { uid: id, displayName } = userAuth;
-  return {
-    id,
-    displayName,
-    avi: userAuth.photoURL || null,
-    banner: null,
-    bio: null,
-    joinDate: new Date(),
-    following: [],
-    followers: [],
-    isPrivate: false,
-    pinnedTweet: null,
-  };
+const addUserToDB = async (userAuth) => {
+  const newUser = model.User(userAuth);
+  const docRef = doc(db, 'users', userAuth.uid);
+  await setDoc(docRef, newUser);
+  await updateDoc(docRef, { joinedDate: serverTimestamp() });
 };
 
 export { auth, signInWithGoogle, checkIfUserIsNew, signOutUser };

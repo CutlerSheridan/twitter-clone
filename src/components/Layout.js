@@ -11,7 +11,6 @@ const Layout = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (x) => {
       setUser(x);
-      console.log(x);
       checkIfUserIsNew(x);
     });
   }, []);
