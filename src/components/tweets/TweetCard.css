@@ -13,6 +13,7 @@
 .tweetCard-avi {
   width: 6rem;
   height: 6rem;
+  flex-shrink: 0;
   background: red;
   border-radius: 10rem;
 }
@@ -36,4 +37,5 @@
 .tweetCard-bottomRow {
   display: flex;
   justify-content: space-around;
+  font-size: 1.7rem;
 }

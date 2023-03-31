@@ -13,7 +13,7 @@ const TweetCard = ({ tweet, userInfo = null }) => {
         <div className="tweetCard-tweetAndUserWrapper">
           <div className="tweetCard-nameAndHandleWrapper">
             <div className="tweetCard-displayName">
-              Name: {userInfo ? userInfo.displayName : 'no user'}
+              {userInfo ? userInfo.displayName : 'no user'}
             </div>
             <div className="tweetCard-handleAndDate">
               {userInfo ? '@' + userInfo.handle : 'no handle'} ·{' '}
@@ -24,9 +24,9 @@ const TweetCard = ({ tweet, userInfo = null }) => {
         </div>
       </div>
       <div className="tweetCard-bottomRow">
-        <div>Replies</div>
-        <div>Retweets</div>
-        <div>Likes</div>
+        <div>Reply</div>
+        <div>Retweet</div>
+        <div>Like</div>
         <div>Share</div>
       </div>
     </div>
