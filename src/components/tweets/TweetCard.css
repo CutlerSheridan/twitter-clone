@@ -18,12 +18,15 @@
   border-radius: 10rem;
 }
 .tweetCard-tweetAndUserWrapper {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 0.2rem;
 }
 .tweetCard-nameAndHandleWrapper {
+  position: relative;
+  width: 100%;
   display: flex;
   gap: 1rem;
 }
@@ -38,4 +41,9 @@
   display: flex;
   justify-content: space-around;
   font-size: 1.7rem;
+}
+.tweetCard-delete {
+  position: absolute;
+  right: 0;
+  width: 2rem;
 }

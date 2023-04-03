@@ -1,9 +1,10 @@
 import './TweetCard.css';
-// import { UserContext } from '../../UserContext';
-// import { useContext } from 'react';
+import { UserContext } from '../../UserContext';
+import { useContext } from 'react';
+import { deleteTweet } from '../../FirebaseController';
 
 const TweetCard = ({ tweet, userInfo = null }) => {
-  // const userAuth = useContext(UserContext);
+  const userAuth = useContext(UserContext);
   const creationMilliseconds = tweet.creationDate.seconds * 1000;
 
   return (
@@ -18,6 +19,23 @@ const TweetCard = ({ tweet, userInfo = null }) => {
             <div className="tweetCard-handleAndDate">
               {userInfo ? '@' + userInfo.handle : 'no handle'} ·{' '}
               {new Date(creationMilliseconds).toDateString()}
+              {userInfo.id === userAuth.uid ? (
+                <button
+                  className="tweetCard-delete"
+                  onClick={() => {
+                    deleteTweet(
+                      userInfo.id,
+                      tweet.id ? tweet.id : tweet.tweetId
+                    ).then(() => {
+                      window.location.reload();
+                    });
+                  }}
+                >
+                  X
+                </button>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
           <div className="tweetCard-tweet">{tweet.tweet}</div>

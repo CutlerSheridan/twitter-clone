@@ -8,7 +8,7 @@ const ComposeTweet = () => {
   const userAuth = useContext(UserContext);
 
   const sendTweet = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     const tweetText = e.target[0].value;
     const newTweet = Tweet({
       tweet: tweetText,
@@ -17,6 +17,7 @@ const ComposeTweet = () => {
     addTweetToDatabase(userAuth.uid, newTweet).then(() => {
       const formElement = document.querySelector('.composeTweet-form');
       formElement.reset();
+      window.location.reload();
     });
   };
 
