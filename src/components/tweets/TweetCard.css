@@ -37,13 +37,20 @@
 .tweetCard-handleAndDate {
   opacity: 50%;
 }
+.tweetCard-delete {
+  position: absolute;
+  right: 0;
+  width: 2rem;
+}
 .tweetCard-bottomRow {
   display: flex;
   justify-content: space-around;
   font-size: 1.7rem;
 }
-.tweetCard-delete {
-  position: absolute;
-  right: 0;
-  width: 2rem;
+.tweetCard-actionAndStats {
+  display: flex;
+  gap: 0.7rem;
+}
+.tweetCard-liked {
+  color: red;
 }
