@@ -51,6 +51,10 @@
   display: flex;
   gap: 0.7rem;
 }
+.tweetCard-likeWrapper {
+  width: 4.5rem;
+  /* border: 1px solid black; */
+}
 .tweetCard-likeButton {
   background: none;
   border: none;

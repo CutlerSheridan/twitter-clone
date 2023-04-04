@@ -13,6 +13,7 @@ const TweetCard = ({ tweet, userInfo: tweeterInfo = null }) => {
   const creationMilliseconds = tweet.creationDate.seconds * 1000;
   const [currentUserInfo, setCurrentUserInfo] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
+  const [numOfLikes, setNumOfLikes] = useState(tweet.likes.length);
 
   useEffect(() => {
     const updateCurrentUser = async () => {
@@ -38,14 +39,12 @@ const TweetCard = ({ tweet, userInfo: tweeterInfo = null }) => {
   const handleLikeButton = () => {
     if (isLiked) {
       setIsLiked(false);
-      unlikeTweet(currentUserInfo.id, tweeterInfo.id, tweet.id).then(() => {
-        window.location.reload();
-      });
+      setNumOfLikes((prev) => --prev);
+      unlikeTweet(currentUserInfo.id, tweeterInfo.id, tweet.id);
     } else {
       setIsLiked(true);
-      likeTweet(currentUserInfo.id, tweeterInfo.id, tweet.id).then(() => {
-        window.location.reload();
-      });
+      setNumOfLikes((prev) => ++prev);
+      likeTweet(currentUserInfo.id, tweeterInfo.id, tweet.id);
     }
   };
 
@@ -89,7 +88,7 @@ const TweetCard = ({ tweet, userInfo: tweeterInfo = null }) => {
           <div>Retweet</div>
           <div>{tweet.retweets.length}</div>
         </div>
-        <div className="tweetCard-actionAndStats">
+        <div className="tweetCard-actionAndStats tweetCard-likeWrapper">
           <button
             className={`tweetCard-likeButton ${
               isLiked ? 'tweetCard-likeButton-liked' : ''
@@ -98,7 +97,7 @@ const TweetCard = ({ tweet, userInfo: tweeterInfo = null }) => {
           >
             ♥
           </button>
-          <div>{tweet.likes.length}</div>
+          <div>{numOfLikes}</div>
         </div>
         <div>Share</div>
       </div>
