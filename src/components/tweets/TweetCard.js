@@ -1,7 +1,12 @@
 import './TweetCard.css';
 import { UserContext } from '../../UserContext';
 import { useContext, useEffect, useState } from 'react';
-import { deleteTweet, getUserInfo } from '../../FirebaseController';
+import {
+  deleteTweet,
+  getUserInfo,
+  likeTweet,
+  unlikeTweet,
+} from '../../FirebaseController';
 
 const TweetCard = ({ tweet, userInfo: tweeterInfo = null }) => {
   const userAuth = useContext(UserContext);
@@ -20,16 +25,29 @@ const TweetCard = ({ tweet, userInfo: tweeterInfo = null }) => {
   }, []);
   useEffect(() => {
     if (currentUserInfo && tweet.id) {
-      console.log('currentUserInfo', currentUserInfo);
       if (
         currentUserInfo.likes.some(
-          (x) => x.userId === tweeterInfo.id && x.tweetId === tweet.id
+          (x) => x.sentBy === tweeterInfo.id && x.tweetId === tweet.id
         )
       ) {
         setIsLiked(true);
       }
     }
   }, [currentUserInfo]);
+
+  const handleLikeButton = () => {
+    if (isLiked) {
+      setIsLiked(false);
+      unlikeTweet(currentUserInfo.id, tweeterInfo.id, tweet.id).then(() => {
+        window.location.reload();
+      });
+    } else {
+      setIsLiked(true);
+      likeTweet(currentUserInfo.id, tweeterInfo.id, tweet.id).then(() => {
+        window.location.reload();
+      });
+    }
+  };
 
   return (
     <div className="tweetCard-wrapper">
@@ -47,10 +65,7 @@ const TweetCard = ({ tweet, userInfo: tweeterInfo = null }) => {
                 <button
                   className="tweetCard-delete"
                   onClick={() => {
-                    deleteTweet(
-                      tweeterInfo.id,
-                      tweet.id ? tweet.id : tweet.tweetId
-                    ).then(() => {
+                    deleteTweet(tweeterInfo.id, tweet.id).then(() => {
                       window.location.reload();
                     });
                   }}
@@ -75,7 +90,14 @@ const TweetCard = ({ tweet, userInfo: tweeterInfo = null }) => {
           <div>{tweet.retweets.length}</div>
         </div>
         <div className="tweetCard-actionAndStats">
-          <div className={`${isLiked ? 'tweetCard-liked' : ''}`}>♥</div>
+          <button
+            className={`tweetCard-likeButton ${
+              isLiked ? 'tweetCard-likeButton-liked' : ''
+            }`}
+            onClick={() => handleLikeButton()}
+          >
+            ♥
+          </button>
           <div>{tweet.likes.length}</div>
         </div>
         <div>Share</div>

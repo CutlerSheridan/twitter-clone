@@ -51,6 +51,11 @@
   display: flex;
   gap: 0.7rem;
 }
-.tweetCard-liked {
+.tweetCard-likeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.tweetCard-likeButton-liked {
   color: red;
 }
