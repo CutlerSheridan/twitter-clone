@@ -1,33 +1,102 @@
 import './Profile.css';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../UserContext';
-import { getUserInfo, getUserTweets } from '../FirebaseController';
+import {
+  getUserInfo,
+  getUserInfoFromHandle,
+  getUserTweets,
+  followUser,
+  unfollowUser,
+} from '../FirebaseController';
+import TweetCard from './tweets/TweetCard';
+import { useParams } from 'react-router-dom';
 
 const Profile = () => {
-  const user = useContext(UserContext);
+  const currentUserAuth = useContext(UserContext);
+  const { userHandle } = useParams();
   const [userInfo, setUserInfo] = useState(null);
   const [userTweets, setUserTweets] = useState([]);
+  const [currentUserInfo, setCurrentUserInfo] = useState(null);
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [isFollowedBy, setIsFollowedBy] = useState(false);
+
   useEffect(() => {
     const fetchUserInfo = async () => {
-      if (user) {
-        const newUserInfo = await getUserInfo(user.uid);
+      if (userHandle) {
+        const newUserInfo = await getUserInfoFromHandle(userHandle);
         setUserInfo(newUserInfo);
       }
     };
     fetchUserInfo();
-  }, [user]);
+  }, [userHandle]);
   useEffect(() => {
     const fetchUserTweets = async () => {
-      if (user) {
-        const tweetsArray = await getUserTweets(user.uid);
+      if (currentUserAuth && userInfo) {
+        const tweetsArray = await getUserTweets(userInfo.id);
         setUserTweets(tweetsArray);
       }
     };
     fetchUserTweets();
-  }, [user]);
+  }, [userInfo]);
+  useEffect(() => {
+    const fetchCurrentUserInfo = async () => {
+      if (userInfo) {
+        const info = await getUserInfo(currentUserAuth.uid);
+        setCurrentUserInfo(info);
+      }
+    };
+    fetchCurrentUserInfo();
+  }, [userTweets]);
+  useEffect(() => {
+    if (currentUserInfo && userInfo) {
+      setIsFollowing(currentUserInfo.following.some((x) => x === userInfo.id));
+      setIsFollowedBy(currentUserInfo.followers.some((x) => x === userInfo.id));
+    }
+  }, [currentUserInfo]);
 
   const createHeaderForUser = () => {
-    return <div>{userInfo.email}</div>;
+    const isUsersProfile = currentUserAuth.uid === userInfo.id;
+
+    return (
+      <div>
+        <div>{userInfo.displayName}</div>
+        <div>Handle: @{userInfo.handle} </div>
+        {!isUsersProfile ? createFollowLabels() : <></>}
+      </div>
+    );
+  };
+  const createFollowLabels = () => {
+    if (currentUserInfo) {
+      return (
+        <div>
+          {isFollowedBy ? (
+            <div className="profile-followLabel">(follows you)</div>
+          ) : (
+            <></>
+          )}
+          {isFollowing ? (
+            <button
+              onClick={() => {
+                unfollowUser(currentUserAuth.uid, userInfo.id);
+                setIsFollowing(false);
+              }}
+            >
+              Unfollow
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                followUser(currentUserAuth.uid, userInfo.id);
+                setIsFollowing(true);
+              }}
+            >
+              Follow
+            </button>
+          )}
+        </div>
+      );
+    }
+    return <></>;
   };
 
   return (
@@ -35,9 +104,17 @@ const Profile = () => {
       <h1>Profile</h1>
       {userInfo ? createHeaderForUser() : ''}
       <h2>Tweets</h2>
-      {userTweets.map((x) => (
-        <div key={Math.random()}>{x.tweet}</div>
-      ))}
+      {userInfo ? (
+        userTweets.map((x) => (
+          <TweetCard
+            tweet={x}
+            userInfo={userInfo}
+            key={`${Math.random()}` + `${Math.random()}`}
+          />
+        ))
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

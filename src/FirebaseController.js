@@ -14,12 +14,17 @@ import {
   doc,
   collection,
   query,
+  where,
   orderBy,
   getDoc,
   setDoc,
   updateDoc,
   serverTimestamp,
   runTransaction,
+  deleteDoc,
+  arrayUnion,
+  arrayRemove,
+  deleteField,
 } from 'firebase/firestore/lite';
 import * as model from './model';
 
@@ -54,7 +59,10 @@ const checkIfUserIsNew = async (userAuth) => {
         const userDoc = await transaction.get(docRef);
         if (!userDoc.exists()) {
           transaction.set(docRef, model.User(userAuth));
-          transaction.update(docRef, { joinDate: serverTimestamp() });
+          transaction.update(docRef, {
+            joinDate: serverTimestamp(),
+            following: [userAuth.uid],
+          });
         }
       });
     } catch (e) {
@@ -65,15 +73,168 @@ const checkIfUserIsNew = async (userAuth) => {
 const getUserInfo = async (userId) => {
   return (await getDoc(doc(db, 'users', userId))).data();
 };
+const getUserInfoFromHandle = async (handle) => {
+  console.log('called using handle: ', handle);
+  try {
+    const querySnapshot = await getDocs(
+      query(collection(db, 'users'), where('handle', '==', handle))
+    );
+    let userData;
+    querySnapshot.forEach((doc) => (userData = doc.data()));
+    console.log('user data', userData);
+    return userData;
+  } catch (e) {
+    console.error(e);
+  }
+};
 const getUserTweets = async (userId) => {
   const querySnapshot = await getDocs(
-    query(collection(db, 'users', userId, 'tweets'), orderBy('creationDate'))
+    query(
+      collection(db, 'users', userId, 'tweets'),
+      orderBy('creationDate', 'desc')
+    )
   );
   const tweetsArray = [];
   querySnapshot.forEach((tweet) => {
     tweetsArray.push(tweet.data());
   });
   return tweetsArray;
+};
+const followUser = (currentUserId, otherUserId) => {
+  try {
+    runTransaction(db, async (transaction) => {
+      const currentUserDocRef = doc(db, 'users', currentUserId);
+      const otherUserDocRef = doc(db, 'users', otherUserId);
+      transaction.update(currentUserDocRef, {
+        following: arrayUnion(otherUserId),
+      });
+      transaction.update(otherUserDocRef, {
+        followers: arrayUnion(currentUserId),
+      });
+    });
+  } catch (e) {
+    console.error(e);
+  }
+};
+const unfollowUser = (currentUserId, otherUserId) => {
+  try {
+    runTransaction(db, async (transaction) => {
+      const currentUserDocRef = doc(db, 'users', currentUserId);
+      const otherUserDocRef = doc(db, 'users', otherUserId);
+      transaction.update(currentUserDocRef, {
+        following: arrayRemove(otherUserId),
+      });
+      transaction.update(otherUserDocRef, {
+        followers: arrayRemove(currentUserId),
+      });
+    });
+  } catch (e) {
+    console.error(e);
+  }
+};
+const updateUserFields = async () => {
+  try {
+    const querySnapshot = await getDocs(query(collection(db, 'users')));
+    querySnapshot.forEach(async (doc) => {
+      await updateDoc(doc.ref, {
+        // followers: [],
+        // following: [],
+        // bookmarks: [],
+        // mentions: [],
+      });
+    });
+  } catch (e) {
+    console.error(e);
+  }
+};
+const updateTweetFields = async (userId) => {
+  try {
+    const querySnapshot = await getDocs(
+      query(
+        collection(db, 'users', userId, 'tweets'),
+        orderBy('creationDate', 'desc')
+      )
+    );
+    querySnapshot.forEach(async (tweetDoc) => {
+      // await updateDoc(tweetDoc.ref, {
+      //   retweets: [],
+      //   replies: [],
+      //   likes: [],
+      //   images: [],
+      //   quotes: [],
+      //   isQuoteTweet: false,
+      //   isReply: false,
+      //   isRetweet: false,
+      //   links: [],
+      //   otherUsersMentioned: [],
+      //   quotedTweet: null,
+      //   repliedToTweet: null,
+      //   sentBy: userId,
+      // });
+      const tweetData = tweetDoc.data();
+      if (!tweetData.id && tweetData.tweetId) {
+        await updateDoc(tweetDoc.ref, {
+          id: tweetData.tweetId,
+          tweetId: deleteField(),
+        });
+      }
+    });
+  } catch (e) {
+    console.error(e);
+  }
+};
+const addTweetToDatabase = async (userId, tweet) => {
+  try {
+    await runTransaction(db, async (transaction) => {
+      const docRef = doc(collection(db, 'users', userId, 'tweets'));
+      transaction.set(docRef, tweet);
+      console.log('docRef', docRef);
+      console.log(
+        'tweet',
+        tweet,
+        'has no timestamp',
+        !tweet.creationDate,
+        'has no id',
+        !tweet.id
+      );
+      if (!tweet.creationDate) {
+        transaction.update(docRef, { creationDate: serverTimestamp() });
+      }
+      if (!tweet.id) {
+        console.log('adding this id:', docRef.id);
+        transaction.update(docRef, { id: docRef.id });
+      }
+    });
+  } catch (e) {
+    console.error('Transaction failed: ', e);
+  }
+};
+const likeTweet = async (userId, tweeterId, tweetId) => {
+  const tweetRef = doc(db, 'users', tweeterId, 'tweets', tweetId);
+  await updateDoc(tweetRef, {
+    likes: arrayUnion(userId),
+  });
+  const userRef = doc(db, 'users', userId);
+  await updateDoc(userRef, {
+    likes: arrayUnion({ tweetId, sentBy: tweeterId }),
+  });
+};
+const unlikeTweet = async (userId, tweeterId, tweetId) => {
+  const tweetRef = doc(db, 'users', tweeterId, 'tweets', tweetId);
+  await updateDoc(tweetRef, {
+    likes: arrayRemove(userId),
+  });
+  const userRef = doc(db, 'users', userId);
+  await updateDoc(userRef, {
+    likes: arrayRemove({ tweetId, sentBy: tweeterId }),
+  });
+};
+const deleteTweet = async (userId, tweetId) => {
+  try {
+    await deleteDoc(doc(db, 'users', userId, 'tweets', tweetId));
+  } catch (e) {
+    console.error(e);
+  }
 };
 
 export {
@@ -82,5 +243,14 @@ export {
   checkIfUserIsNew,
   signOutUser,
   getUserInfo,
+  getUserInfoFromHandle,
   getUserTweets,
+  followUser,
+  unfollowUser,
+  addTweetToDatabase,
+  deleteTweet,
+  likeTweet,
+  unlikeTweet,
+  updateUserFields,
+  updateTweetFields,
 };

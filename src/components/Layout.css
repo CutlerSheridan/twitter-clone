@@ -1,13 +1,21 @@
 .layout-wrapper {
-  display: flex;
+  margin: auto;
+  width: min(100%, 120rem);
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-items: center;
   justify-content: center;
   gap: 1rem;
   border: 1px solid red;
 }
-.layout-element:first-child {
-  min-width: max-content;
+.layout-wrapper > * {
+  border: 2px solid pink;
+}
+.layout-element:first-child,
+.layout-element:last-child {
+  max-width: 25rem;
 }
 .layout-element:nth-child(2) {
-  width: 100%;
-  max-width: 100rem;
+  min-width: 55rem;
+  max-width: 60rem;
 }

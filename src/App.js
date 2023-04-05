@@ -9,7 +9,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="profile/:profileid" element={<Profile />} />
+        <Route path=":userHandle" element={<Profile />} />
       </Route>
     </Routes>
   );

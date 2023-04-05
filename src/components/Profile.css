@@ -1,3 +1,10 @@
-.profile-wrapper {
-  border: 1px solid black;
+.profile-followLabel {
+  padding: 0.3rem;
+  width: max-content;
+  font-size: 1.6rem;
+  background: rgb(197, 197, 197);
+  border-radius: 0.5rem;
+}
+.profile-wrapper > h2 {
+  margin-top: 1.6rem;
 }

@@ -17,13 +17,13 @@ const Layout = () => {
   }, []);
 
   return (
-    <div className="layout-wrapper">
-      <UserContext.Provider value={user}>
+    <UserContext.Provider value={user}>
+      <div className="layout-wrapper">
         <Navbar />
         <Outlet />
         <SignIn />
-      </UserContext.Provider>
-    </div>
+      </div>
+    </UserContext.Provider>
   );
 };
 
