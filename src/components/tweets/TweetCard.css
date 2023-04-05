@@ -24,11 +24,15 @@
   justify-content: center;
   gap: 0.2rem;
 }
+.tweetCard-tweetAndUserWrapper > a {
+  text-decoration: none;
+}
 .tweetCard-nameAndHandleWrapper {
   position: relative;
   width: 100%;
   display: flex;
   gap: 1rem;
+  color: black;
 }
 .tweetCard-displayName {
   font-weight: bold;

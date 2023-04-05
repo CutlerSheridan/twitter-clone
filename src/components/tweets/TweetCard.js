@@ -7,6 +7,7 @@ import {
   likeTweet,
   unlikeTweet,
 } from '../../FirebaseController';
+import { Link } from 'react-router-dom';
 
 const TweetCard = ({ tweet, userInfo: tweeterInfo = null }) => {
   const userAuth = useContext(UserContext);
@@ -51,10 +52,46 @@ const TweetCard = ({ tweet, userInfo: tweeterInfo = null }) => {
   return (
     <div className="tweetCard-wrapper">
       <div className="tweetCard-middleRow">
-        <div className="tweetCard-avi"></div>
+        <img src={tweeterInfo.avi} className="tweetCard-avi"></img>
         <div className="tweetCard-tweetAndUserWrapper">
-          <div className="tweetCard-nameAndHandleWrapper">
-            <div className="tweetCard-displayName">
+          {tweeterInfo ? (
+            <Link to={`/${tweeterInfo.handle}`}>
+              <div className="tweetCard-nameAndHandleWrapper">
+                <div className="tweetCard-displayName">
+                  {tweeterInfo ? tweeterInfo.displayName : 'no user'}
+                </div>
+                <div className="tweetCard-handleAndDate">
+                  {tweeterInfo ? '@' + tweeterInfo.handle : 'no handle'} ·{' '}
+                  {new Date(creationMilliseconds).toDateString()}
+                  {tweeterInfo.id === userAuth.uid ? (
+                    <button
+                      className="tweetCard-delete"
+                      onClick={() => {
+                        deleteTweet(tweeterInfo.id, tweet.id).then(() => {
+                          window.location.reload();
+                        });
+                      }}
+                    >
+                      X
+                    </button>
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              </div>
+            </Link>
+          ) : (
+            <div className="tweetCard-nameAndHandleWrapper-empty">...</div>
+          )}
+          {/* <div className="tweetCard-nameAndHandleWrapper"> */}
+          {/* {tweeterInfo ? (
+              <Link to={`/${tweeterInfo.handle}`}>
+                <div>go</div>
+              </Link>
+            ) : (
+              <></>
+            )} */}
+          {/* <div className="tweetCard-displayName">
               {tweeterInfo ? tweeterInfo.displayName : 'no user'}
             </div>
             <div className="tweetCard-handleAndDate">
@@ -75,7 +112,7 @@ const TweetCard = ({ tweet, userInfo: tweeterInfo = null }) => {
                 <></>
               )}
             </div>
-          </div>
+          </div> */}
           <div className="tweetCard-tweet">{tweet.tweet}</div>
         </div>
       </div>

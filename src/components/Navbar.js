@@ -13,14 +13,12 @@ const Navbar = () => {
     if (userAuth) {
       getUserInfo(userAuth.uid).then((result) => {
         setCurrentUserHandle(result.handle);
-        console.log('handle', result.handle);
       });
     }
   }, [userAuth]);
 
   const handleFindUser = (e) => {
     e.preventDefault();
-    console.log('e', e);
     let userHandle = e.target[0].value.toLowerCase();
     if (userHandle.charAt(0) === '@') {
       userHandle = userHandle.slice(1);

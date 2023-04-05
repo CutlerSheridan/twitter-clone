@@ -12,24 +12,17 @@ const User = (userAuth) => {
     pinnedTweet: null,
     location: null,
     likes: [], // {tweetId, userId}
+    followers: [],
+    following: [],
+    bookmarks: [],
+    mentions: [],
     // joinDate (timestamped when added to db)
+
     // DB COLLECTIONS ADDED LATER
     // tweets
     //// tweetId
     ////// {tweet info}
-    // replies
-    // likes
-    // following
-    //// docId
-    ////// userId
-    ////// followedDate
-    // followers
-    //// docId
-    ////// userId
-    ////// followedDate
-    // mentions
     // directMessages
-    // bookmarks
   };
 };
 
@@ -72,8 +65,5 @@ const Tweet = ({
     // retweetedDate
   };
 };
-
-const testTweet = Tweet({ tweet: 'it worked', sentBy: 'KkKHZbic' });
-console.log(testTweet);
 
 export { User, Tweet };

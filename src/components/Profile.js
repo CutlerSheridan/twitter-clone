@@ -32,7 +32,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserTweets = async () => {
       if (currentUserAuth && userInfo) {
-        const tweetsArray = await getUserTweets(userInfo.id);
+        const tweetsArray = await getUserTweets(userInfo.id, false);
         setUserTweets(tweetsArray);
       }
     };

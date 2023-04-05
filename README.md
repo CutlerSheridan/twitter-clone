@@ -6,8 +6,8 @@ Very much in progress.
 
 #### TODO NEXT
 
-- create Feed component usable by profile as well as home
-- add home page logic to show what the people you follow have tweeted
+- absract currentUser from TweetCard to parent component so every tweet card doesn't have to fetch current user info, what the fuck
+- refactor Profile to use TweetFeed instead of creating its own
 
 #### TODO LATER
 
@@ -22,15 +22,19 @@ Very much in progress.
 
 ##### Behavior
 
-- maybe make overall page track current user's likes so that each tweetCard doesn't have to read the db
-- maybe keep userInfo in Context. Probably should
-- add landing page for URL /profile without /profileid
+- ? make overall page track current user's likes so that each tweetCard doesn't have to read the db
 
 ##### Style
 
 - add credit
 
 #### DONE
+
+_0.4.0_
+
+- create Feed component usable by profile as well as home
+- add home page logic to show what the people you follow have tweeted
+- make displayName and handle navigate to that user's profile upon clicking
 
 _0.3.3_
 

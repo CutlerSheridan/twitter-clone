@@ -74,7 +74,6 @@ const getUserInfo = async (userId) => {
   return (await getDoc(doc(db, 'users', userId))).data();
 };
 const getUserInfoFromHandle = async (handle) => {
-  console.log('called using handle: ', handle);
   try {
     const querySnapshot = await getDocs(
       query(collection(db, 'users'), where('handle', '==', handle))
@@ -87,13 +86,42 @@ const getUserInfoFromHandle = async (handle) => {
     console.error(e);
   }
 };
-const getUserTweets = async (userId) => {
-  const querySnapshot = await getDocs(
-    query(
-      collection(db, 'users', userId, 'tweets'),
-      orderBy('creationDate', 'desc')
-    )
-  );
+const getUsersAndTweets = async (userIds, includeReplies = true) => {
+  try {
+    const usersAndTweets = [];
+    for (let i = 0; i < userIds.length; i++) {
+      const id = userIds[i];
+      const userInfo = await getUserInfo(id);
+      const tweets = await getUserTweets(id, includeReplies);
+      tweets.forEach((tweet) => {
+        usersAndTweets.push({ tweet, userInfo });
+      });
+    }
+
+    usersAndTweets.sort((x, y) => y.tweet.creationDate - x.tweet.creationDate);
+    return usersAndTweets;
+  } catch (e) {
+    console.error(e);
+  }
+};
+const getUserTweets = async (userId, includeReplies = true) => {
+  let querySnapshot;
+  if (includeReplies) {
+    querySnapshot = await getDocs(
+      query(
+        collection(db, 'users', userId, 'tweets'),
+        orderBy('creationDate', 'desc')
+      )
+    );
+  } else {
+    querySnapshot = await getDocs(
+      query(
+        collection(db, 'users', userId, 'tweets'),
+        where('isReply', '==', false),
+        orderBy('creationDate', 'desc')
+      )
+    );
+  }
   const tweetsArray = [];
   querySnapshot.forEach((tweet) => {
     tweetsArray.push(tweet.data());
@@ -188,20 +216,10 @@ const addTweetToDatabase = async (userId, tweet) => {
     await runTransaction(db, async (transaction) => {
       const docRef = doc(collection(db, 'users', userId, 'tweets'));
       transaction.set(docRef, tweet);
-      console.log('docRef', docRef);
-      console.log(
-        'tweet',
-        tweet,
-        'has no timestamp',
-        !tweet.creationDate,
-        'has no id',
-        !tweet.id
-      );
       if (!tweet.creationDate) {
         transaction.update(docRef, { creationDate: serverTimestamp() });
       }
       if (!tweet.id) {
-        console.log('adding this id:', docRef.id);
         transaction.update(docRef, { id: docRef.id });
       }
     });
@@ -245,6 +263,7 @@ export {
   getUserInfo,
   getUserInfoFromHandle,
   getUserTweets,
+  getUsersAndTweets,
   followUser,
   unfollowUser,
   addTweetToDatabase,
