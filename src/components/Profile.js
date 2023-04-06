@@ -10,6 +10,7 @@ import {
 } from '../FirebaseController';
 import TweetCard from './tweets/TweetCard';
 import { useParams } from 'react-router-dom';
+import TweetFeed from './tweets/TweetFeed';
 
 const Profile = () => {
   const currentUserAuth = useContext(UserContext);
@@ -105,13 +106,11 @@ const Profile = () => {
       {userInfo ? createHeaderForUser() : ''}
       <h2>Tweets</h2>
       {userInfo ? (
-        userTweets.map((x) => (
-          <TweetCard
-            tweet={x}
-            userInfo={userInfo}
-            key={`${Math.random()}` + `${Math.random()}`}
-          />
-        ))
+        <TweetFeed
+          idsForFeed={[userInfo.id]}
+          includeReplies={false}
+          currentUserInfo={currentUserInfo}
+        />
       ) : (
         <></>
       )}

@@ -6,14 +6,12 @@ Very much in progress.
 
 #### TODO NEXT
 
-- absract currentUser from TweetCard to parent component so every tweet card doesn't have to fetch current user info, what the fuck
-- refactor Profile to use TweetFeed instead of creating its own
+- add route for user's likes
 
 #### TODO LATER
 
 ##### Features
 
-- add route for user's likes
 - add ability to reply
 - add page for user's replies
 - add big tweet page
@@ -22,13 +20,16 @@ Very much in progress.
 
 ##### Behavior
 
-- ? make overall page track current user's likes so that each tweetCard doesn't have to read the db
-
 ##### Style
 
 - add credit
 
 #### DONE
+
+_0.4.1_
+
+- refactor Profile to use TweetFeed instead of creating its own
+- absract currentUser from TweetCard to parent component so every tweet card doesn't have to fetch current user info, what the fuck
 
 _0.4.0_
 

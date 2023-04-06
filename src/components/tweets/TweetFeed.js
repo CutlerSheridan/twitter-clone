@@ -3,7 +3,7 @@ import TweetCard from './TweetCard';
 import { useEffect, useState } from 'react';
 import { getUsersAndTweets } from '../../FirebaseController';
 
-const TweetFeed = ({ idsForFeed, includeReplies }) => {
+const TweetFeed = ({ idsForFeed, includeReplies, currentUserInfo }) => {
   const [tweetsToDisplay, setTweetsToDisplay] = useState([]);
 
   useEffect(() => {
@@ -26,6 +26,7 @@ const TweetFeed = ({ idsForFeed, includeReplies }) => {
           <TweetCard
             tweet={x.tweet}
             userInfo={x.userInfo}
+            currentUserInfo={currentUserInfo}
             key={`${Math.random()}` + `${Math.random()}`}
           />
         ))}

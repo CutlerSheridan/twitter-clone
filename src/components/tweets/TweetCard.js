@@ -9,22 +9,16 @@ import {
 } from '../../FirebaseController';
 import { Link } from 'react-router-dom';
 
-const TweetCard = ({ tweet, userInfo: tweeterInfo = null }) => {
+const TweetCard = ({
+  tweet,
+  userInfo: tweeterInfo = null,
+  currentUserInfo,
+}) => {
   const userAuth = useContext(UserContext);
   const creationMilliseconds = tweet.creationDate.seconds * 1000;
-  const [currentUserInfo, setCurrentUserInfo] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
   const [numOfLikes, setNumOfLikes] = useState(tweet.likes.length);
 
-  useEffect(() => {
-    const updateCurrentUser = async () => {
-      if (!currentUserInfo) {
-        const fetchedUser = await getUserInfo(userAuth.uid);
-        setCurrentUserInfo(fetchedUser);
-      }
-    };
-    updateCurrentUser();
-  }, []);
   useEffect(() => {
     if (currentUserInfo && tweet.id) {
       if (
@@ -35,7 +29,7 @@ const TweetCard = ({ tweet, userInfo: tweeterInfo = null }) => {
         setIsLiked(true);
       }
     }
-  }, [currentUserInfo]);
+  }, []);
 
   const handleLikeButton = () => {
     if (isLiked) {
@@ -83,36 +77,6 @@ const TweetCard = ({ tweet, userInfo: tweeterInfo = null }) => {
           ) : (
             <div className="tweetCard-nameAndHandleWrapper-empty">...</div>
           )}
-          {/* <div className="tweetCard-nameAndHandleWrapper"> */}
-          {/* {tweeterInfo ? (
-              <Link to={`/${tweeterInfo.handle}`}>
-                <div>go</div>
-              </Link>
-            ) : (
-              <></>
-            )} */}
-          {/* <div className="tweetCard-displayName">
-              {tweeterInfo ? tweeterInfo.displayName : 'no user'}
-            </div>
-            <div className="tweetCard-handleAndDate">
-              {tweeterInfo ? '@' + tweeterInfo.handle : 'no handle'} ·{' '}
-              {new Date(creationMilliseconds).toDateString()}
-              {tweeterInfo.id === userAuth.uid ? (
-                <button
-                  className="tweetCard-delete"
-                  onClick={() => {
-                    deleteTweet(tweeterInfo.id, tweet.id).then(() => {
-                      window.location.reload();
-                    });
-                  }}
-                >
-                  X
-                </button>
-              ) : (
-                <></>
-              )}
-            </div>
-          </div> */}
           <div className="tweetCard-tweet">{tweet.tweet}</div>
         </div>
       </div>
