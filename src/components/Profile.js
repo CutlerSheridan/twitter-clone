@@ -14,6 +14,7 @@ const Profile = () => {
   const currentUserAuth = useContext(UserContext);
   const { userHandle } = useParams();
   const [userInfo, setUserInfo] = useState(null);
+  const [selectedFeed, setSelectedFeed] = useState(null);
   const [currentUserInfo, setCurrentUserInfo] = useState(null);
   const [isFollowingCurrentUser, setIsFollowingCurrentUser] = useState(false);
   const [isFollowedByCurrentUser, setIsFollowedByCurrentUser] = useState(false);
@@ -26,6 +27,7 @@ const Profile = () => {
       }
     };
     fetchUserInfo();
+    setSelectedFeed('tweets');
   }, [userHandle]);
   useEffect(() => {
     const fetchCurrentUserInfo = async () => {
@@ -91,7 +93,7 @@ const Profile = () => {
     return <></>;
   };
   const createFeed = () => {
-    if (currentUserInfo) {
+    if (currentUserInfo && userInfo) {
       return (
         <TweetFeed
           idsForFeed={[userInfo.id]}
@@ -103,12 +105,38 @@ const Profile = () => {
       return <></>;
     }
   };
+  const getFeedSelectorClasses = (selector) => {
+    let className = 'profile-feedSelector';
+    if (selector === selectedFeed) {
+      className += ' profile-feedSelector-active';
+    }
+    return className;
+  };
 
   return (
     <div className="profile-wrapper layout-element">
       <h1>Profile</h1>
       {userInfo ? createHeaderForUser() : ''}
-      <h2>Tweets</h2>
+      <div className="profile-feedSelectorWrapper">
+        <h2
+          className={getFeedSelectorClasses('tweets')}
+          onClick={() => setSelectedFeed('tweets')}
+        >
+          Tweets
+        </h2>
+        <h2
+          className={getFeedSelectorClasses('likes')}
+          onClick={() => setSelectedFeed('likes')}
+        >
+          Likes
+        </h2>
+        <h2
+          className={getFeedSelectorClasses('replies')}
+          onClick={() => setSelectedFeed('replies')}
+        >
+          Replies
+        </h2>
+      </div>
       {createFeed()}
     </div>
   );

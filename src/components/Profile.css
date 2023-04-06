@@ -5,6 +5,19 @@
   background: rgb(197, 197, 197);
   border-radius: 0.5rem;
 }
-.profile-wrapper > h2 {
-  margin-top: 1.6rem;
+.profile-feedSelectorWrapper {
+  margin: 1.6rem 0 1rem 0;
+  display: flex;
+  justify-content: space-around;
+}
+.profile-feedSelector {
+  padding-bottom: 0.5rem;
+  width: 7rem;
+  text-align: center;
+  border-bottom: 3px solid black;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.profile-feedSelector-active {
+  border-bottom-color: dodgerblue;
 }

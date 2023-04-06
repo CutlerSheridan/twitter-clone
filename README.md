@@ -26,6 +26,10 @@ Very much in progress.
 
 #### DONE
 
+_0.4.3_
+
+- add feed selector tabs to profiles
+
 _0.4.2_
 
 - fix profile tweet feed not refreshing if going straight from other user's profile to current user's profile
