@@ -80,7 +80,6 @@ const getUserInfoFromHandle = async (handle) => {
     );
     let userData;
     querySnapshot.forEach((doc) => (userData = doc.data()));
-    console.log('user data', userData);
     return userData;
   } catch (e) {
     console.error(e);

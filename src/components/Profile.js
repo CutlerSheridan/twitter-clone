@@ -4,11 +4,9 @@ import { UserContext } from '../UserContext';
 import {
   getUserInfo,
   getUserInfoFromHandle,
-  getUserTweets,
   followUser,
   unfollowUser,
 } from '../FirebaseController';
-import TweetCard from './tweets/TweetCard';
 import { useParams } from 'react-router-dom';
 import TweetFeed from './tweets/TweetFeed';
 
@@ -16,10 +14,9 @@ const Profile = () => {
   const currentUserAuth = useContext(UserContext);
   const { userHandle } = useParams();
   const [userInfo, setUserInfo] = useState(null);
-  const [userTweets, setUserTweets] = useState([]);
   const [currentUserInfo, setCurrentUserInfo] = useState(null);
-  const [isFollowing, setIsFollowing] = useState(false);
-  const [isFollowedBy, setIsFollowedBy] = useState(false);
+  const [isFollowingCurrentUser, setIsFollowingCurrentUser] = useState(false);
+  const [isFollowedByCurrentUser, setIsFollowedByCurrentUser] = useState(false);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -31,33 +28,27 @@ const Profile = () => {
     fetchUserInfo();
   }, [userHandle]);
   useEffect(() => {
-    const fetchUserTweets = async () => {
-      if (currentUserAuth && userInfo) {
-        const tweetsArray = await getUserTweets(userInfo.id, false);
-        setUserTweets(tweetsArray);
-      }
-    };
-    fetchUserTweets();
-  }, [userInfo]);
-  useEffect(() => {
     const fetchCurrentUserInfo = async () => {
-      if (userInfo) {
+      if (currentUserAuth) {
         const info = await getUserInfo(currentUserAuth.uid);
         setCurrentUserInfo(info);
       }
     };
     fetchCurrentUserInfo();
-  }, [userTweets]);
+  }, [currentUserAuth]);
   useEffect(() => {
     if (currentUserInfo && userInfo) {
-      setIsFollowing(currentUserInfo.following.some((x) => x === userInfo.id));
-      setIsFollowedBy(currentUserInfo.followers.some((x) => x === userInfo.id));
+      setIsFollowingCurrentUser(
+        currentUserInfo.following.some((x) => x === userInfo.id)
+      );
+      setIsFollowedByCurrentUser(
+        currentUserInfo.followers.some((x) => x === userInfo.id)
+      );
     }
   }, [currentUserInfo]);
 
   const createHeaderForUser = () => {
     const isUsersProfile = currentUserAuth.uid === userInfo.id;
-
     return (
       <div>
         <div>{userInfo.displayName}</div>
@@ -70,16 +61,16 @@ const Profile = () => {
     if (currentUserInfo) {
       return (
         <div>
-          {isFollowedBy ? (
+          {isFollowedByCurrentUser ? (
             <div className="profile-followLabel">(follows you)</div>
           ) : (
             <></>
           )}
-          {isFollowing ? (
+          {isFollowingCurrentUser ? (
             <button
               onClick={() => {
                 unfollowUser(currentUserAuth.uid, userInfo.id);
-                setIsFollowing(false);
+                setIsFollowingCurrentUser(false);
               }}
             >
               Unfollow
@@ -88,7 +79,7 @@ const Profile = () => {
             <button
               onClick={() => {
                 followUser(currentUserAuth.uid, userInfo.id);
-                setIsFollowing(true);
+                setIsFollowingCurrentUser(true);
               }}
             >
               Follow
@@ -99,21 +90,26 @@ const Profile = () => {
     }
     return <></>;
   };
+  const createFeed = () => {
+    if (currentUserInfo) {
+      return (
+        <TweetFeed
+          idsForFeed={[userInfo.id]}
+          includesReplies={false}
+          currentUserInfo={currentUserInfo}
+        />
+      );
+    } else {
+      return <></>;
+    }
+  };
 
   return (
     <div className="profile-wrapper layout-element">
       <h1>Profile</h1>
       {userInfo ? createHeaderForUser() : ''}
       <h2>Tweets</h2>
-      {userInfo ? (
-        <TweetFeed
-          idsForFeed={[userInfo.id]}
-          includeReplies={false}
-          currentUserInfo={currentUserInfo}
-        />
-      ) : (
-        <></>
-      )}
+      {createFeed()}
     </div>
   );
 };

@@ -8,7 +8,7 @@ const TweetFeed = ({ idsForFeed, includeReplies, currentUserInfo }) => {
 
   useEffect(() => {
     const fetchTweets = async () => {
-      if (!tweetsToDisplay.length) {
+      if (idsForFeed && currentUserInfo) {
         const usersAndTweets = await getUsersAndTweets(
           idsForFeed,
           includeReplies
@@ -17,7 +17,7 @@ const TweetFeed = ({ idsForFeed, includeReplies, currentUserInfo }) => {
       }
     };
     fetchTweets();
-  }, []);
+  }, [idsForFeed]);
 
   const createFeed = () => {
     return (

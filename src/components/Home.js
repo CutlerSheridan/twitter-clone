@@ -7,11 +7,13 @@ import TweetFeed from './tweets/TweetFeed';
 const Home = () => {
   const currentUserAuth = useContext(UserContext);
   const [idsForFeed, setIdsForFeed] = useState([]);
+  const [currentUserInfo, setCurrentUserInfo] = useState(null);
 
   useEffect(() => {
     if (currentUserAuth && !idsForFeed.length) {
       getUserInfo(currentUserAuth.uid).then((result) => {
         setIdsForFeed(result.following);
+        setCurrentUserInfo(result);
       });
     }
   }, [currentUserAuth]);
@@ -19,7 +21,11 @@ const Home = () => {
   return (
     <div className="home-wrapper layout-element">
       {idsForFeed.length ? (
-        <TweetFeed idsForFeed={idsForFeed} includeReplies={true} />
+        <TweetFeed
+          idsForFeed={idsForFeed}
+          includeReplies={true}
+          currentUserInfo={currentUserInfo}
+        />
       ) : (
         <></>
       )}

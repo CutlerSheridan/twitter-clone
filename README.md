@@ -26,6 +26,13 @@ Very much in progress.
 
 #### DONE
 
+_0.4.2_
+
+- fix profile tweet feed not refreshing if going straight from other user's profile to current user's profile
+  - just had to add [idsForFeed] parameter to useEffect in TweetFeed
+- polish useEffect logic in Profile
+- clean up outdated code in Profile
+
 _0.4.1_
 
 - refactor Profile to use TweetFeed instead of creating its own
