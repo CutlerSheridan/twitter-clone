@@ -1,30 +1,37 @@
 # Twitter Clone
 
-## Get started with new social media site, Oinker! The site for pigs!
+## Use it just like Twitter!
 
 Very much in progress.
 
 #### TODO NEXT
 
-- add route for user's likes
+- add big tweet page
 
 #### TODO LATER
 
 ##### Features
 
 - add ability to reply
-- add page for user's replies
-- add big tweet page
 - generate random handle that hasn't been used before upon user creation
+- add ability to edit handle
+- add ability to edit display name
+- add ability to retweet
+- ? add ability to change avi
 - ? add tweet searchbox that displays tweets containing search parameters
 
 ##### Behavior
 
 ##### Style
 
+- make tweets consistent widths
 - add credit
 
 #### DONE
+
+_0.4.4_
+
+- add feed on profiles for that user's likes
 
 _0.4.3_
 

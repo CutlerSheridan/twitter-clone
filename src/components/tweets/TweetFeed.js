@@ -1,9 +1,9 @@
 import './TweetFeed.css';
 import TweetCard from './TweetCard';
 import { useEffect, useState } from 'react';
-import { getUsersAndTweets } from '../../FirebaseController';
+import { getSpecificTweets, getUsersAndTweets } from '../../FirebaseController';
 
-const TweetFeed = ({ idsForFeed, includeReplies, currentUserInfo }) => {
+const TweetFeed = ({ idsForFeed, likes, includeReplies, currentUserInfo }) => {
   const [tweetsToDisplay, setTweetsToDisplay] = useState([]);
 
   useEffect(() => {
@@ -15,9 +15,14 @@ const TweetFeed = ({ idsForFeed, includeReplies, currentUserInfo }) => {
         );
         setTweetsToDisplay(usersAndTweets);
       }
+      if (likes && currentUserInfo) {
+        const usersAndTweets = await getSpecificTweets(likes);
+        console.log('tf likes usersAndTweets before setting:', usersAndTweets);
+        setTweetsToDisplay(usersAndTweets);
+      }
     };
     fetchTweets();
-  }, [idsForFeed]);
+  }, [idsForFeed, likes]);
 
   const createFeed = () => {
     return (

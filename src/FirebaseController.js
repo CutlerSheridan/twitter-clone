@@ -127,6 +127,24 @@ const getUserTweets = async (userId, includeReplies = true) => {
   });
   return tweetsArray;
 };
+const getSpecificTweets = async (tweetAndUserIds) => {
+  try {
+    const usersAndTweets = [];
+    await runTransaction(db, async (transaction) => {
+      for (const item of tweetAndUserIds) {
+        const { tweetId, sentBy } = item;
+        const userRef = doc(db, 'users', sentBy);
+        const tweetRef = doc(db, 'users', sentBy, 'tweets', tweetId);
+        const userInfo = (await transaction.get(userRef)).data();
+        const tweet = (await transaction.get(tweetRef)).data();
+        usersAndTweets.push({ tweet, userInfo });
+      }
+    });
+    return usersAndTweets.reverse();
+  } catch (e) {
+    console.error(e);
+  }
+};
 const followUser = (currentUserId, otherUserId) => {
   try {
     runTransaction(db, async (transaction) => {
@@ -263,6 +281,7 @@ export {
   getUserInfoFromHandle,
   getUserTweets,
   getUsersAndTweets,
+  getSpecificTweets,
   followUser,
   unfollowUser,
   addTweetToDatabase,

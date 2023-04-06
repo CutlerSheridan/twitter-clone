@@ -94,13 +94,32 @@ const Profile = () => {
   };
   const createFeed = () => {
     if (currentUserInfo && userInfo) {
-      return (
-        <TweetFeed
-          idsForFeed={[userInfo.id]}
-          includesReplies={false}
-          currentUserInfo={currentUserInfo}
-        />
-      );
+      switch (selectedFeed) {
+        case 'tweets':
+          return (
+            <TweetFeed
+              idsForFeed={[userInfo.id]}
+              includeReplies={false}
+              currentUserInfo={currentUserInfo}
+            />
+          );
+        case 'replies':
+          return (
+            <TweetFeed
+              idsForFeed={[userInfo.id]}
+              includeReplies={true}
+              currentUserInfo={currentUserInfo}
+            />
+          );
+        case 'likes':
+          return (
+            <TweetFeed
+              likes={userInfo.likes}
+              includeReplies={true}
+              currentUserInfo={currentUserInfo}
+            />
+          );
+      }
     } else {
       return <></>;
     }
