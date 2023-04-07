@@ -105,21 +105,14 @@ const _testRandomHandleGen = () => {
 };
 // _testRandomHandleGen();
 
-const isHandleAvailable = async (newHandle, userId = null) => {
-  if (!userId) {
+const isHandleAvailable = async (newHandle) => {
+  try {
     const querySnapshot = await getDocs(
       query(collection(db, 'users'), where('handle', '==', newHandle))
     );
-    return !querySnapshot.length;
-  } else {
-    const querySnapshot = await getDocs(
-      query(
-        collection(db, 'users'),
-        where('handle', '==', newHandle),
-        where('id', '!=', userId)
-      )
-    );
-    return !querySnapshot.length;
+    return !querySnapshot.docs.length;
+  } catch (e) {
+    console.error(e);
   }
 };
 const getUserInfo = async (userId) => {

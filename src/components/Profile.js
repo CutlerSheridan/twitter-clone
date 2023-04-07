@@ -79,7 +79,6 @@ const Profile = () => {
 
               const findNonHandleFields = () => {
                 const fieldsObj = {};
-                console.log(form);
                 const newName = form.querySelector('#edit-displayName').value;
                 if (newName && newName !== currentUserInfo.displayName) {
                   fieldsObj.displayName = newName;
@@ -87,13 +86,14 @@ const Profile = () => {
                 return fieldsObj;
               };
 
-              const newHandle = form.querySelector('#edit-handle').value;
+              const newHandle = form
+                .querySelector('#edit-handle')
+                .value.toLowerCase();
               if (newHandle && newHandle !== currentUserInfo.handle) {
-                if (await isHandleAvailable(newHandle, currentUserAuth.uid)) {
+                if (await isHandleAvailable(newHandle)) {
                   updatesObj.handle = newHandle;
                   updatesObj = { ...updatesObj, ...findNonHandleFields() };
                   await updateUserFields(currentUserAuth.uid, updatesObj);
-                  // window.location.reload();
                   setUserInfo((prev) => {
                     return { ...prev, ...updatesObj };
                   });
@@ -103,14 +103,13 @@ const Profile = () => {
                   navigate(`/${newHandle}`);
                 } else {
                   form
-                    .querySelector('#edit-handle')
-                    .classList.add('profile-editHandle-taken');
+                    .querySelector('.profile-handleWarning')
+                    .classList.add('profile-handleWarning-taken');
                 }
               } else {
                 updatesObj = { ...findNonHandleFields() };
                 if (Object.keys(updatesObj).length) {
                   await updateUserFields(currentUserAuth.uid, updatesObj);
-                  // window.location.reload();
                   setEditingHeader(false);
                   setUserInfo((prev) => {
                     return { ...prev, ...updatesObj };
@@ -121,7 +120,6 @@ const Profile = () => {
                   navigate(`/${currentUserInfo.handle}`);
                 }
               }
-              // setEditingHeader(false);
             }}
           >
             <label>
@@ -154,6 +152,7 @@ const Profile = () => {
                 placeholder={userInfo.handle}
               />
             </label>
+            <div className="profile-handleWarning">This handle is taken</div>
 
             <button type="submit">Save</button>
           </form>

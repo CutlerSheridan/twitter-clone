@@ -6,8 +6,8 @@ Very much in progress.
 
 #### TODO NEXT
 
-- fix duplicate handle prevention
 - add cancel button to header edit view
+- start inputs with current values
 
 #### TODO LATER
 
@@ -32,6 +32,11 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.5.2_
+
+- fix duplicate handle prevention
+- add alert for duplicate handles
 
 _0.5.1_
 

@@ -3,8 +3,12 @@
   flex-direction: column;
   align-items: flex-start;
 }
-.profile-editHandle-taken::after {
-  content: 'Handle is taken';
+.profile-handleWarning {
+  visibility: hidden;
+}
+.profile-handleWarning-taken {
+  visibility: visible;
+  color: red;
 }
 .profile-followLabel {
   padding: 0.3rem;
