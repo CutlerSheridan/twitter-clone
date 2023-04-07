@@ -6,15 +6,19 @@ import {
   getUserInfoFromHandle,
   followUser,
   unfollowUser,
+  updateUserFields,
+  isHandleAvailable,
 } from '../FirebaseController';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import TweetFeed from './tweets/TweetFeed';
 
 const Profile = () => {
   const currentUserAuth = useContext(UserContext);
   const { userHandle } = useParams();
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState(null);
-  const [selectedFeed, setSelectedFeed] = useState(null);
+  const [editingHeader, setEditingHeader] = useState(false);
+  const [selectedFeed, setSelectedFeed] = useState('tweets');
   const [currentUserInfo, setCurrentUserInfo] = useState(null);
   const [isFollowingCurrentUser, setIsFollowingCurrentUser] = useState(false);
   const [isFollowedByCurrentUser, setIsFollowedByCurrentUser] = useState(false);
@@ -26,10 +30,6 @@ const Profile = () => {
         setUserInfo(newUserInfo);
       }
     };
-    fetchUserInfo();
-    setSelectedFeed('tweets');
-  }, [userHandle]);
-  useEffect(() => {
     const fetchCurrentUserInfo = async () => {
       if (currentUserAuth) {
         const info = await getUserInfo(currentUserAuth.uid);
@@ -37,7 +37,13 @@ const Profile = () => {
       }
     };
     fetchCurrentUserInfo();
-  }, [currentUserAuth]);
+    fetchUserInfo();
+    setSelectedFeed('tweets');
+    setIsFollowedByCurrentUser(false);
+    setIsFollowingCurrentUser(false);
+    setEditingHeader(false);
+  }, [userHandle, currentUserAuth]);
+  useEffect(() => {}, [currentUserAuth]);
   useEffect(() => {
     if (currentUserInfo && userInfo) {
       setIsFollowingCurrentUser(
@@ -47,15 +53,111 @@ const Profile = () => {
         currentUserInfo.followers.some((x) => x === userInfo.id)
       );
     }
-  }, [currentUserInfo]);
+  }, [currentUserInfo, userInfo]);
 
   const createHeaderForUser = () => {
     const isUsersProfile = currentUserAuth.uid === userInfo.id;
     return (
-      <div>
-        <div>{userInfo.displayName}</div>
-        <div>Handle: @{userInfo.handle} </div>
-        {!isUsersProfile ? createFollowLabels() : <></>}
+      <div className="profile-header">
+        {!editingHeader ? (
+          <div>
+            <div>{userInfo.displayName}</div>
+            <div>Handle: @{userInfo.handle}</div>
+            {!isUsersProfile ? (
+              createFollowLabels()
+            ) : (
+              <button onClick={() => setEditingHeader(true)}>Edit</button>
+            )}
+          </div>
+        ) : (
+          <form
+            className="profile-headerForm"
+            onSubmit={async (e) => {
+              e.preventDefault();
+              const form = e.target;
+              let updatesObj = {};
+
+              const findNonHandleFields = () => {
+                const fieldsObj = {};
+                console.log(form);
+                const newName = form.querySelector('#edit-displayName').value;
+                if (newName && newName !== currentUserInfo.displayName) {
+                  fieldsObj.displayName = newName;
+                }
+                return fieldsObj;
+              };
+
+              const newHandle = form.querySelector('#edit-handle').value;
+              if (newHandle && newHandle !== currentUserInfo.handle) {
+                if (await isHandleAvailable(newHandle, currentUserAuth.uid)) {
+                  updatesObj.handle = newHandle;
+                  updatesObj = { ...updatesObj, ...findNonHandleFields() };
+                  await updateUserFields(currentUserAuth.uid, updatesObj);
+                  // window.location.reload();
+                  setUserInfo((prev) => {
+                    return { ...prev, ...updatesObj };
+                  });
+                  setCurrentUserInfo((prev) => {
+                    return { ...prev, ...updatesObj };
+                  });
+                  navigate(`/${newHandle}`);
+                } else {
+                  form
+                    .querySelector('#edit-handle')
+                    .classList.add('profile-editHandle-taken');
+                }
+              } else {
+                updatesObj = { ...findNonHandleFields() };
+                if (Object.keys(updatesObj).length) {
+                  await updateUserFields(currentUserAuth.uid, updatesObj);
+                  // window.location.reload();
+                  setEditingHeader(false);
+                  setUserInfo((prev) => {
+                    return { ...prev, ...updatesObj };
+                  });
+                  setCurrentUserInfo((prev) => {
+                    return { ...prev, ...updatesObj };
+                  });
+                  navigate(`/${currentUserInfo.handle}`);
+                }
+              }
+              // setEditingHeader(false);
+            }}
+          >
+            <label>
+              Name{' '}
+              <input
+                id="edit-displayName"
+                maxLength={20}
+                placeholder={userInfo.displayName}
+              />
+            </label>
+            <label>
+              Handle{' '}
+              <input
+                className="profile-editHandle"
+                id="edit-handle"
+                onChange={(e) => {
+                  if (!/^[A-Za-z0-9]{1,17}$/.test(e.target.value)) {
+                    const typedValue = [...e.target.value];
+                    let newValue = typedValue.reduce((prev, x) => {
+                      if (/[A-Za-z0-9]/.test(x)) {
+                        prev += x;
+                      }
+                      return prev;
+                    }, '');
+                    e.target.value = newValue;
+                  }
+                }}
+                pattern="[A-Za-z0-9]{1,20}"
+                maxLength={17}
+                placeholder={userInfo.handle}
+              />
+            </label>
+
+            <button type="submit">Save</button>
+          </form>
+        )}
       </div>
     );
   };

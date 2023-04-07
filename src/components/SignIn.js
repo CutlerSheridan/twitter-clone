@@ -3,7 +3,7 @@ import { signInWithGoogle, signOutUser } from '../FirebaseController';
 import { useContext } from 'react';
 import { UserContext } from '../UserContext';
 import ComposeTweet from './tweets/ComposeTweet';
-import { updateUserFields, updateTweetFields } from '../FirebaseController';
+import { devAddUserFields, updateTweetFields } from '../FirebaseController';
 
 const SignIn = () => {
   const user = useContext(UserContext);
@@ -14,9 +14,11 @@ const SignIn = () => {
           <div>{user.displayName}</div>
           <button onClick={signOutUser}>Sign out</button>
           <ComposeTweet />
-          <button onClick={() => updateUserFields()}>Update user fields</button>
+          <button onClick={() => devAddUserFields()}>
+            [dev] Add user fields
+          </button>
           <button onClick={() => updateTweetFields(user.uid)}>
-            Update Tweet fields
+            [dev] Add Tweet fields
           </button>
         </div>
       ) : (

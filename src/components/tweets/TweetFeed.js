@@ -22,7 +22,7 @@ const TweetFeed = ({ idsForFeed, likes, includeReplies, currentUserInfo }) => {
       }
     };
     fetchTweets();
-  }, [idsForFeed, likes]);
+  }, [idsForFeed, currentUserInfo, likes]);
 
   const createFeed = () => {
     return (

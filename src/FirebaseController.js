@@ -103,13 +103,24 @@ const _testRandomHandleGen = () => {
   }, {});
   console.log('charCount', charCount);
 };
-_testRandomHandleGen();
+// _testRandomHandleGen();
 
-const isHandleAvailable = async (newHandle) => {
-  const querySnapshot = await getDocs(
-    query(collection(db, 'users'), where('handle', '==', newHandle))
-  );
-  return !querySnapshot.length;
+const isHandleAvailable = async (newHandle, userId = null) => {
+  if (!userId) {
+    const querySnapshot = await getDocs(
+      query(collection(db, 'users'), where('handle', '==', newHandle))
+    );
+    return !querySnapshot.length;
+  } else {
+    const querySnapshot = await getDocs(
+      query(
+        collection(db, 'users'),
+        where('handle', '==', newHandle),
+        where('id', '!=', userId)
+      )
+    );
+    return !querySnapshot.length;
+  }
 };
 const getUserInfo = async (userId) => {
   return (await getDoc(doc(db, 'users', userId))).data();
@@ -186,6 +197,17 @@ const getSpecificTweets = async (tweetAndUserIds) => {
     console.error(e);
   }
 };
+const updateUserFields = async (userId, updatesObj) => {
+  try {
+    // console.log('uid to update', userId);
+    const docRef = doc(db, 'users', userId);
+    // const updateObj = {};
+    // fieldsArray.forEach((field) => (updateObj[field.key] = field.value));
+    await updateDoc(docRef, updatesObj);
+  } catch (e) {
+    console.error(e);
+  }
+};
 const followUser = (currentUserId, otherUserId) => {
   try {
     runTransaction(db, async (transaction) => {
@@ -218,7 +240,7 @@ const unfollowUser = (currentUserId, otherUserId) => {
     console.error(e);
   }
 };
-const updateUserFields = async () => {
+const devAddUserFields = async () => {
   try {
     const querySnapshot = await getDocs(query(collection(db, 'users')));
     querySnapshot.forEach(async (doc) => {
@@ -317,18 +339,20 @@ export {
   auth,
   signInWithGoogle,
   checkIfUserIsNew,
+  isHandleAvailable,
   signOutUser,
   getUserInfo,
   getUserInfoFromHandle,
   getUserTweets,
   getUsersAndTweets,
   getSpecificTweets,
+  updateUserFields,
   followUser,
   unfollowUser,
   addTweetToDatabase,
   deleteTweet,
   likeTweet,
   unlikeTweet,
-  updateUserFields,
+  devAddUserFields,
   updateTweetFields,
 };

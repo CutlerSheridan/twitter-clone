@@ -6,8 +6,8 @@ Very much in progress.
 
 #### TODO NEXT
 
-- add ability to edit handle
-- add ability to edit display name
+- fix duplicate handle prevention
+- add cancel button to header edit view
 
 #### TODO LATER
 
@@ -32,6 +32,12 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.5.1_
+
+- add ability to edit handle
+- add ability to edit display name
+- make user's info refresh upon editing without refreshing entire page
 
 _0.5.0_
 
