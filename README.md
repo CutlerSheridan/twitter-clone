@@ -6,21 +6,25 @@ Very much in progress.
 
 #### TODO NEXT
 
-- add big tweet page
+- add ability to edit handle
+- add ability to edit display name
 
 #### TODO LATER
 
 ##### Features
 
+- add ability to see user's followers and following
+- add big tweet page
 - add ability to reply
-- generate random handle that hasn't been used before upon user creation
-- add ability to edit handle
-- add ability to edit display name
 - add ability to retweet
 - ? add ability to change avi
 - ? add tweet searchbox that displays tweets containing search parameters
 
 ##### Behavior
+
+- make sure header information refreshes when going straight from one profile to another; for example, "follow" button remains toggled to whatever it becomes after pressing it on the first profile
+- handle visiting pages when not signed in
+- fix how when signed out, nav elements not there (correct behavior), but when signing in (or maybe only new user signing in?), they don't populate, which they should
 
 ##### Style
 
@@ -28,6 +32,12 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.5.0_
+
+- generate random handle that hasn't been used before upon user creation
+- test random handle generation
+- make sure first character in random handle after "newuser" is a number so it's clear where it becomes random
 
 _0.4.4_
 

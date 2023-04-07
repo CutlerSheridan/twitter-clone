@@ -59,9 +59,14 @@ const checkIfUserIsNew = async (userAuth) => {
         const userDoc = await transaction.get(docRef);
         if (!userDoc.exists()) {
           transaction.set(docRef, model.User(userAuth));
+          let handle;
+          do {
+            handle = createRandomHandle();
+          } while (!(await isHandleAvailable(handle)));
           transaction.update(docRef, {
             joinDate: serverTimestamp(),
             following: [userAuth.uid],
+            handle: handle,
           });
         }
       });
@@ -69,6 +74,42 @@ const checkIfUserIsNew = async (userAuth) => {
       console.error('Transaction failed: ', e);
     }
   }
+};
+const createRandomHandle = () => {
+  let newHandle = 'newuser';
+  const charOptions = Array.from('1234567890abcdefghijklmnopqrstuvwxyz');
+  newHandle += charOptions[Math.floor(Math.random() * 10)];
+  for (let i = 0; i < 9; i++) {
+    const randomIndex = Math.floor(Math.random() * 36);
+    newHandle += charOptions[randomIndex];
+  }
+  return newHandle;
+};
+const _testRandomHandleGen = () => {
+  let testArray = [];
+  for (let i = 0; i < 10000; i++) {
+    testArray.push(createRandomHandle());
+  }
+  testArray = testArray.map((x) => x.slice(8));
+  const charCount = testArray.reduce((accumulator, x) => {
+    [...x].forEach((y) => {
+      if (!accumulator[y]) {
+        accumulator[y] = 1;
+      } else {
+        accumulator[y]++;
+      }
+    });
+    return accumulator;
+  }, {});
+  console.log('charCount', charCount);
+};
+_testRandomHandleGen();
+
+const isHandleAvailable = async (newHandle) => {
+  const querySnapshot = await getDocs(
+    query(collection(db, 'users'), where('handle', '==', newHandle))
+  );
+  return !querySnapshot.length;
 };
 const getUserInfo = async (userId) => {
   return (await getDoc(doc(db, 'users', userId))).data();
