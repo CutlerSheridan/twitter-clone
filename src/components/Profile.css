@@ -17,6 +17,11 @@
   background: rgb(197, 197, 197);
   border-radius: 0.5rem;
 }
+.profile-followsWrapper {
+  display: flex;
+  gap: 1rem;
+}
+
 .profile-feedSelectorWrapper {
   margin: 1.6rem 0 1rem 0;
   display: flex;

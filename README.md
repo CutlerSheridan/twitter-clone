@@ -6,25 +6,27 @@ Very much in progress.
 
 #### TODO NEXT
 
-- add cancel button to header edit view
-- start inputs with current values
+- create component to show a list of users from a list of user IDs
+- add ability to see user's followers and following
 
 #### TODO LATER
 
 ##### Features
 
-- add ability to see user's followers and following
 - add big tweet page
 - add ability to reply
 - add ability to retweet
+- ? add notifications
 - ? add ability to change avi
 - ? add tweet searchbox that displays tweets containing search parameters
 
 ##### Behavior
 
+- handle search box when non-existant user is searched
 - make sure header information refreshes when going straight from one profile to another; for example, "follow" button remains toggled to whatever it becomes after pressing it on the first profile
 - handle visiting pages when not signed in
 - fix how when signed out, nav elements not there (correct behavior), but when signing in (or maybe only new user signing in?), they don't populate, which they should
+- ? start inputs with current values
 
 ##### Style
 
@@ -32,6 +34,11 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.5.3_
+
+- add cancel button to header edit view
+- add routes for followers/ing
 
 _0.5.2_
 

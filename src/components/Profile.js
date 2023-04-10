@@ -155,8 +155,14 @@ const Profile = () => {
             <div className="profile-handleWarning">This handle is taken</div>
 
             <button type="submit">Save</button>
+            <button onClick={() => setEditingHeader(false)}>Cancel</button>
           </form>
         )}
+        <div className="profile-followsWrapper">
+          {/* -1 to following length to account for following yourself */}
+          <div>{userInfo.following.length - 1} Following</div>
+          <div>{userInfo.followers.length} Followers</div>
+        </div>
       </div>
     );
   };
