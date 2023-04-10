@@ -7,6 +7,8 @@ Very much in progress.
 #### TODO NEXT
 
 - make each user into a link
+- add bio section to profile headers
+- add bio to each user card in list
 - ? add follow button to each user card in UserListPopup
 - make user's number of followers update upon following/unfollowing on profile
 
@@ -36,6 +38,11 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.5.6_
+
+- make user cards in list a little prettier
+- fix "follows you" label so it doesn't say you follow yourself
 
 _0.5.5_
 

@@ -13,19 +13,24 @@
   width: min(100%, 50rem);
   background: lightgoldenrodyellow;
 }
-.userList-list {
-  margin-top: 1rem;
+.userList-title {
+  margin: 1rem 0;
 }
 .userList-userCard {
   display: flex;
-  border: 1px solid black;
 }
 .userList-avi {
-  width: 6rem;
-  height: 6rem;
+  margin: 0.5rem;
+  width: 5.5rem;
+  height: 5.5rem;
   flex-shrink: 0;
   background: red;
   border-radius: 10rem;
+}
+.userList-nameAndHandle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .userList-handleAndFollowLabel {
   display: flex;
