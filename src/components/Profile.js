@@ -9,7 +9,8 @@ import {
   updateUserFields,
   isHandleAvailable,
 } from '../FirebaseController';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import TweetFeed from './tweets/TweetFeed';
 
 const Profile = () => {
@@ -55,7 +56,7 @@ const Profile = () => {
     }
   }, [currentUserInfo, userInfo]);
 
-  const createHeaderForUser = () => {
+  const createHeader = () => {
     const isUsersProfile = currentUserAuth.uid === userInfo.id;
     return (
       <div className="profile-header">
@@ -160,9 +161,25 @@ const Profile = () => {
         )}
         <div className="profile-followsWrapper">
           {/* -1 to following length to account for following yourself */}
-          <div>{userInfo.following.length - 1} Following</div>
-          <div>{userInfo.followers.length} Followers</div>
+          {/* filter out user's ID from following for state */}
+          <Link
+            to="following"
+            state={{
+              userIds: userInfo.following.filter((x) => x !== userInfo.id),
+            }}
+          >
+            {userInfo.following.length - 1} Following
+          </Link>
+          <Link
+            to="followers"
+            state={{
+              userIds: userInfo.followers,
+            }}
+          >
+            {userInfo.followers.length} Followers
+          </Link>
         </div>
+        <Outlet />
       </div>
     );
   };
@@ -242,7 +259,7 @@ const Profile = () => {
   return (
     <div className="profile-wrapper layout-element">
       <h1>Profile</h1>
-      {userInfo ? createHeaderForUser() : ''}
+      {userInfo ? createHeader() : ''}
       <div className="profile-feedSelectorWrapper">
         <h2
           className={getFeedSelectorClasses('tweets')}

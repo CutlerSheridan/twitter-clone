@@ -6,8 +6,8 @@ Very much in progress.
 
 #### TODO NEXT
 
-- create component to show a list of users from a list of user IDs
-- add ability to see user's followers and following
+- make UserListPopup fetch display names and pictures and handles for each user
+- make user's number of followers update upon following/unfollowing
 
 #### TODO LATER
 
@@ -22,6 +22,7 @@ Very much in progress.
 
 ##### Behavior
 
+- handle manually navigating to UserListPopup component without a user IDs array in state from Link
 - handle search box when non-existant user is searched
 - make sure header information refreshes when going straight from one profile to another; for example, "follow" button remains toggled to whatever it becomes after pressing it on the first profile
 - handle visiting pages when not signed in
@@ -35,9 +36,15 @@ Very much in progress.
 
 #### DONE
 
+_0.5.4_
+
+- create component to show a list of users from a list of user IDs
+- link following and followers counts to UserListPopup component
+
 _0.5.3_
 
 - add cancel button to header edit view
+- make header display number of followers/ing
 - add routes for followers/ing
 
 _0.5.2_
