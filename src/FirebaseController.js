@@ -130,6 +130,13 @@ const getUserInfoFromHandle = async (handle) => {
     console.error(e);
   }
 };
+const getUsersList = async (userIdsArray) => {
+  const userObjs = [];
+  for (let i = 0; i < userIdsArray.length; i++) {
+    userObjs.push(await getUserInfo(userIdsArray[i]));
+  }
+  return userObjs;
+};
 const getUsersAndTweets = async (userIds, includeReplies = true) => {
   try {
     const usersAndTweets = [];
@@ -336,6 +343,7 @@ export {
   signOutUser,
   getUserInfo,
   getUserInfoFromHandle,
+  getUsersList,
   getUserTweets,
   getUsersAndTweets,
   getSpecificTweets,

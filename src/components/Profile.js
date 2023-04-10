@@ -165,7 +165,10 @@ const Profile = () => {
           <Link
             to="following"
             state={{
-              userIds: userInfo.following.filter((x) => x !== userInfo.id),
+              userIds: userInfo.following
+                .filter((x) => x !== userInfo.id)
+                .reverse(),
+              title: 'Following',
             }}
           >
             {userInfo.following.length - 1} Following
@@ -173,7 +176,8 @@ const Profile = () => {
           <Link
             to="followers"
             state={{
-              userIds: userInfo.followers,
+              userIds: userInfo.followers.reverse(),
+              title: 'Followers',
             }}
           >
             {userInfo.followers.length} Followers

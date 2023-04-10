@@ -13,3 +13,29 @@
   width: min(100%, 50rem);
   background: lightgoldenrodyellow;
 }
+.userList-list {
+  margin-top: 1rem;
+}
+.userList-userCard {
+  display: flex;
+  border: 1px solid black;
+}
+.userList-avi {
+  width: 6rem;
+  height: 6rem;
+  flex-shrink: 0;
+  background: red;
+  border-radius: 10rem;
+}
+.userList-handleAndFollowLabel {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+}
+.userList-followLabel {
+  padding: 0.3rem;
+  width: max-content;
+  font-size: 1.6rem;
+  background: rgb(197, 197, 197);
+  border-radius: 0.5rem;
+}

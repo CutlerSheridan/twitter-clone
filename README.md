@@ -6,8 +6,9 @@ Very much in progress.
 
 #### TODO NEXT
 
-- make UserListPopup fetch display names and pictures and handles for each user
-- make user's number of followers update upon following/unfollowing
+- make each user into a link
+- ? add follow button to each user card in UserListPopup
+- make user's number of followers update upon following/unfollowing on profile
 
 #### TODO LATER
 
@@ -35,6 +36,11 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.5.5_
+
+- make UserListPopup fetch display names and pictures and handles for each user
+- pass title to UserListPopup
 
 _0.5.4_
 
