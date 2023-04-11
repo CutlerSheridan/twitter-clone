@@ -6,7 +6,6 @@ Very much in progress.
 
 #### TODO NEXT
 
-- make each user into a link
 - add bio section to profile headers
 - add bio to each user card in list
 - ? add follow button to each user card in UserListPopup
@@ -38,6 +37,10 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.5.7_
+
+- make each user card into a link to their profile
 
 _0.5.6_
 

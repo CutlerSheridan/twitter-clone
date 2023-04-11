@@ -16,8 +16,14 @@
 .userList-title {
   margin: 1rem 0;
 }
+.userList-list > a {
+  text-decoration: none;
+}
 .userList-userCard {
   display: flex;
+}
+.userList-userCard:hover {
+  background: darkgrey;
 }
 .userList-avi {
   margin: 0.5rem;
@@ -31,6 +37,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+.userList-name,
+.userList-handle {
+  text-decoration: none;
+  color: black;
 }
 .userList-handleAndFollowLabel {
   display: flex;

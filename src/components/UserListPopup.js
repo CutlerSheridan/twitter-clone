@@ -24,24 +24,28 @@ const UserListPopup = () => {
         <div className="userList-list">
           {userObjs.length ? (
             userObjs.map((x) => (
-              <div
-                className="userList-userCard"
+              <Link
+                to={`../../${x.handle}`}
                 key={`${Math.random()}${Math.random()}`}
               >
-                <img className="userList-avi" src={x.avi}></img>
-                <div className="userList-nameAndHandle">
-                  <div>{x.displayName}</div>
-                  <div className="userList-handleAndFollowLabel">
-                    <div>@{x.handle}</div>
-                    {x.following.some((y) => y === currentUserAuth.uid) &&
-                    x.id !== currentUserAuth.uid ? (
-                      <div className="userList-followLabel">(follows you)</div>
-                    ) : (
-                      <></>
-                    )}
+                <div className="userList-userCard">
+                  <img className="userList-avi" src={x.avi}></img>
+                  <div className="userList-nameAndHandle">
+                    <div className="userList-name">{x.displayName}</div>
+                    <div className="userList-handleAndFollowLabel">
+                      <div className="userList-handle">@{x.handle}</div>
+                      {x.following.some((y) => y === currentUserAuth.uid) &&
+                      x.id !== currentUserAuth.uid ? (
+                        <div className="userList-followLabel">
+                          (follows you)
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))
           ) : (
             <div>Loading</div>
