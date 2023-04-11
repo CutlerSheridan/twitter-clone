@@ -19,6 +19,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState(null);
   const [editingHeader, setEditingHeader] = useState(false);
+  const [numOfFollowers, setNumOfFollowers] = useState(0);
   const [selectedFeed, setSelectedFeed] = useState('tweets');
   const [currentUserInfo, setCurrentUserInfo] = useState(null);
   const [isFollowingCurrentUser, setIsFollowingCurrentUser] = useState(false);
@@ -44,7 +45,6 @@ const Profile = () => {
     setIsFollowingCurrentUser(false);
     setEditingHeader(false);
   }, [userHandle, currentUserAuth]);
-  useEffect(() => {}, [currentUserAuth]);
   useEffect(() => {
     if (currentUserInfo && userInfo) {
       setIsFollowingCurrentUser(
@@ -53,6 +53,7 @@ const Profile = () => {
       setIsFollowedByCurrentUser(
         currentUserInfo.followers.some((x) => x === userInfo.id)
       );
+      setNumOfFollowers(userInfo.followers.length);
     }
   }, [currentUserInfo, userInfo]);
 
@@ -138,7 +139,7 @@ const Profile = () => {
               title: 'Followers',
             }}
           >
-            {userInfo.followers.length} Followers
+            {numOfFollowers} Followers
           </Link>
         </div>
         <Outlet />
@@ -210,6 +211,7 @@ const Profile = () => {
               onClick={() => {
                 unfollowUser(currentUserAuth.uid, userInfo.id);
                 setIsFollowingCurrentUser(false);
+                setNumOfFollowers((prev) => --prev);
               }}
             >
               Unfollow
@@ -219,6 +221,7 @@ const Profile = () => {
               onClick={() => {
                 followUser(currentUserAuth.uid, userInfo.id);
                 setIsFollowingCurrentUser(true);
+                setNumOfFollowers((prev) => ++prev);
               }}
             >
               Follow

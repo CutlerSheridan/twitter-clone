@@ -41,7 +41,11 @@ const TweetCard = ({
   return (
     <div className="tweetCard-wrapper">
       <div className="tweetCard-middleRow">
-        <img src={tweeterInfo.avi} className="tweetCard-avi"></img>
+        <img
+          src={tweeterInfo.avi}
+          className="tweetCard-avi"
+          referrerPolicy="no-referrer"
+        ></img>
         <div className="tweetCard-tweetAndUserWrapper">
           {tweeterInfo ? (
             <Link to={`/${tweeterInfo.handle}`}>
