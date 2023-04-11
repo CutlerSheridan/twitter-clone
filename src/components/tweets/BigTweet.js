@@ -63,7 +63,7 @@ const BigTweet = () => {
     <div className="bigTweet-wrapper">
       <section className="bigTweet-innerContainer">
         <div className="bigTweet-header">
-          <button onClick={goBack}>{'<-'}</button>
+          <button onClick={goBack}>{'<'}</button>
           <h1>Tweet</h1>
         </div>
         <div className="bigTweet-tweetWrapper">
@@ -112,16 +112,30 @@ const BigTweet = () => {
           </div>
         </div>
 
-        <div className="bigTweet-bottomRow">
-          <div className="bigTweet-actionAndStats">
+        <div className="bigTweet-divider"></div>
+
+        <div className="bigTweet-statsRow">
+          <div className="bigTweet-stat">
+            {tweetInfo.replies.length} <span>Replies</span>
+          </div>
+          <div className="bigTweet-stat">
+            {tweetInfo.retweets.length} <span>Retweets</span>
+          </div>
+          <div className="bigTweet-stat bigTweet-stat-likes">
+            {numOfLikes} <span>Likes</span>
+          </div>
+        </div>
+
+        <div className="bigTweet-divider"></div>
+
+        <div className="bigTweet-actionsRow">
+          <div className="bigTweet-action">
             <div>Reply</div>
-            <div>{tweetInfo.replies.length}</div>
           </div>
-          <div className="bigTweet-actionAndStats">
+          <div className="bigTweet-action">
             <div>Retweet</div>
-            <div>{tweetInfo.retweets.length}</div>
           </div>
-          <div className="bigTweet-actionAndStats bigTweet-likeWrapper">
+          <div className="bigTweet-action">
             <button
               className={`bigTweet-likeButton ${
                 isLiked ? 'bigTweet-likeButton-liked' : ''
@@ -130,7 +144,6 @@ const BigTweet = () => {
             >
               ♥
             </button>
-            <div>{numOfLikes}</div>
           </div>
           <div>Share</div>
         </div>

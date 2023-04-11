@@ -6,7 +6,6 @@ Very much in progress.
 
 #### TODO NEXT
 
-- separate like and likes on BigTweet
 - make likes bring you to likers page
 - start edit inputs with current values
 - ? add follow button to each user card in UserListPopup
@@ -24,6 +23,7 @@ Very much in progress.
 
 ##### Behavior
 
+- ? add confirmation to delete tweet button
 - investigate if I need to pass currentUserInfo to TweetCard or if I can just use context
 - handle manually navigating to UserListPopup component without a user IDs array in state from Link
 - handle search box when non-existant user is searched
@@ -33,11 +33,17 @@ Very much in progress.
 
 ##### Style
 
+- make colors consistent
 - make profile links in TweetCards, UserListPopups underline
 - make tweets consistent widths
 - add credit
 
 #### DONE
+
+_0.6.1_
+
+- adjust styling for BigTweet
+- separate actions and stats on BigTweet
 
 _0.6.0_
 

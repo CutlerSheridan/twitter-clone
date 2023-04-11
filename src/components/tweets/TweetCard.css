@@ -26,6 +26,7 @@
 }
 .tweetCard-tweetAndUserWrapper > a {
   text-decoration: none;
+  color: black;
 }
 .tweetCard-nameAndHandleWrapper {
   position: relative;
