@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './UserListPopup.css';
 import { getUsersList } from '../FirebaseController';
 import { useState, useEffect, useContext } from 'react';
@@ -9,6 +9,7 @@ const UserListPopup = () => {
   const { userIds, title } = location.state;
   const currentUserAuth = useContext(UserContext);
   const [userObjs, setUserObjs] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (userIds.length && !userObjs.length) {
@@ -16,10 +17,14 @@ const UserListPopup = () => {
     }
   });
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
     <div className="userList-wrapper">
       <section className="userList-innerContainer">
-        <Link to="..">X</Link>
+        <button onClick={goBack}>X</button>
         <h2 className="userList-title">{title}</h2>
         <div className="userList-list">
           {userObjs.length ? (
@@ -43,6 +48,7 @@ const UserListPopup = () => {
                         <></>
                       )}
                     </div>
+                    <div>{x.bio}</div>
                   </div>
                 </div>
               </Link>

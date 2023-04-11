@@ -14,6 +14,7 @@ const App = () => {
           <Route path="following" element={<UserListPopup />} />
           <Route path="followers" element={<UserListPopup />} />
         </Route>
+        <Route path=":tweetId/likes" element={<UserListPopup />} />
       </Route>
     </Routes>
   );

@@ -16,11 +16,17 @@
 .userList-title {
   margin: 1rem 0;
 }
+.userList-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
 .userList-list > a {
   text-decoration: none;
 }
 .userList-userCard {
   display: flex;
+  color: black;
 }
 .userList-userCard:hover {
   background: darkgrey;
@@ -38,10 +44,9 @@
   flex-direction: column;
   justify-content: center;
 }
-.userList-name,
 .userList-handle {
-  text-decoration: none;
-  color: black;
+  font-size: 1.8rem;
+  color: rgb(22, 22, 22, 0.6);
 }
 .userList-handleAndFollowLabel {
   display: flex;

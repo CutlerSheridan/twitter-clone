@@ -6,16 +6,15 @@ Very much in progress.
 
 #### TODO NEXT
 
-- add bio section to profile headers
-- add bio to each user card in list
+- start edit inputs with current values
 - ? add follow button to each user card in UserListPopup
 - make user's number of followers update upon following/unfollowing on profile
+- add big tweet page
 
 #### TODO LATER
 
 ##### Features
 
-- add big tweet page
 - add ability to reply
 - add ability to retweet
 - ? add notifications
@@ -29,7 +28,6 @@ Very much in progress.
 - make sure header information refreshes when going straight from one profile to another; for example, "follow" button remains toggled to whatever it becomes after pressing it on the first profile
 - handle visiting pages when not signed in
 - fix how when signed out, nav elements not there (correct behavior), but when signing in (or maybe only new user signing in?), they don't populate, which they should
-- ? start inputs with current values
 
 ##### Style
 
@@ -37,6 +35,13 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.5.8_
+
+- add bio section to profile headers
+- add bio to each user card in list
+- refactor routing so any path ending in /likes or /followers or /following will work
+- refactor routing again so checking user's following/ers doesn't unmount profile component and require reload upon returning
 
 _0.5.7_
 

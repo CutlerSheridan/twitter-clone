@@ -62,8 +62,9 @@ const Profile = () => {
       <div className="profile-header">
         {!editingHeader ? (
           <div>
-            <div>{userInfo.displayName}</div>
-            <div>Handle: @{userInfo.handle}</div>
+            <h1>{userInfo.displayName}</h1>
+            <div>@{userInfo.handle}</div>
+            <div>{userInfo.bio}</div>
             {!isUsersProfile ? (
               createFollowLabels()
             ) : (
@@ -71,58 +72,7 @@ const Profile = () => {
             )}
           </div>
         ) : (
-          <form
-            className="profile-headerForm"
-            onSubmit={async (e) => {
-              e.preventDefault();
-              const form = e.target;
-              let updatesObj = {};
-
-              const findNonHandleFields = () => {
-                const fieldsObj = {};
-                const newName = form.querySelector('#edit-displayName').value;
-                if (newName && newName !== currentUserInfo.displayName) {
-                  fieldsObj.displayName = newName;
-                }
-                return fieldsObj;
-              };
-
-              const newHandle = form
-                .querySelector('#edit-handle')
-                .value.toLowerCase();
-              if (newHandle && newHandle !== currentUserInfo.handle) {
-                if (await isHandleAvailable(newHandle)) {
-                  updatesObj.handle = newHandle;
-                  updatesObj = { ...updatesObj, ...findNonHandleFields() };
-                  await updateUserFields(currentUserAuth.uid, updatesObj);
-                  setUserInfo((prev) => {
-                    return { ...prev, ...updatesObj };
-                  });
-                  setCurrentUserInfo((prev) => {
-                    return { ...prev, ...updatesObj };
-                  });
-                  navigate(`/${newHandle}`);
-                } else {
-                  form
-                    .querySelector('.profile-handleWarning')
-                    .classList.add('profile-handleWarning-taken');
-                }
-              } else {
-                updatesObj = { ...findNonHandleFields() };
-                if (Object.keys(updatesObj).length) {
-                  await updateUserFields(currentUserAuth.uid, updatesObj);
-                  setEditingHeader(false);
-                  setUserInfo((prev) => {
-                    return { ...prev, ...updatesObj };
-                  });
-                  setCurrentUserInfo((prev) => {
-                    return { ...prev, ...updatesObj };
-                  });
-                  navigate(`/${currentUserInfo.handle}`);
-                }
-              }
-            }}
-          >
+          <form className="profile-headerForm" onSubmit={handleEditSubmit}>
             <label>
               Name{' '}
               <input
@@ -154,6 +104,14 @@ const Profile = () => {
               />
             </label>
             <div className="profile-handleWarning">This handle is taken</div>
+            <label>
+              Bio{' '}
+              <input
+                id="edit-bio"
+                max-length={300}
+                placeholder={userInfo.bio}
+              />
+            </label>
 
             <button type="submit">Save</button>
             <button onClick={() => setEditingHeader(false)}>Cancel</button>
@@ -186,6 +144,57 @@ const Profile = () => {
         <Outlet />
       </div>
     );
+  };
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    let updatesObj = {};
+
+    const findNonHandleFields = () => {
+      const fieldsObj = {};
+      const newName = form.querySelector('#edit-displayName').value;
+      if (newName && newName !== currentUserInfo.displayName) {
+        fieldsObj.displayName = newName;
+      }
+      const newBio = form.querySelector('#edit-bio').value;
+      if (newBio && newBio !== currentUserInfo.bio) {
+        fieldsObj.bio = newBio;
+      }
+      return fieldsObj;
+    };
+
+    const newHandle = form.querySelector('#edit-handle').value.toLowerCase();
+    if (newHandle && newHandle !== currentUserInfo.handle) {
+      if (await isHandleAvailable(newHandle)) {
+        updatesObj.handle = newHandle;
+        updatesObj = { ...updatesObj, ...findNonHandleFields() };
+        await updateUserFields(currentUserAuth.uid, updatesObj);
+        setUserInfo((prev) => {
+          return { ...prev, ...updatesObj };
+        });
+        setCurrentUserInfo((prev) => {
+          return { ...prev, ...updatesObj };
+        });
+        navigate(`/${newHandle}`);
+      } else {
+        form
+          .querySelector('.profile-handleWarning')
+          .classList.add('profile-handleWarning-taken');
+      }
+    } else {
+      updatesObj = { ...findNonHandleFields() };
+      if (Object.keys(updatesObj).length) {
+        await updateUserFields(currentUserAuth.uid, updatesObj);
+        setEditingHeader(false);
+        setUserInfo((prev) => {
+          return { ...prev, ...updatesObj };
+        });
+        setCurrentUserInfo((prev) => {
+          return { ...prev, ...updatesObj };
+        });
+        navigate(`/${currentUserInfo.handle}`);
+      }
+    }
   };
   const createFollowLabels = () => {
     if (currentUserInfo) {
@@ -262,7 +271,6 @@ const Profile = () => {
 
   return (
     <div className="profile-wrapper layout-element">
-      <h1>Profile</h1>
       {userInfo ? createHeader() : ''}
       <div className="profile-feedSelectorWrapper">
         <h2
