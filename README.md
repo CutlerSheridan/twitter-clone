@@ -6,7 +6,6 @@ Very much in progress.
 
 #### TODO NEXT
 
-- make likes bring you to likers page
 - start edit inputs with current values
 - ? add follow button to each user card in UserListPopup
 - make user's number of followers update upon following/unfollowing on profile
@@ -39,6 +38,14 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.6.2_
+
+- make likes bring you to likers page
+- style Likes link
+- add hover underline to all instances of linked display names
+- adjust styling on Tweetcards
+- make like buttons pink on hover
 
 _0.6.1_
 

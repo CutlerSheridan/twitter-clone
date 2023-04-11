@@ -44,6 +44,12 @@
   flex-direction: column;
   justify-content: center;
 }
+.userList-name {
+  font-weight: bold;
+}
+.userList-name:hover {
+  text-decoration: underline;
+}
 .userList-handle {
   font-size: 1.8rem;
   color: rgb(22, 22, 22, 0.6);

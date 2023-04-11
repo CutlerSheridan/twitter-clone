@@ -23,13 +23,6 @@
   background: red;
   border-radius: 10rem;
 }
-.bigTweet-tweetAndUserWrapper {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.2rem;
-}
 .bigTweet-nameAndHandleWrapper {
   position: relative;
   width: 100%;
@@ -40,11 +33,13 @@
 }
 .bigTweet-nameAndHandleWrapper > a {
   text-decoration: none;
-  color: black;
+  color: inherit;
 }
 .bigTweet-displayName {
   font-weight: bold;
-  white-space: nowrap;
+}
+.bigTweet-displayName:hover {
+  text-decoration: underline;
 }
 .bigTweet-handle {
   font-size: 1.8rem;
@@ -78,8 +73,16 @@
 .bigTweet-stat {
   width: max-content;
   font-weight: bold;
+  color: black;
 }
-.bigTweet-stat > span {
+.bigTweet-stat > a {
+  text-decoration: none;
+  color: inherit;
+}
+.bigTweet-stat > a:hover {
+  text-decoration: underline;
+}
+.bigTweet-stat span {
   font-weight: normal;
   color: grey;
 }
@@ -96,6 +99,12 @@
   background: none;
   border: none;
   cursor: pointer;
+}
+.bigTweet-likeButton:hover {
+  color: pink;
+}
+.bigTweet-likeButton:active {
+  color: red;
 }
 .bigTweet-likeButton-liked {
   color: red;

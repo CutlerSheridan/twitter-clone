@@ -1,5 +1,11 @@
 import './BigTweet.css';
-import { useLocation, useNavigate, useParams, Link } from 'react-router-dom';
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+  Link,
+  Outlet,
+} from 'react-router-dom';
 import {
   getTweetAndUser,
   getUserInfo,
@@ -122,7 +128,12 @@ const BigTweet = () => {
             {tweetInfo.retweets.length} <span>Retweets</span>
           </div>
           <div className="bigTweet-stat bigTweet-stat-likes">
-            {numOfLikes} <span>Likes</span>
+            <Link
+              to="./likes"
+              state={{ userIds: tweetInfo.likes.reverse(), title: 'Likes' }}
+            >
+              {numOfLikes} <span>Likes</span>
+            </Link>
           </div>
         </div>
 
@@ -147,6 +158,8 @@ const BigTweet = () => {
           </div>
           <div>Share</div>
         </div>
+
+        <Outlet />
       </section>
     </div>
   ) : (
