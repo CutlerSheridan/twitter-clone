@@ -179,6 +179,13 @@ const getUserTweets = async (userId, includeReplies = true) => {
   });
   return tweetsArray;
 };
+const getTweetAndUser = async ({ tweetId, userId }) => {
+  const userInfo = (await getDoc(doc(db, 'users', userId))).data();
+  const tweetInfo = (
+    await getDoc(doc(db, 'users', userId, 'tweets', tweetId))
+  ).data();
+  return { userInfo, tweetInfo };
+};
 const getSpecificTweets = async (tweetAndUserIds) => {
   try {
     const usersAndTweets = [];
@@ -346,6 +353,7 @@ export {
   getUsersList,
   getUserTweets,
   getUsersAndTweets,
+  getTweetAndUser,
   getSpecificTweets,
   updateUserFields,
   followUser,

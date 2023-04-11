@@ -4,6 +4,7 @@ import Layout from './components/Layout.js';
 import Home from './components/Home.js';
 import Profile from './components/Profile';
 import UserListPopup from './components/UserListPopup';
+import BigTweet from './components/tweets/BigTweet';
 
 const App = () => {
   return (
@@ -14,7 +15,9 @@ const App = () => {
           <Route path="following" element={<UserListPopup />} />
           <Route path="followers" element={<UserListPopup />} />
         </Route>
-        <Route path=":tweetId/likes" element={<UserListPopup />} />
+        <Route path=":anyPath/tweet/:userIdTweetId" element={<BigTweet />}>
+          <Route path="likes" element={<UserListPopup />} />
+        </Route>
       </Route>
     </Routes>
   );

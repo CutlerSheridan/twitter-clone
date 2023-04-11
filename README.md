@@ -6,10 +6,11 @@ Very much in progress.
 
 #### TODO NEXT
 
+- separate like and likes on BigTweet
+- make likes bring you to likers page
 - start edit inputs with current values
 - ? add follow button to each user card in UserListPopup
 - make user's number of followers update upon following/unfollowing on profile
-- add big tweet page
 
 #### TODO LATER
 
@@ -23,6 +24,7 @@ Very much in progress.
 
 ##### Behavior
 
+- investigate if I need to pass currentUserInfo to TweetCard or if I can just use context
 - handle manually navigating to UserListPopup component without a user IDs array in state from Link
 - handle search box when non-existant user is searched
 - make sure header information refreshes when going straight from one profile to another; for example, "follow" button remains toggled to whatever it becomes after pressing it on the first profile
@@ -31,10 +33,17 @@ Very much in progress.
 
 ##### Style
 
+- make profile links in TweetCards, UserListPopups underline
 - make tweets consistent widths
 - add credit
 
 #### DONE
+
+_0.6.0_
+
+- make /likes route a child of /tweet/:userIdTweetId
+- add big tweet page
+- adjust big tweet layout
 
 _0.5.8_
 
