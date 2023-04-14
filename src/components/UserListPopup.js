@@ -34,7 +34,11 @@ const UserListPopup = () => {
                 key={`${Math.random()}${Math.random()}`}
               >
                 <div className="userList-userCard">
-                  <img className="userList-avi" src={x.avi}></img>
+                  <img
+                    className="userList-avi"
+                    src={x.avi}
+                    referrerPolicy="no-referrer"
+                  ></img>
                   <div className="userList-nameAndHandle">
                     <div className="userList-name">{x.displayName}</div>
                     <div className="userList-handleAndFollowLabel">

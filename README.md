@@ -6,21 +6,24 @@ Very much in progress.
 
 #### TODO NEXT
 
-- start edit inputs with current values
-- ? add follow button to each user card in UserListPopup
+- make small tweets reply button bring up reply compose popup
+- make big tweets show previous and future tweets in the thread
+- add text in tweet cards and big tweets stating if they're replies and to whom
 
 #### TODO LATER
 
 ##### Features
 
-- add ability to reply
 - add ability to retweet
+- start edit inputs with current values
 - ? add notifications
 - ? add ability to change avi
 - ? add tweet searchbox that displays tweets containing search parameters
+- ? add follow button to each user card in UserListPopup
 
 ##### Behavior
 
+- make "Tweets" feed on profile show user's replies to their own tweets even if not in the "Replies" tab
 - ? add confirmation to delete tweet button
 - investigate if I need to pass currentUserInfo to TweetCard or if I can just use context
 - handle manually navigating to UserListPopup component without a user IDs array in state from Link
@@ -32,10 +35,16 @@ Very much in progress.
 
 - make colors consistent
 - make profile links in TweetCards, UserListPopups underline
-- make tweets consistent widths
+- make middle section consistent widths
+- ? make replies have a line to indicate they're replies
+
 - add credit
 
 #### DONE
+
+_0.7.0_
+
+- add ability to reply
 
 _0.6.3_
 

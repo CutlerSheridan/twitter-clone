@@ -310,6 +310,23 @@ const addTweetToDatabase = async (userId, tweet) => {
         transaction.update(docRef, { id: docRef.id });
       }
     });
+    if (tweet.isReply) {
+      const { userId: repliedToUserId, tweetId: repliedToTweetId } =
+        tweet.repliedToTweet;
+      const repliedToTweetRef = doc(
+        db,
+        'users',
+        repliedToUserId,
+        'tweets',
+        repliedToTweetId
+      );
+      await updateDoc(repliedToTweetRef, {
+        replies: arrayUnion({
+          userId: repliedToUserId,
+          tweetId: repliedToTweetId,
+        }),
+      });
+    }
   } catch (e) {
     console.error('Transaction failed: ', e);
   }

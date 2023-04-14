@@ -15,13 +15,18 @@ import {
 } from '../../FirebaseController';
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../UserContext';
+import ComposeTweet from './ComposeTweet';
 
-const BigTweet = () => {
+const BigTweet = (props) => {
   const { userIdTweetId } = useParams();
-  const [userId, tweetId] = userIdTweetId.split('-');
+  let userId, tweetId;
+  if (userIdTweetId) {
+    [userId, tweetId] = userIdTweetId.split('-');
+  } else {
+    userId = props.userId;
+    tweetId = props.tweetId;
+  }
   const userAuth = useContext(UserContext);
-  // const location = useLocation();
-  // const { tweetInfo, tweeterInfo, currentUserInfo } = location.state;
   const [tweeterInfo, setTweeterInfo] = useState(null);
   const [tweetInfo, setTweetInfo] = useState(null);
   const [currentUserInfo, setCurrentUserInfo] = useState(null);
@@ -74,7 +79,11 @@ const BigTweet = () => {
         </div>
         <div className="bigTweet-tweetWrapper">
           <div className="bigTweet-middleRow">
-            <img src={tweeterInfo.avi} className="bigTweet-avi"></img>
+            <img
+              src={tweeterInfo.avi}
+              className="bigTweet-avi"
+              referrerPolicy="no-referrer"
+            ></img>
             {tweeterInfo ? (
               <div className="bigTweet-nameAndHandleWrapper">
                 <Link to={`/${tweeterInfo.handle}`}>
@@ -158,6 +167,7 @@ const BigTweet = () => {
           </div>
           <div>Share</div>
         </div>
+        <ComposeTweet repliedToIdsObj={{ userId, tweetId }} />
 
         <Outlet />
       </section>
