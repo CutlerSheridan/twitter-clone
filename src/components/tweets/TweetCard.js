@@ -3,6 +3,7 @@ import { UserContext } from '../../UserContext';
 import { useContext, useEffect, useState } from 'react';
 import { deleteTweet, likeTweet, unlikeTweet } from '../../FirebaseController';
 import { Link } from 'react-router-dom';
+import ComposeTweetPopUp from './ComposeTweetPopUp';
 
 const TweetCard = ({
   tweet: tweetInfo,
@@ -13,6 +14,7 @@ const TweetCard = ({
   const creationMilliseconds = tweetInfo.creationDate.seconds * 1000;
   const [isLiked, setIsLiked] = useState(false);
   const [numOfLikes, setNumOfLikes] = useState(tweetInfo.likes.length);
+  const [replying, setReplying] = useState(false);
 
   useEffect(() => {
     if (currentUserInfo && tweetInfo.id) {
@@ -36,6 +38,13 @@ const TweetCard = ({
       setNumOfLikes((prev) => ++prev);
       likeTweet(currentUserInfo.id, tweeterInfo.id, tweetInfo.id);
     }
+  };
+
+  const launchReplyPopup = () => {
+    setReplying(true);
+  };
+  const exitReplyPopup = () => {
+    setReplying(false);
   };
 
   return (
@@ -83,7 +92,7 @@ const TweetCard = ({
       </div>
       <div className="tweetCard-bottomRow">
         <div className="tweetCard-actionAndStats">
-          <div>Reply</div>
+          <button onClick={launchReplyPopup}>Reply</button>
           <div>{tweetInfo.replies.length}</div>
         </div>
         <div className="tweetCard-actionAndStats">
@@ -103,6 +112,14 @@ const TweetCard = ({
         </div>
         <div>Share</div>
       </div>
+      {replying ? (
+        <ComposeTweetPopUp
+          repliedToIdsObj={{ userId: tweeterInfo.id, tweetId: tweetInfo.id }}
+          handleExit={exitReplyPopup}
+        />
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

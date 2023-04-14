@@ -6,9 +6,8 @@ Very much in progress.
 
 #### TODO NEXT
 
-- make small tweets reply button bring up reply compose popup
-- make big tweets show previous and future tweets in the thread
 - add text in tweet cards and big tweets stating if they're replies and to whom
+- make big tweets show previous and future tweets in the thread
 
 #### TODO LATER
 
@@ -42,9 +41,13 @@ Very much in progress.
 
 #### DONE
 
+_0.7.1_
+
+- make small tweets reply button bring up reply compose popup
+
 _0.7.0_
 
-- add ability to reply
+- add logic to reply to tweets
 
 _0.6.3_
 

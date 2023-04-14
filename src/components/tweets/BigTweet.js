@@ -26,6 +26,7 @@ const BigTweet = (props) => {
     userId = props.userId;
     tweetId = props.tweetId;
   }
+  const { isPartOfPopupReply } = props;
   const userAuth = useContext(UserContext);
   const [tweeterInfo, setTweeterInfo] = useState(null);
   const [tweetInfo, setTweetInfo] = useState(null);
@@ -74,7 +75,7 @@ const BigTweet = (props) => {
     <div className="bigTweet-wrapper">
       <section className="bigTweet-innerContainer">
         <div className="bigTweet-header">
-          <button onClick={goBack}>{'<'}</button>
+          {isPartOfPopupReply ? <></> : <button onClick={goBack}>{'<'}</button>}
           <h1>Tweet</h1>
         </div>
         <div className="bigTweet-tweetWrapper">
@@ -167,7 +168,11 @@ const BigTweet = (props) => {
           </div>
           <div>Share</div>
         </div>
-        <ComposeTweet repliedToIdsObj={{ userId, tweetId }} />
+        {isPartOfPopupReply ? (
+          <></>
+        ) : (
+          <ComposeTweet repliedToIdsObj={{ userId, tweetId }} />
+        )}
 
         <Outlet />
       </section>
