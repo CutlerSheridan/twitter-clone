@@ -6,7 +6,7 @@ Very much in progress.
 
 #### TODO NEXT
 
-- add text in tweet cards and big tweets stating if they're replies and to whom
+- add reply label in big tweets
 - make big tweets show previous and future tweets in the thread
 
 #### TODO LATER
@@ -40,6 +40,11 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.7.2_
+
+- add reply label in tweetCards
+- link reply label to user's page
 
 _0.7.1_
 

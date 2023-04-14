@@ -1,7 +1,12 @@
 import './TweetCard.css';
 import { UserContext } from '../../UserContext';
 import { useContext, useEffect, useState } from 'react';
-import { deleteTweet, likeTweet, unlikeTweet } from '../../FirebaseController';
+import {
+  deleteTweet,
+  getUserInfo,
+  likeTweet,
+  unlikeTweet,
+} from '../../FirebaseController';
 import { Link } from 'react-router-dom';
 import ComposeTweetPopUp from './ComposeTweetPopUp';
 
@@ -15,6 +20,7 @@ const TweetCard = ({
   const [isLiked, setIsLiked] = useState(false);
   const [numOfLikes, setNumOfLikes] = useState(tweetInfo.likes.length);
   const [replying, setReplying] = useState(false);
+  const [userReplyingTo, setUserReplyingTo] = useState(null);
 
   useEffect(() => {
     if (currentUserInfo && tweetInfo.id) {
@@ -25,6 +31,11 @@ const TweetCard = ({
       ) {
         setIsLiked(true);
       }
+    }
+    if (tweetInfo && tweetInfo.isReply) {
+      getUserInfo(tweetInfo.repliedToTweet.userId).then((result) => {
+        setUserReplyingTo(result.handle);
+      });
     }
   }, []);
 
@@ -84,6 +95,14 @@ const TweetCard = ({
             </Link>
           ) : (
             <div className="tweetCard-nameAndHandleWrapper-empty">...</div>
+          )}
+          {userReplyingTo ? (
+            <div className="tweetCard-replyLabel">
+              Replying to{' '}
+              <Link to={`../${userReplyingTo}`}>@{userReplyingTo}</Link>
+            </div>
+          ) : (
+            <></>
           )}
           <Link to={`tweet/${tweeterInfo.id}-${tweetInfo.id}`}>
             <div className="tweetCard-tweet">{tweetInfo.tweet}</div>
