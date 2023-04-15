@@ -12,10 +12,12 @@ import {
   deleteTweet,
   likeTweet,
   unlikeTweet,
+  getThreadTweetsAndUsers,
 } from '../../FirebaseController';
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../UserContext';
 import ComposeTweet from './ComposeTweet';
+import TweetFeed from './TweetFeed';
 
 const BigTweet = (props) => {
   const { userIdTweetId } = useParams();
@@ -33,6 +35,7 @@ const BigTweet = (props) => {
   const [currentUserInfo, setCurrentUserInfo] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
   const [numOfLikes, setNumOfLikes] = useState(0);
+  const [repliesAndPrevTweets, setRepliesAndPrevTweets] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -50,9 +53,17 @@ const BigTweet = (props) => {
     }
   }, [currentUserInfo]);
   useEffect(() => {
+    const fetchPrevTweetsAndReplies = async () => {
+      const tweetObjs = await getThreadTweetsAndUsers({
+        replies: tweetInfo.replies,
+        prevTweetAndUserIdObj: tweetInfo.repliedToTweet,
+      });
+      setRepliesAndPrevTweets(tweetObjs);
+    };
     if (tweetInfo) {
       setNumOfLikes(tweetInfo.likes.length);
     }
+    fetchPrevTweetsAndReplies();
   }, [tweetInfo]);
 
   const handleLikeButton = () => {
@@ -73,6 +84,17 @@ const BigTweet = (props) => {
 
   return tweetInfo && tweeterInfo && currentUserInfo ? (
     <div className="bigTweet-wrapper">
+      {tweetInfo.isReply && repliesAndPrevTweets ? (
+        <TweetFeed
+          tweetAndUserInfoArray={
+            repliesAndPrevTweets.previousTweetsAndUsersInfo
+          }
+          includeReplies={true}
+          currentUserInfo={currentUserInfo}
+        />
+      ) : (
+        <></>
+      )}
       <section className="bigTweet-innerContainer">
         <div className="bigTweet-header">
           {isPartOfPopupReply ? <></> : <button onClick={goBack}>{'<'}</button>}
@@ -171,7 +193,20 @@ const BigTweet = (props) => {
         {isPartOfPopupReply ? (
           <></>
         ) : (
-          <ComposeTweet repliedToIdsObj={{ userId, tweetId }} />
+          <div>
+            <ComposeTweet repliedToIdsObj={{ userId, tweetId }} />
+            {tweetInfo.replies.length && repliesAndPrevTweets ? (
+              <TweetFeed
+                tweetAndUserInfoArray={
+                  repliesAndPrevTweets.replyTweetsAndUsersInfo
+                }
+                includeReplies={true}
+                currentUserInfo={currentUserInfo}
+              />
+            ) : (
+              <></>
+            )}
+          </div>
         )}
 
         <Outlet />

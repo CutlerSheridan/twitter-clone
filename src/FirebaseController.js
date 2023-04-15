@@ -191,25 +191,61 @@ const getSpecificTweets = async (tweetAndUserIds) => {
     const usersAndTweets = [];
     await runTransaction(db, async (transaction) => {
       for (const item of tweetAndUserIds) {
-        const { tweetId, sentBy } = item;
-        const userRef = doc(db, 'users', sentBy);
-        const tweetRef = doc(db, 'users', sentBy, 'tweets', tweetId);
+        const { tweetId, sentBy, userId } = item;
+        let userRef, tweetRef;
+        if (sentBy) {
+          userRef = doc(db, 'users', sentBy);
+          tweetRef = doc(db, 'users', sentBy, 'tweets', tweetId);
+        } else if (userId) {
+          userRef = doc(db, 'users', userId);
+          tweetRef = doc(db, 'users', userId, 'tweets', tweetId);
+        }
         const userInfo = (await transaction.get(userRef)).data();
         const tweet = (await transaction.get(tweetRef)).data();
         usersAndTweets.push({ tweet, userInfo });
       }
     });
+    console.log('result of getSpecificTweets', usersAndTweets);
     return usersAndTweets.reverse();
   } catch (e) {
     console.error(e);
   }
 };
+const getThreadTweetsAndUsers = async ({ replies, prevTweetAndUserIdObj }) => {
+  console.log('replies in gTTAU', replies);
+  const replyTweetsAndUsersInfo = (await getSpecificTweets(replies)).reverse();
+  console.log('rTAUI near beginning of gTTAU', replyTweetsAndUsersInfo);
+  let prevTweetsAndUsers = [];
+  let needPrevTweet = prevTweetAndUserIdObj ? true : false;
+  let prevTweetId, prevUserId;
+  if (needPrevTweet) {
+    prevTweetId = prevTweetAndUserIdObj.tweetId;
+    prevUserId = prevTweetAndUserIdObj.userId;
+  }
+  while (needPrevTweet) {
+    const tweetAndUserInfo = await getTweetAndUser({
+      userId: prevUserId,
+      tweetId: prevTweetId,
+    });
+    const tweetInfo = tweetAndUserInfo.tweetInfo;
+    const userInfo = tweetAndUserInfo.userInfo;
+    prevTweetsAndUsers.push({ tweetInfo, userInfo });
+    if (tweetInfo.isReply) {
+      prevTweetId = tweetInfo.repliedToTweet.tweetId;
+      prevUserId = tweetInfo.repliedToTweet.userId;
+    } else {
+      needPrevTweet = false;
+    }
+  }
+  prevTweetsAndUsers = prevTweetsAndUsers.reverse();
+  return {
+    previousTweetsAndUsersInfo: prevTweetsAndUsers,
+    replyTweetsAndUsersInfo,
+  };
+};
 const updateUserFields = async (userId, updatesObj) => {
   try {
-    // console.log('uid to update', userId);
     const docRef = doc(db, 'users', userId);
-    // const updateObj = {};
-    // fieldsArray.forEach((field) => (updateObj[field.key] = field.value));
     await updateDoc(docRef, updatesObj);
   } catch (e) {
     console.error(e);
@@ -300,8 +336,9 @@ const updateTweetFields = async (userId) => {
 };
 const addTweetToDatabase = async (userId, tweet) => {
   try {
+    let docRef;
     await runTransaction(db, async (transaction) => {
-      const docRef = doc(collection(db, 'users', userId, 'tweets'));
+      docRef = doc(collection(db, 'users', userId, 'tweets'));
       transaction.set(docRef, tweet);
       if (!tweet.creationDate) {
         transaction.update(docRef, { creationDate: serverTimestamp() });
@@ -322,8 +359,8 @@ const addTweetToDatabase = async (userId, tweet) => {
       );
       await updateDoc(repliedToTweetRef, {
         replies: arrayUnion({
-          userId: repliedToUserId,
-          tweetId: repliedToTweetId,
+          userId,
+          tweetId: docRef.id,
         }),
       });
     }
@@ -372,6 +409,7 @@ export {
   getUsersAndTweets,
   getTweetAndUser,
   getSpecificTweets,
+  getThreadTweetsAndUsers,
   updateUserFields,
   followUser,
   unfollowUser,

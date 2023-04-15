@@ -3,7 +3,13 @@ import TweetCard from './TweetCard';
 import { useEffect, useState } from 'react';
 import { getSpecificTweets, getUsersAndTweets } from '../../FirebaseController';
 
-const TweetFeed = ({ idsForFeed, likes, includeReplies, currentUserInfo }) => {
+const TweetFeed = ({
+  idsForFeed,
+  likes,
+  tweetAndUserInfoArray,
+  includeReplies,
+  currentUserInfo,
+}) => {
   const [tweetsToDisplay, setTweetsToDisplay] = useState([]);
 
   useEffect(() => {
@@ -17,19 +23,22 @@ const TweetFeed = ({ idsForFeed, likes, includeReplies, currentUserInfo }) => {
       }
       if (likes && currentUserInfo) {
         const usersAndTweets = await getSpecificTweets(likes);
-        console.log('tf likes usersAndTweets before setting:', usersAndTweets);
         setTweetsToDisplay(usersAndTweets);
+      }
+      if (tweetAndUserInfoArray && currentUserInfo) {
+        setTweetsToDisplay(tweetAndUserInfoArray);
       }
     };
     fetchTweets();
-  }, [idsForFeed, currentUserInfo, likes]);
+  }, [idsForFeed, currentUserInfo, likes, tweetAndUserInfoArray]);
 
   const createFeed = () => {
+    console.log(tweetsToDisplay);
     return (
       <div className="feed">
         {tweetsToDisplay.map((x) => (
           <TweetCard
-            tweet={x.tweet}
+            tweet={x.tweet || x.tweetInfo}
             userInfo={x.userInfo}
             currentUserInfo={currentUserInfo}
             key={`${Math.random()}` + `${Math.random()}`}

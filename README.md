@@ -6,8 +6,10 @@ Very much in progress.
 
 #### TODO NEXT
 
+- get rid of some of these errors on big tweet pages
+- clean up console.logs
+- make routes work when on Big Tweet page and click to go straight to another Big Tweet page
 - add reply label in big tweets
-- make big tweets show previous and future tweets in the thread
 
 #### TODO LATER
 
@@ -40,6 +42,12 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.7.3_
+
+- make big tweets show previous tweets in the chain
+- make big tweets show replies in the thread
+- fix replying so it adds correct tweetId and userId to previous tweet's replies
 
 _0.7.2_
 
