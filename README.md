@@ -6,14 +6,14 @@ Very much in progress.
 
 #### TODO NEXT
 
-- make routes work when on Big Tweet page and click to go straight to another Big Tweet page
+- fix testuser's tweet not showing replies; it's showing the big tweet again in small tweet form as a reply, what the fuck
 
 #### TODO LATER
 
 ##### Features
 
 - add ability to retweet
-- start edit inputs with current values
+- start profile edit inputs with current values
 - ? add notifications
 - ? add ability to change avi
 - ? add tweet searchbox that displays tweets containing search parameters
@@ -29,6 +29,7 @@ Very much in progress.
 - handle search box when non-existant user is searched
 - handle visiting pages when not signed in
 - fix how when signed out, nav elements not there (correct behavior), but when signing in (or maybe only new user signing in?), they don't populate, which they should
+- ? prevent reply label from blinking a few times upon loading
 
 ##### Style
 
@@ -41,6 +42,12 @@ Very much in progress.
 
 #### DONE
 
+_0.7.5_
+
+- make routes work when on Big Tweet page and click to go straight to another Big Tweet page
+- program behavior for handling tweets in threads that no longer exist
+- make deleted big tweets display as deleted
+
 _0.7.4_
 
 - add reply label in big tweets
@@ -48,7 +55,7 @@ _0.7.4_
 - clean up console.logs
 - adjust routing so big tweet links don't need to be prefaced with another page
 - fix reply button on previous tweet in thread; currently brings up popup of most recent tweet instead of selected reply
-  - fixed by only using params if they exist AND if it is not part of a popup reply
+  - fixed by only using params if they exist AND if component is not part of a popup reply
 
 _0.7.3_
 

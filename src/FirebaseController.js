@@ -180,7 +180,7 @@ const getUserTweets = async (userId, includeReplies = true) => {
 };
 const getTweetAndUser = async ({ tweetId, userId }) => {
   const userInfo = (await getDoc(doc(db, 'users', userId))).data();
-  const tweetInfo = (
+  let tweetInfo = (
     await getDoc(doc(db, 'users', userId, 'tweets', tweetId))
   ).data();
   return { userInfo, tweetInfo };

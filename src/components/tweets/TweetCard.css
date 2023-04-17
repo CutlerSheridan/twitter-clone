@@ -5,6 +5,10 @@
   gap: 1rem;
   border-top: 1px solid black;
 }
+.tweetCard-wrapper-deleted {
+  padding: 3rem 1.65rem;
+  font-style: italic;
+}
 .tweetCard-middleRow {
   display: flex;
   gap: 1rem;

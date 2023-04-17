@@ -16,26 +16,33 @@ const TweetCard = ({
   currentUserInfo,
 }) => {
   const userAuth = useContext(UserContext);
-  const creationMilliseconds = tweetInfo.creationDate.seconds * 1000;
+  const creationMilliseconds = tweetInfo
+    ? tweetInfo.creationDate.seconds * 1000
+    : null;
   const [isLiked, setIsLiked] = useState(false);
-  const [numOfLikes, setNumOfLikes] = useState(tweetInfo.likes.length);
+  const [numOfLikes, setNumOfLikes] = useState(
+    tweetInfo ? tweetInfo.likes.length : null
+  );
   const [replying, setReplying] = useState(false);
   const [userReplyingTo, setUserReplyingTo] = useState(null);
+  const [isDeleted, setIsDeleted] = useState(!tweetInfo);
 
   useEffect(() => {
-    if (currentUserInfo && tweetInfo.id) {
-      if (
-        currentUserInfo.likes.some(
-          (x) => x.sentBy === tweeterInfo.id && x.tweetId === tweetInfo.id
-        )
-      ) {
-        setIsLiked(true);
+    if (!isDeleted) {
+      if (currentUserInfo && tweetInfo.id) {
+        if (
+          currentUserInfo.likes.some(
+            (x) => x.sentBy === tweeterInfo.id && x.tweetId === tweetInfo.id
+          )
+        ) {
+          setIsLiked(true);
+        }
       }
-    }
-    if (tweetInfo && tweetInfo.isReply) {
-      getUserInfo(tweetInfo.repliedToTweet.userId).then((result) => {
-        setUserReplyingTo(result.handle);
-      });
+      if (tweetInfo && tweetInfo.isReply) {
+        getUserInfo(tweetInfo.repliedToTweet.userId).then((result) => {
+          setUserReplyingTo(result.handle);
+        });
+      }
     }
   }, []);
 
@@ -58,7 +65,11 @@ const TweetCard = ({
     setReplying(false);
   };
 
-  return (
+  return isDeleted ? (
+    <div className="tweetCard-wrapper tweetCard-wrapper-deleted">
+      This tweet has been deleted by its author.
+    </div>
+  ) : (
     <div className="tweetCard-wrapper">
       <div className="tweetCard-middleRow">
         <img
@@ -106,12 +117,12 @@ const TweetCard = ({
           {userReplyingTo ? (
             <div className="tweetCard-replyLabel">
               Replying to{' '}
-              <Link to={`../${userReplyingTo}`}>@{userReplyingTo}</Link>
+              <Link to={`/${userReplyingTo}`}>@{userReplyingTo}</Link>
             </div>
           ) : (
             <></>
           )}
-          <Link to={`tweet/${tweeterInfo.id}-${tweetInfo.id}`}>
+          <Link to={`/tweet/${tweeterInfo.id}-${tweetInfo.id}`}>
             <div className="tweetCard-tweet">{tweetInfo.tweet}</div>
           </Link>
         </div>

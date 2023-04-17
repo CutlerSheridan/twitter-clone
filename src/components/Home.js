@@ -11,7 +11,6 @@ const Home = () => {
 
   useEffect(() => {
     if (currentUserAuth && !idsForFeed.length) {
-      console.log('currentUserAuth', currentUserAuth);
       getUserInfo(currentUserAuth.uid).then((result) => {
         setIdsForFeed(result.following);
         setCurrentUserInfo(result);

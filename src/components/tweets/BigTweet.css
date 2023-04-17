@@ -4,6 +4,10 @@
   flex-direction: column;
   gap: 1rem;
 }
+.bigTweet-wrapper-deleted {
+  padding: 3rem 1.65rem;
+  font-style: italic;
+}
 .bigTweet-innerContainer {
   padding: 2rem 0;
   border-top: 1px solid black;
