@@ -15,7 +15,7 @@ const App = () => {
           <Route path="following" element={<UserListPopup />} />
           <Route path="followers" element={<UserListPopup />} />
         </Route>
-        <Route path=":anyPath/tweet/:userIdTweetId" element={<BigTweet />}>
+        <Route path=":anyPath?/tweet/:userIdTweetId" element={<BigTweet />}>
           <Route path="likes" element={<UserListPopup />} />
         </Route>
       </Route>

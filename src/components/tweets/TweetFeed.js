@@ -33,7 +33,6 @@ const TweetFeed = ({
   }, [idsForFeed, currentUserInfo, likes, tweetAndUserInfoArray]);
 
   const createFeed = () => {
-    console.log(tweetsToDisplay);
     return (
       <div className="feed">
         {tweetsToDisplay.map((x) => (

@@ -20,15 +20,15 @@ import ComposeTweet from './ComposeTweet';
 import TweetFeed from './TweetFeed';
 
 const BigTweet = (props) => {
+  const { isPartOfPopupReply } = props;
   const { userIdTweetId } = useParams();
   let userId, tweetId;
-  if (userIdTweetId) {
+  if (userIdTweetId && !isPartOfPopupReply) {
     [userId, tweetId] = userIdTweetId.split('-');
   } else {
     userId = props.userId;
     tweetId = props.tweetId;
   }
-  const { isPartOfPopupReply } = props;
   const userAuth = useContext(UserContext);
   const [tweeterInfo, setTweeterInfo] = useState(null);
   const [tweetInfo, setTweetInfo] = useState(null);
@@ -36,6 +36,7 @@ const BigTweet = (props) => {
   const [isLiked, setIsLiked] = useState(false);
   const [numOfLikes, setNumOfLikes] = useState(0);
   const [repliesAndPrevTweets, setRepliesAndPrevTweets] = useState({});
+  const [userReplyingTo, setUserReplyingTo] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -62,8 +63,13 @@ const BigTweet = (props) => {
     };
     if (tweetInfo) {
       setNumOfLikes(tweetInfo.likes.length);
+      fetchPrevTweetsAndReplies();
+      if (tweetInfo.isReply) {
+        getUserInfo(tweetInfo.repliedToTweet.userId).then((result) => {
+          setUserReplyingTo(result.handle);
+        });
+      }
     }
-    fetchPrevTweetsAndReplies();
   }, [tweetInfo]);
 
   const handleLikeButton = () => {
@@ -148,6 +154,14 @@ const BigTweet = (props) => {
               { month: 'short', day: 'numeric', year: 'numeric' }
             )}
           </div>
+          {tweetInfo.isReply ? (
+            <div className="bigTweet-replyLabel">
+              Replying to{' '}
+              <Link to={`../${userReplyingTo}`}>@{userReplyingTo}</Link>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
 
         <div className="bigTweet-divider"></div>

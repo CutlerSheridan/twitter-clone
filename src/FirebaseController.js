@@ -101,7 +101,6 @@ const _testRandomHandleGen = () => {
     });
     return accumulator;
   }, {});
-  console.log('charCount', charCount);
 };
 // _testRandomHandleGen();
 
@@ -205,16 +204,13 @@ const getSpecificTweets = async (tweetAndUserIds) => {
         usersAndTweets.push({ tweet, userInfo });
       }
     });
-    console.log('result of getSpecificTweets', usersAndTweets);
     return usersAndTweets.reverse();
   } catch (e) {
     console.error(e);
   }
 };
 const getThreadTweetsAndUsers = async ({ replies, prevTweetAndUserIdObj }) => {
-  console.log('replies in gTTAU', replies);
   const replyTweetsAndUsersInfo = (await getSpecificTweets(replies)).reverse();
-  console.log('rTAUI near beginning of gTTAU', replyTweetsAndUsersInfo);
   let prevTweetsAndUsers = [];
   let needPrevTweet = prevTweetAndUserIdObj ? true : false;
   let prevTweetId, prevUserId;

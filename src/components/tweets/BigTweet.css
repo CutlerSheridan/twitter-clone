@@ -57,8 +57,16 @@
   margin: 1rem 0;
 }
 .bigTweet-timestamp {
+  margin: 1rem 0;
   font-size: 1.8rem;
   opacity: 60%;
+}
+.bigTweet-replyLabel {
+  color: grey;
+}
+.bigTweet-replyLabel > a {
+  text-decoration: none;
+  color: dodgerblue;
 }
 
 .bigTweet-divider {

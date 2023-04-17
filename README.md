@@ -6,10 +6,7 @@ Very much in progress.
 
 #### TODO NEXT
 
-- get rid of some of these errors on big tweet pages
-- clean up console.logs
 - make routes work when on Big Tweet page and click to go straight to another Big Tweet page
-- add reply label in big tweets
 
 #### TODO LATER
 
@@ -24,6 +21,7 @@ Very much in progress.
 
 ##### Behavior
 
+- figure out why I had to click my own profile twice when on another user's profile for the user profile to refresh
 - make "Tweets" feed on profile show user's replies to their own tweets even if not in the "Replies" tab
 - ? add confirmation to delete tweet button
 - investigate if I need to pass currentUserInfo to TweetCard or if I can just use context
@@ -42,6 +40,15 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.7.4_
+
+- add reply label in big tweets
+- refactor [tweetInfo] useEffect() in BigTweet to prevent uncaught promises
+- clean up console.logs
+- adjust routing so big tweet links don't need to be prefaced with another page
+- fix reply button on previous tweet in thread; currently brings up popup of most recent tweet instead of selected reply
+  - fixed by only using params if they exist AND if it is not part of a popup reply
 
 _0.7.3_
 

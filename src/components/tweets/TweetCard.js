@@ -75,7 +75,14 @@ const TweetCard = ({
                 </div>
                 <div className="tweetCard-handleAndDate">
                   {tweeterInfo ? '@' + tweeterInfo.handle : 'no handle'} ·{' '}
-                  {new Date(creationMilliseconds).toDateString()}
+                  {new Date(creationMilliseconds).toLocaleDateString(
+                    undefined,
+                    {
+                      month: 'short',
+                      day: 'numeric',
+                      year: 'numeric',
+                    }
+                  )}
                   {tweeterInfo.id === userAuth.uid ? (
                     <button
                       className="tweetCard-delete"
