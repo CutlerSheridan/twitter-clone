@@ -63,11 +63,13 @@
 .tweetCard-bottomRow {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   font-size: 1.7rem;
 }
 .tweetCard-actionAndStats {
   display: flex;
   gap: 0.7rem;
+  align-items: center;
 }
 .tweetCard-likeWrapper {
   width: 4.5rem;

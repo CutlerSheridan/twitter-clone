@@ -42,7 +42,7 @@ const BigTweet = (props) => {
 
   useEffect(() => {
     getTweetAndUser({ userId, tweetId }).then((result) => {
-      if (!tweetInfo) {
+      if (!result.tweetInfo) {
         setIsDeleted(true);
       } else {
         setTweetInfo(result.tweetInfo);

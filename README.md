@@ -6,7 +6,8 @@ Very much in progress.
 
 #### TODO NEXT
 
-- fix testuser's tweet not showing replies; it's showing the big tweet again in small tweet form as a reply, what the fuck
+- ? make big tweet show own user's future thread from current tweet, not just extraneous replies, and that should be first
+- figure out why I had to click my own profile twice when on another user's profile for the user profile to refresh
 
 #### TODO LATER
 
@@ -21,7 +22,6 @@ Very much in progress.
 
 ##### Behavior
 
-- figure out why I had to click my own profile twice when on another user's profile for the user profile to refresh
 - make "Tweets" feed on profile show user's replies to their own tweets even if not in the "Replies" tab
 - ? add confirmation to delete tweet button
 - investigate if I need to pass currentUserInfo to TweetCard or if I can just use context
@@ -41,6 +41,11 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.7.6_
+
+- fix every big tweet saying they've been deleted
+- fix testuser's tweet not showing replies; it's showing the big tweet again in small tweet form as a reply, what the fuck
 
 _0.7.5_
 
