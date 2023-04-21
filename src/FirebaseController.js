@@ -178,6 +178,12 @@ const getUserTweets = async (userId, includeReplies = true) => {
   });
   return tweetsArray;
 };
+const getTweet = async ({ tweetId, userId }) => {
+  const tweetInfo = (
+    await getDoc(doc(db, 'users', userId, 'tweets', tweetId))
+  ).data();
+  return tweetInfo;
+};
 const getTweetAndUser = async ({ tweetId, userId }) => {
   const userInfo = (await getDoc(doc(db, 'users', userId))).data();
   let tweetInfo = (
@@ -200,8 +206,8 @@ const getSpecificTweets = async (tweetAndUserIds) => {
           tweetRef = doc(db, 'users', userId, 'tweets', tweetId);
         }
         const userInfo = (await transaction.get(userRef)).data();
-        const tweet = (await transaction.get(tweetRef)).data();
-        usersAndTweets.push({ tweet, userInfo });
+        const tweetInfo = (await transaction.get(tweetRef)).data();
+        usersAndTweets.push({ tweetInfo, userInfo });
       }
     });
     return usersAndTweets.reverse();
@@ -209,8 +215,12 @@ const getSpecificTweets = async (tweetAndUserIds) => {
     console.error(e);
   }
 };
-const getThreadTweetsAndUsers = async ({ replies, prevTweetAndUserIdObj }) => {
-  const replyTweetsAndUsersInfo = (await getSpecificTweets(replies)).reverse();
+const getThreadTweetsAndUsers = async ({
+  replies,
+  prevTweetAndUserIdObj,
+  currentUserInfo: originalTweeter,
+}) => {
+  let replyTweetsAndUsersInfo = (await getSpecificTweets(replies)).reverse();
   let prevTweetsAndUsers = [];
   let needPrevTweet = prevTweetAndUserIdObj ? true : false;
   let prevTweetId, prevUserId;
@@ -219,10 +229,18 @@ const getThreadTweetsAndUsers = async ({ replies, prevTweetAndUserIdObj }) => {
     prevUserId = prevTweetAndUserIdObj.userId;
   }
   while (needPrevTweet) {
-    const tweetAndUserInfo = await getTweetAndUser({
-      userId: prevUserId,
-      tweetId: prevTweetId,
-    });
+    let tweetAndUserInfo;
+    if (prevTweetId === originalTweeter.id) {
+      tweetAndUserInfo = {
+        userInfo: originalTweeter,
+        tweetInfo: await getTweet({ userId: prevUserId, tweetId: prevTweetId }),
+      };
+    } else {
+      tweetAndUserInfo = await getTweetAndUser({
+        userId: prevUserId,
+        tweetId: prevTweetId,
+      });
+    }
     const tweetInfo = tweetAndUserInfo.tweetInfo;
     const userInfo = tweetAndUserInfo.userInfo;
     prevTweetsAndUsers.push({ tweetInfo, userInfo });
@@ -234,9 +252,58 @@ const getThreadTweetsAndUsers = async ({ replies, prevTweetAndUserIdObj }) => {
     }
   }
   prevTweetsAndUsers = prevTweetsAndUsers.reverse();
+
+  let futureThreadsArray = [];
+  let bigTweetRepliesFromCurrentUser = [];
+  for (let i = replyTweetsAndUsersInfo.length - 1; i >= 0; i--) {
+    if (replyTweetsAndUsersInfo[i].userInfo.id === originalTweeter.id) {
+      bigTweetRepliesFromCurrentUser.push(
+        ...replyTweetsAndUsersInfo.splice(i, 1)
+      );
+    }
+  }
+  if (bigTweetRepliesFromCurrentUser.length) {
+    for (let i = 0; i < bigTweetRepliesFromCurrentUser.length; i++) {
+      const currentReply = bigTweetRepliesFromCurrentUser[i];
+      futureThreadsArray.push([currentReply]);
+      let needNextTweet = currentReply.tweetInfo.replies.some(
+        (x) => x.userId === originalTweeter.id
+      );
+      let nextUserId, nextTweetId;
+      if (needNextTweet) {
+        // assuing oldest thread should come first
+        const nextIds = currentReply.tweetInfo.replies.find(
+          (y) => y.userId === originalTweeter.id
+        );
+        nextUserId = nextIds.userId;
+        nextTweetId = nextIds.tweetId;
+      }
+      while (needNextTweet) {
+        const userInfo = originalTweeter;
+        const tweetInfo = await getTweet({
+          userId: nextUserId,
+          tweetId: nextTweetId,
+        });
+        futureThreadsArray[i].push({ userInfo, tweetInfo });
+        needNextTweet = tweetInfo.replies.some(
+          (x) => x.userId === originalTweeter.id
+        );
+        if (needNextTweet) {
+          const nextIds = tweetInfo.replies.find(
+            (x) => x.userId === originalTweeter.id
+          );
+          nextUserId = nextIds.userId;
+          nextTweetId = nextIds.tweetId;
+        }
+      }
+    }
+  }
+  futureThreadsArray = futureThreadsArray.reverse();
+
   return {
     previousTweetsAndUsersInfo: prevTweetsAndUsers,
     replyTweetsAndUsersInfo,
+    futureThreadsArray,
   };
 };
 const updateUserFields = async (userId, updatesObj) => {

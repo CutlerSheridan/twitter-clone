@@ -35,7 +35,7 @@ const BigTweet = (props) => {
   const [currentUserInfo, setCurrentUserInfo] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
   const [numOfLikes, setNumOfLikes] = useState(0);
-  const [repliesAndPrevTweets, setRepliesAndPrevTweets] = useState({});
+  const [threadTweets, setThreadTweets] = useState(null);
   const [userReplyingTo, setUserReplyingTo] = useState(null);
   const [isDeleted, setIsDeleted] = useState(false);
   const navigate = useNavigate();
@@ -59,13 +59,14 @@ const BigTweet = (props) => {
     }
   }, [currentUserInfo]);
   useEffect(() => {
-    if (!isDeleted) {
+    if (!isDeleted && tweeterInfo) {
       const fetchPrevTweetsAndReplies = async () => {
         const tweetObjs = await getThreadTweetsAndUsers({
           replies: tweetInfo.replies,
           prevTweetAndUserIdObj: tweetInfo.repliedToTweet,
+          currentUserInfo: tweeterInfo,
         });
-        setRepliesAndPrevTweets(tweetObjs);
+        setThreadTweets(tweetObjs);
       };
       if (tweetInfo) {
         setNumOfLikes(tweetInfo.likes.length);
@@ -77,7 +78,7 @@ const BigTweet = (props) => {
         }
       }
     }
-  }, [tweetInfo]);
+  }, [tweetInfo, tweeterInfo]);
 
   const handleLikeButton = () => {
     if (isLiked) {
@@ -104,11 +105,9 @@ const BigTweet = (props) => {
   } else {
     return tweetInfo && tweeterInfo && currentUserInfo ? (
       <div className="bigTweet-wrapper">
-        {tweetInfo.isReply && repliesAndPrevTweets ? (
+        {tweetInfo.isReply && threadTweets ? (
           <TweetFeed
-            tweetAndUserInfoArray={
-              repliesAndPrevTweets.previousTweetsAndUsersInfo
-            }
+            tweetAndUserInfoArray={threadTweets.previousTweetsAndUsersInfo}
             includeReplies={true}
             currentUserInfo={currentUserInfo}
           />
@@ -234,14 +233,22 @@ const BigTweet = (props) => {
           ) : (
             <div>
               <ComposeTweet repliedToIdsObj={{ userId, tweetId }} />
-              {tweetInfo.replies.length && repliesAndPrevTweets ? (
-                <TweetFeed
-                  tweetAndUserInfoArray={
-                    repliesAndPrevTweets.replyTweetsAndUsersInfo
-                  }
-                  includeReplies={true}
-                  currentUserInfo={currentUserInfo}
-                />
+              {tweetInfo.replies.length && threadTweets ? (
+                <div>
+                  {threadTweets.futureThreadsArray.map((x) => (
+                    <TweetFeed
+                      tweetAndUserInfoArray={x}
+                      includeReplies={true}
+                      currentUserInfo={tweeterInfo}
+                      key={`${Math.random()}` + `${Math.random()}`}
+                    />
+                  ))}
+                  <TweetFeed
+                    tweetAndUserInfoArray={threadTweets.replyTweetsAndUsersInfo}
+                    includeReplies={true}
+                    currentUserInfo={currentUserInfo}
+                  />
+                </div>
               ) : (
                 <></>
               )}

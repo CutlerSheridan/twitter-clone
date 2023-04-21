@@ -37,7 +37,7 @@ const TweetFeed = ({
       <div className="feed">
         {tweetsToDisplay.map((x) => (
           <TweetCard
-            tweet={x.tweet || x.tweetInfo}
+            tweet={x.tweetInfo}
             userInfo={x.userInfo}
             currentUserInfo={currentUserInfo}
             key={`${Math.random()}` + `${Math.random()}`}

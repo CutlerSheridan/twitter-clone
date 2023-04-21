@@ -6,7 +6,6 @@ Very much in progress.
 
 #### TODO NEXT
 
-- ? make big tweet show own user's future thread from current tweet, not just extraneous replies, and that should be first
 - figure out why I had to click my own profile twice when on another user's profile for the user profile to refresh
 
 #### TODO LATER
@@ -36,11 +35,17 @@ Very much in progress.
 - make colors consistent
 - make profile links in TweetCards, UserListPopups underline
 - make middle section consistent widths
-- ? make replies have a line to indicate they're replies
-
+- make replies have a line to indicate they're replies
 - add credit
 
 #### DONE
+
+_0.7.7_
+
+- refactor thread fetching to pass current user's info so it doesn't have to fetch it for every tweet
+- make big tweet show own user's future thread from current tweet, not just replies to that direct tweet
+- fix threads so future tweets of the tweeter are shown, not of the signed-in user
+- handle if user has multiple threads continuing from current
 
 _0.7.6_
 
