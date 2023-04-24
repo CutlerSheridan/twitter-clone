@@ -6,14 +6,15 @@ Very much in progress.
 
 #### TODO NEXT
 
-- figure out why I had to click my own profile twice when on another user's profile for the user profile to refresh
+- make "Tweets" feed on profile show user's replies to their own tweets even if not in the "Replies" tab
+- handle search box when non-existant user is searched
+- start profile edit inputs with current values
 
 #### TODO LATER
 
 ##### Features
 
 - add ability to retweet
-- start profile edit inputs with current values
 - ? add notifications
 - ? add ability to change avi
 - ? add tweet searchbox that displays tweets containing search parameters
@@ -21,11 +22,9 @@ Very much in progress.
 
 ##### Behavior
 
-- make "Tweets" feed on profile show user's replies to their own tweets even if not in the "Replies" tab
 - ? add confirmation to delete tweet button
 - investigate if I need to pass currentUserInfo to TweetCard or if I can just use context
 - handle manually navigating to UserListPopup component without a user IDs array in state from Link
-- handle search box when non-existant user is searched
 - handle visiting pages when not signed in
 - fix how when signed out, nav elements not there (correct behavior), but when signing in (or maybe only new user signing in?), they don't populate, which they should
 - ? prevent reply label from blinking a few times upon loading
@@ -39,6 +38,10 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.7.8_
+
+- fix all profile tweets showing as deleted
 
 _0.7.7_
 

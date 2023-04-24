@@ -144,11 +144,13 @@ const getUsersAndTweets = async (userIds, includeReplies = true) => {
       const userInfo = await getUserInfo(id);
       const tweets = await getUserTweets(id, includeReplies);
       tweets.forEach((tweet) => {
-        usersAndTweets.push({ tweet, userInfo });
+        usersAndTweets.push({ tweetInfo: tweet, userInfo });
       });
     }
 
-    usersAndTweets.sort((x, y) => y.tweet.creationDate - x.tweet.creationDate);
+    usersAndTweets.sort(
+      (x, y) => y.tweetInfo.creationDate - x.tweetInfo.creationDate
+    );
     return usersAndTweets;
   } catch (e) {
     console.error(e);
