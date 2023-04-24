@@ -274,7 +274,11 @@ const Profile = () => {
 
   return (
     <div className="profile-wrapper layout-element">
-      {userInfo ? createHeader() : ''}
+      {userInfo ? (
+        createHeader()
+      ) : (
+        <div className="profile-nonexistantUser">This user does not exist.</div>
+      )}
       <div className="profile-feedSelectorWrapper">
         <h2
           className={getFeedSelectorClasses('tweets')}

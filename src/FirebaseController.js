@@ -10,14 +10,12 @@ import {
 import {
   getFirestore,
   getDocs,
-  addDoc,
   doc,
   collection,
   query,
   where,
   orderBy,
   getDoc,
-  setDoc,
   updateDoc,
   serverTimestamp,
   runTransaction,
@@ -25,6 +23,7 @@ import {
   arrayUnion,
   arrayRemove,
   deleteField,
+  or,
 } from 'firebase/firestore/lite';
 import * as model from './model';
 
@@ -169,7 +168,10 @@ const getUserTweets = async (userId, includeReplies = true) => {
     querySnapshot = await getDocs(
       query(
         collection(db, 'users', userId, 'tweets'),
-        where('isReply', '==', false),
+        or(
+          where('isReply', '==', false),
+          where('repliedToTweet.userId', '==', userId)
+        ),
         orderBy('creationDate', 'desc')
       )
     );

@@ -6,8 +6,6 @@ Very much in progress.
 
 #### TODO NEXT
 
-- make "Tweets" feed on profile show user's replies to their own tweets even if not in the "Replies" tab
-- handle search box when non-existant user is searched
 - start profile edit inputs with current values
 
 #### TODO LATER
@@ -38,6 +36,11 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.7.9_
+
+- make "Tweets" feed on profile show user's replies to their own tweets even if not in the "Replies" tab
+- handle search box when non-existant user is searched
 
 _0.7.8_
 
