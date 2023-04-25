@@ -1,5 +1,5 @@
 .composeTweet-wrapper {
-  border: 1px solid black;
+  border: 1px solid var(--clr-2);
 }
 .composeTweet-form > input {
   width: min(20rem, 100%);

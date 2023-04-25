@@ -8,13 +8,13 @@
 }
 .profile-handleWarning-taken {
   visibility: visible;
-  color: red;
+  color: var(--clr-5);
 }
 .profile-followLabel {
   padding: 0.3rem;
   width: max-content;
   font-size: 1.6rem;
-  background: rgb(197, 197, 197);
+  background: var(--clr-3);
   border-radius: 0.5rem;
 }
 .profile-followsWrapper {
@@ -31,12 +31,12 @@
   padding-bottom: 0.5rem;
   width: 7rem;
   text-align: center;
-  border-bottom: 3px solid black;
+  border-bottom: 3px solid var(--clr-2);
   cursor: pointer;
   transition: all 0.15s;
 }
 .profile-feedSelector-active {
-  border-bottom-color: dodgerblue;
+  border-bottom-color: var(--clr-4);
 }
 
 .profile-nonexistantUser {

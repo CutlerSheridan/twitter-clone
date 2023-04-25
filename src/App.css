@@ -1,4 +1,19 @@
 :root {
+  /* black */
+  --clr-1: orange;
+  --clr-1-nums: 255, 165, 0;
+  --clr-1-light: rgb(255, 194, 79);
+  /* white */
+  --clr-2: forestgreen;
+  /* grey */
+  --clr-3: lightgreen;
+  --clr-3-dark: green;
+  /* blue */
+  --clr-4: purple;
+  --clr-4-light: lavender;
+  /* red */
+  --clr-5: red;
+  --clr-5-light: pink;
   font-size: 62.5%;
 }
 *,
@@ -9,6 +24,7 @@
   box-sizing: border-box;
   font-size: inherit;
   font-family: inherit;
+  color: var(--clr-2);
 }
 body {
   height: 100%;

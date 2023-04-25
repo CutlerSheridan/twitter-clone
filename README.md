@@ -6,7 +6,8 @@ Very much in progress.
 
 #### TODO NEXT
 
-- start profile edit inputs with current values
+- add proper background color assignments then make color vars the actual colors
+- make middle section consistent widths
 
 #### TODO LATER
 
@@ -20,6 +21,7 @@ Very much in progress.
 
 ##### Behavior
 
+- start profile edit inputs with current values
 - ? add confirmation to delete tweet button
 - investigate if I need to pass currentUserInfo to TweetCard or if I can just use context
 - handle manually navigating to UserListPopup component without a user IDs array in state from Link
@@ -29,13 +31,26 @@ Very much in progress.
 
 ##### Style
 
-- make colors consistent
-- make profile links in TweetCards, UserListPopups underline
-- make middle section consistent widths
-- make replies have a line to indicate they're replies
+- figure out how to handle everything on mobile
+- style followers/ing list
+- style likes list
+- style reply popup
+- style big tweet threads
+- style profile headers
+- style unassigned avis
+- style compose tweet modal on home page
+- style tweet card
+  - should whole card highlight upon hover?
+- go through components and make sure all are styled
+- make replies have a line to indicate they're replies--at least in Big Tweets
 - add credit
 
 #### DONE
+
+_0.8.0_
+
+- make colors assigned to vars
+  - go back to UserListPopup translucent wrapper background and handle
 
 _0.7.9_
 

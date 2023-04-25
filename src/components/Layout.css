@@ -6,10 +6,10 @@
   justify-items: center;
   justify-content: center;
   gap: 1rem;
-  border: 1px solid red;
+  border: 1px solid var(--clr-5);
 }
 .layout-wrapper > * {
-  border: 2px solid pink;
+  border: 2px solid var(--clr-5-light);
 }
 .layout-element:first-child,
 .layout-element:last-child {

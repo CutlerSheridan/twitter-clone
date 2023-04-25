@@ -10,7 +10,7 @@
 }
 .bigTweet-innerContainer {
   padding: 2rem 0;
-  border-top: 1px solid black;
+  border-top: 1px solid var(--clr-2);
 }
 .bigTweet-header {
   display: flex;
@@ -27,7 +27,7 @@
   width: 6rem;
   height: 6rem;
   flex-shrink: 0;
-  background: red;
+  background: var(--clr-3);
   border-radius: 10rem;
 }
 .bigTweet-nameAndHandleWrapper {
@@ -36,7 +36,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: black;
+  color: var(--clr-2);
 }
 .bigTweet-nameAndHandleWrapper > a {
   text-decoration: none;
@@ -50,7 +50,7 @@
 }
 .bigTweet-handle {
   font-size: 1.8rem;
-  opacity: 50%;
+  color: var(--clr-3);
 }
 .bigTweet-delete {
   position: absolute;
@@ -63,20 +63,20 @@
 .bigTweet-timestamp {
   margin: 1rem 0;
   font-size: 1.8rem;
-  opacity: 60%;
+  color: var(--clr-3);
 }
 .bigTweet-replyLabel {
-  color: grey;
+  color: var(--clr-3);
 }
 .bigTweet-replyLabel > a {
   text-decoration: none;
-  color: dodgerblue;
+  color: var(--clr-4);
 }
 
 .bigTweet-divider {
   margin: 2rem 0;
   height: 0.1rem;
-  background: grey;
+  background: var(--clr-3);
 }
 
 .bigTweet-statsRow {
@@ -88,7 +88,7 @@
 .bigTweet-stat {
   width: max-content;
   font-weight: bold;
-  color: black;
+  color: var(--clr-2);
 }
 .bigTweet-stat > a {
   text-decoration: none;
@@ -99,7 +99,7 @@
 }
 .bigTweet-stat span {
   font-weight: normal;
-  color: grey;
+  color: var(--clr-3);
 }
 .bigTweet-actionsRow {
   display: flex;
@@ -116,11 +116,11 @@
   cursor: pointer;
 }
 .bigTweet-likeButton:hover {
-  color: pink;
+  color: var(--clr-5-light);
 }
 .bigTweet-likeButton:active {
-  color: red;
+  color: var(--clr-5);
 }
 .bigTweet-likeButton-liked {
-  color: red;
+  color: var(--clr-5);
 }

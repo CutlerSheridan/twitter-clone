@@ -1,5 +1,5 @@
 .navbar-wrapper {
-  border: 1px solid black;
+  border: 1px solid var(--clr-2);
 }
 nav {
   display: flex;
