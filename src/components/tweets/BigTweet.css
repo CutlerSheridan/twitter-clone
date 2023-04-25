@@ -10,7 +10,7 @@
 }
 .bigTweet-innerContainer {
   padding: 2rem 0;
-  border-top: 1px solid var(--clr-2);
+  border-top: 1px solid var(--clr-3-dark);
 }
 .bigTweet-header {
   display: flex;
@@ -76,7 +76,7 @@
 .bigTweet-divider {
   margin: 2rem 0;
   height: 0.1rem;
-  background: var(--clr-3);
+  background: var(--clr-3-dark);
 }
 
 .bigTweet-statsRow {
@@ -105,6 +105,9 @@
   display: flex;
   justify-content: space-around;
   font-size: 1.7rem;
+}
+.bigTweet-actionsRow * {
+  color: var(--clr-3);
 }
 .bigTweet-action {
   display: flex;

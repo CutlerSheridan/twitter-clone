@@ -1,10 +1,9 @@
-.navbar-wrapper {
-  border: 1px solid var(--clr-2);
-}
 nav {
   display: flex;
   flex-direction: column;
 }
 .navbar-findUserForm > label > input {
   width: min(20rem, 100%);
+}
+input {
 }

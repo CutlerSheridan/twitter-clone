@@ -34,7 +34,7 @@ const ComposeTweet = ({ repliedToIdsObj = null }) => {
       <form className="composeTweet-form" onSubmit={sendTweet}>
         <h2>New tweet</h2>
         {isReply ? <div>Replying</div> : <></>}
-        <input maxLength={280}></input>
+        <input type="text" maxLength={280}></input>
         <button type="submit">Send tweet</button>
       </form>
     </div>

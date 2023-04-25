@@ -20,12 +20,13 @@
 .userList-list {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 0rem;
 }
 .userList-list > a {
   text-decoration: none;
 }
 .userList-userCard {
+  padding: 1rem 0.5rem;
   display: flex;
   color: var(--clr-2);
 }

@@ -6,14 +6,15 @@ Very much in progress.
 
 #### TODO NEXT
 
-- add proper background color assignments then make color vars the actual colors
 - make middle section consistent widths
+- style profile headers
 
 #### TODO LATER
 
 ##### Features
 
 - add ability to retweet
+- add pinned tweet option
 - ? add notifications
 - ? add ability to change avi
 - ? add tweet searchbox that displays tweets containing search parameters
@@ -36,20 +37,33 @@ Very much in progress.
 - style likes list
 - style reply popup
 - style big tweet threads
-- style profile headers
+  - ? remove "replying to" label from big tweets
 - style unassigned avis
 - style compose tweet modal on home page
 - style tweet card
   - should whole card highlight upon hover?
+- style navbar
+- style signin sidebar
+- style compose tweet modal
 - go through components and make sure all are styled
 - make replies have a line to indicate they're replies--at least in Big Tweets
 - add credit
 
 #### DONE
 
+_0.8.1_
+
+- add proper background color assignments
+- make color variables the actual colors
+- adjust grid layout panel spacing
+- color buttons and button text
+- make action buttons grey on tweet cards
+- make action buttons grey on big tweets
+- make dividers darker grey
+
 _0.8.0_
 
-- make colors assigned to vars
+- assign all colors to variables
   - go back to UserListPopup translucent wrapper background and handle
 
 _0.7.9_

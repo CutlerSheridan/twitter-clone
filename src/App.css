@@ -1,20 +1,21 @@
 :root {
   /* black */
-  --clr-1: orange;
-  --clr-1-nums: 255, 165, 0;
-  --clr-1-light: rgb(255, 194, 79);
+  --clr-1: black;
+  --clr-1-nums: 0, 0, 0;
+  --clr-1-light: rgb(30, 30, 30);
   /* white */
-  --clr-2: forestgreen;
+  --clr-2: white;
   /* grey */
-  --clr-3: lightgreen;
-  --clr-3-dark: green;
+  --clr-3: grey;
+  --clr-3-dark: rgb(66, 66, 66);
   /* blue */
-  --clr-4: purple;
-  --clr-4-light: lavender;
+  --clr-4: dodgerblue;
+  --clr-4-light: rgb(78, 167, 255);
   /* red */
   --clr-5: red;
   --clr-5-light: pink;
   font-size: 62.5%;
+  background: var(--clr-1);
 }
 *,
 *::before,
@@ -30,4 +31,18 @@ body {
   height: 100%;
   width: 100%;
   font-size: 2rem;
+}
+input[type='text'] {
+  background-color: var(--clr-1);
+  border: 1px solid var(--clr-3);
+}
+button {
+  padding: 0.3rem;
+  background: var(--clr-4);
+  border: none;
+  border-radius: 0.2rem;
+}
+button:hover {
+  background: var(--clr-4-light);
+  cursor: pointer;
 }

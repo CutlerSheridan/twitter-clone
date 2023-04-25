@@ -35,7 +35,7 @@ const Navbar = () => {
         <form className="navbar-findUserForm" onSubmit={handleFindUser}>
           <label>
             Find user:
-            <input></input>
+            <input type="text"></input>
             <button type="submit">Go</button>
           </label>
         </form>

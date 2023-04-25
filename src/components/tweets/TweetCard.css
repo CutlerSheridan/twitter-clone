@@ -66,6 +66,9 @@
   align-items: center;
   font-size: 1.7rem;
 }
+.tweetCard-bottomRow * {
+  color: var(--clr-3);
+}
 .tweetCard-actionAndStats {
   display: flex;
   gap: 0.7rem;
@@ -81,6 +84,7 @@
 }
 .tweetCard-likeButton:hover {
   color: var(--clr-5-light);
+  background: inherit;
 }
 .tweetCard-likeButton:active {
   color: var(--clr-5);
