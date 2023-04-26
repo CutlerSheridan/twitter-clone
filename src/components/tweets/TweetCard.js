@@ -129,11 +129,15 @@ const TweetCard = ({
       </div>
       <div className="tweetCard-bottomRow">
         <div className="tweetCard-actionAndStats">
-          <button onClick={launchReplyPopup}>Reply</button>
+          <button className="tweetCard-action" onClick={launchReplyPopup}>
+            <span className="material-symbols-outlined">chat_bubble</span>
+          </button>
           <div>{tweetInfo.replies.length}</div>
         </div>
         <div className="tweetCard-actionAndStats">
-          <div>Retweet</div>
+          <button className="tweetCard-action">
+            <span className="material-symbols-outlined">laps</span>
+          </button>
           <div>{tweetInfo.retweets.length}</div>
         </div>
         <div className="tweetCard-actionAndStats tweetCard-likeWrapper">
@@ -147,7 +151,9 @@ const TweetCard = ({
           </button>
           <div>{numOfLikes}</div>
         </div>
-        <div>Share</div>
+        <button className="tweetCard-action">
+          <span className="material-symbols-outlined">ios_share</span>
+        </button>
       </div>
       {replying ? (
         <ComposeTweetPopUp

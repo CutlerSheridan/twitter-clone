@@ -210,12 +210,12 @@ const BigTweet = (props) => {
           <div className="bigTweet-divider"></div>
 
           <div className="bigTweet-actionsRow">
-            <div className="bigTweet-action">
-              <div>Reply</div>
-            </div>
-            <div className="bigTweet-action">
-              <div>Retweet</div>
-            </div>
+            <button className="bigTweet-action">
+              <span className="material-symbols-outlined">chat_bubble</span>
+            </button>
+            <button className="bigTweet-action">
+              <span className="material-symbols-outlined">laps</span>
+            </button>
             <div className="bigTweet-action">
               <button
                 className={`bigTweet-likeButton ${
@@ -226,7 +226,9 @@ const BigTweet = (props) => {
                 ♥
               </button>
             </div>
-            <div>Share</div>
+            <button className="bigTweet-action">
+              <span className="material-symbols-outlined">ios_share</span>
+            </button>
           </div>
           {isPartOfPopupReply ? (
             <></>

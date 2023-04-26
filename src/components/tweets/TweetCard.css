@@ -74,6 +74,16 @@
   gap: 0.7rem;
   align-items: center;
 }
+.tweetCard-action {
+  display: flex;
+  align-items: center;
+  background: none;
+}
+.tweetCard-action:hover,
+.tweetCard-action > span:hover {
+  background: none;
+  color: var(--clr-4);
+}
 .tweetCard-likeWrapper {
   width: 4.5rem;
 }

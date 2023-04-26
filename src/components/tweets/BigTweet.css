@@ -112,6 +112,12 @@
 .bigTweet-action {
   display: flex;
   gap: 0.7rem;
+  background: none;
+}
+.bigTweet-action:hover,
+.bigTweet-action > span:hover {
+  background: none;
+  color: var(--clr-4);
 }
 .bigTweet-likeButton {
   background: none;
@@ -119,6 +125,7 @@
   cursor: pointer;
 }
 .bigTweet-likeButton:hover {
+  background: none;
   color: var(--clr-5-light);
 }
 .bigTweet-likeButton:active {

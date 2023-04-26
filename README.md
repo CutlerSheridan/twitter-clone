@@ -6,8 +6,9 @@ Very much in progress.
 
 #### TODO NEXT
 
-- make middle section consistent widths
+- figure out how to handle reply button on big tweets
 - style profile headers
+- make middle section consistent widths
 
 #### TODO LATER
 
@@ -23,6 +24,7 @@ Very much in progress.
 ##### Behavior
 
 - start profile edit inputs with current values
+- ? fix promise error triggered when exiting big tweet
 - ? add confirmation to delete tweet button
 - investigate if I need to pass currentUserInfo to TweetCard or if I can just use context
 - handle manually navigating to UserListPopup component without a user IDs array in state from Link
@@ -50,6 +52,11 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.8.2_
+
+- add icons for actions
+- color icons
 
 _0.8.1_
 
