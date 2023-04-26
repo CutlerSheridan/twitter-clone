@@ -63,6 +63,11 @@
   visibility: visible;
   color: var(--clr-5);
 }
+.profile-editFormButtons {
+  margin: 2rem 0;
+  display: flex;
+  gap: 1rem;
+}
 
 .profile-followsWrapper {
   display: flex;

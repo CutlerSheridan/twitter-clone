@@ -139,8 +139,10 @@ const Profile = () => {
               />
             </label>
 
-            <button type="submit">Save</button>
-            <button onClick={() => setEditingHeader(false)}>Cancel</button>
+            <div className="profile-editFormButtons">
+              <button type="submit">Save</button>
+              <button onClick={() => setEditingHeader(false)}>Cancel</button>
+            </div>
           </form>
         )}
         <div className="profile-followsWrapper">

@@ -6,7 +6,8 @@ Very much in progress.
 
 #### TODO NEXT
 
-- make middle section consistent widths
+- style navbar
+- style signin sidebar
 
 #### TODO LATER
 
@@ -43,8 +44,6 @@ Very much in progress.
 - style compose tweet modal on home page
 - style tweet card
   - should whole card highlight upon hover?
-- style navbar
-- style signin sidebar
 - style compose tweet modal
 - go through components and make sure all are styled
 - make replies have a line to indicate they're replies--at least in Big Tweets
@@ -53,6 +52,11 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.8.6_
+
+- adjust placement of profile edit buttons
+- make middle section consistent widths
 
 _0.8.5_
 

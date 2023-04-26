@@ -6,20 +6,19 @@
   justify-items: center;
   justify-content: center;
 }
-.layout-element:first-child,
-.layout-element:last-child {
+.layout-wrapper > div:first-child,
+.layout-wrapper > div:last-child {
   padding: 2rem;
   max-width: 25rem;
 }
-.layout-element:first-child {
+.layout-wrapper > div:first-child {
   border-right: 2px solid var(--clr-3-dark);
 }
-.layout-element:nth-child(2) {
-  min-width: 55rem;
-  max-width: 60rem;
+.layout-wrapper > div:nth-child(2) {
+  width: 60rem;
   border-top: none;
   border-bottom: none;
 }
-.layout-element:last-child {
+.layout-wrapper > div:last-child {
   border-left: 2px solid var(--clr-3-dark);
 }
