@@ -6,7 +6,6 @@ Very much in progress.
 
 #### TODO NEXT
 
-- figure out how to handle reply button on big tweets
 - style profile headers
 - make middle section consistent widths
 
@@ -14,9 +13,9 @@ Very much in progress.
 
 ##### Features
 
+- add notifications
 - add ability to retweet
 - add pinned tweet option
-- ? add notifications
 - ? add ability to change avi
 - ? add tweet searchbox that displays tweets containing search parameters
 - ? add follow button to each user card in UserListPopup
@@ -52,6 +51,12 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.8.3_
+
+- remove comment button from popup reply modal
+- remove compose reply modal from non-reply big tweets
+- add box shadow to followers/ing/likes/popup reply boxes
 
 _0.8.2_
 

@@ -17,6 +17,7 @@ import {
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../UserContext';
 import ComposeTweet from './ComposeTweet';
+import ComposeTweetPopUp from './ComposeTweetPopUp';
 import TweetFeed from './TweetFeed';
 
 const BigTweet = (props) => {
@@ -38,6 +39,8 @@ const BigTweet = (props) => {
   const [threadTweets, setThreadTweets] = useState(null);
   const [userReplyingTo, setUserReplyingTo] = useState(null);
   const [isDeleted, setIsDeleted] = useState(false);
+  const [replying, setReplying] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -80,6 +83,12 @@ const BigTweet = (props) => {
     }
   }, [tweetInfo, tweeterInfo]);
 
+  const launchReplyPopup = () => {
+    setReplying(true);
+  };
+  const exitReplyPopup = () => {
+    setReplying(false);
+  };
   const handleLikeButton = () => {
     if (isLiked) {
       setIsLiked(false);
@@ -210,9 +219,13 @@ const BigTweet = (props) => {
           <div className="bigTweet-divider"></div>
 
           <div className="bigTweet-actionsRow">
-            <button className="bigTweet-action">
-              <span className="material-symbols-outlined">chat_bubble</span>
-            </button>
+            {isPartOfPopupReply ? (
+              <></>
+            ) : (
+              <button className="bigTweet-action" onClick={launchReplyPopup}>
+                <span className="material-symbols-outlined">chat_bubble</span>
+              </button>
+            )}
             <button className="bigTweet-action">
               <span className="material-symbols-outlined">laps</span>
             </button>
@@ -234,7 +247,18 @@ const BigTweet = (props) => {
             <></>
           ) : (
             <div>
-              <ComposeTweet repliedToIdsObj={{ userId, tweetId }} />
+              {/* <ComposeTweet repliedToIdsObj={{ userId, tweetId }} /> */}
+              {replying ? (
+                <ComposeTweetPopUp
+                  repliedToIdsObj={{
+                    userId: tweeterInfo.id,
+                    tweetId: tweetInfo.id,
+                  }}
+                  handleExit={exitReplyPopup}
+                />
+              ) : (
+                <></>
+              )}
               {tweetInfo.replies.length && threadTweets ? (
                 <div>
                   {threadTweets.futureThreadsArray.map((x) => (
