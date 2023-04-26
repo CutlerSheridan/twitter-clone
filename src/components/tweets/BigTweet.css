@@ -29,10 +29,10 @@
   height: 0.1rem;
   background: var(--clr-3-dark);
 }
-
 .bigTweet-tweetWrapper > .bigTweet-divider {
   margin-top: 1rem;
 }
+
 .bigTweet-middleRow {
   display: flex;
   gap: 1rem;
@@ -110,12 +110,18 @@
   color: var(--clr-3);
 }
 .bigTweet-actionsRow {
+  margin: -1rem 0 1rem 0;
   display: flex;
   justify-content: space-around;
   font-size: 1.7rem;
 }
-.bigTweet-actionsRow * {
+.bigTweet-actionsRow,
+.bigTweet-action,
+.bigTweet-action > span {
   color: var(--clr-3);
+}
+.bigTweet-actionWrapper {
+  position: relative;
 }
 .bigTweet-action {
   display: flex;

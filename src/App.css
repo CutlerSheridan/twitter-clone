@@ -50,3 +50,21 @@ button:hover {
   background: var(--clr-4-light);
   cursor: pointer;
 }
+
+.alert-textCopied {
+  opacity: 0;
+  z-index: -1;
+  position: absolute;
+  padding: 0.2rem 0.3rem;
+  top: -50%;
+  left: -125%;
+  width: max-content;
+  border-radius: 0.2rem;
+  background: var(--clr-4);
+  color: var(--clr-2);
+  transition: all 0.25s;
+}
+.alert-textCopied-visible {
+  opacity: 100%;
+  z-index: 0;
+}

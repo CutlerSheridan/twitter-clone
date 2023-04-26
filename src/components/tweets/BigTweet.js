@@ -105,6 +105,19 @@ const BigTweet = (props) => {
     navigate(-1);
   };
 
+  const copyLink = () => {
+    navigator.clipboard.writeText(
+      `cutlersheridan.github.io/twitter-clone/tweet/${tweeterInfo.id}-${tweetInfo.id}`
+    );
+    const copiedIndicator = document.querySelector(
+      `.alert-textCopied-${tweeterInfo.id}_${tweetInfo.id}`
+    );
+    copiedIndicator.classList.add('alert-textCopied-visible');
+    setTimeout(() => {
+      copiedIndicator.classList.remove('alert-textCopied-visible');
+    }, 850);
+  };
+
   if (isDeleted) {
     return (
       <div className="bigTweet-wrapper bigTweet-wrapper-deleted">
@@ -235,7 +248,7 @@ const BigTweet = (props) => {
             </button>
             <div className="bigTweet-action">
               <button
-                className={`bigTweet-likeButton ${
+                className={`bigTweet-action bigTweet-likeButton ${
                   isLiked ? 'bigTweet-likeButton-liked' : ''
                 }`}
                 onClick={() => handleLikeButton()}
@@ -243,9 +256,16 @@ const BigTweet = (props) => {
                 ♥
               </button>
             </div>
-            <button className="bigTweet-action">
-              <span className="material-symbols-outlined">ios_share</span>
-            </button>
+            <div className="bigTweet-actionWrapper">
+              <button className="bigTweet-action" onClick={copyLink}>
+                <span className="material-symbols-outlined">ios_share</span>
+              </button>
+              <div
+                className={`alert-textCopied alert-textCopied-${userId}_${tweetId}`}
+              >
+                URL copied!
+              </div>
+            </div>
           </div>
           {isPartOfPopupReply ? (
             <></>

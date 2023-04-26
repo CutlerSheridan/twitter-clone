@@ -64,6 +64,18 @@ const TweetCard = ({
   const exitReplyPopup = () => {
     setReplying(false);
   };
+  const copyLink = () => {
+    navigator.clipboard.writeText(
+      `cutlersheridan.github.io/twitter-clone/tweet/${tweeterInfo.id}-${tweetInfo.id}`
+    );
+    const copiedIndicator = document.querySelector(
+      `.alert-textCopied-${tweeterInfo.id}_${tweetInfo.id}`
+    );
+    copiedIndicator.classList.add('alert-textCopied-visible');
+    setTimeout(() => {
+      copiedIndicator.classList.remove('alert-textCopied-visible');
+    }, 850);
+  };
 
   return isDeleted ? (
     <div className="tweetCard-wrapper tweetCard-wrapper-deleted">
@@ -132,28 +144,35 @@ const TweetCard = ({
           <button className="tweetCard-action" onClick={launchReplyPopup}>
             <span className="material-symbols-outlined">chat_bubble</span>
           </button>
-          <div>{tweetInfo.replies.length}</div>
+          <div className="tweetCard-stat">{tweetInfo.replies.length}</div>
         </div>
         <div className="tweetCard-actionAndStats">
           <button className="tweetCard-action">
             <span className="material-symbols-outlined">laps</span>
           </button>
-          <div>{tweetInfo.retweets.length}</div>
+          <div className="tweetCard-stat">{tweetInfo.retweets.length}</div>
         </div>
         <div className="tweetCard-actionAndStats tweetCard-likeWrapper">
           <button
-            className={`tweetCard-likeButton ${
+            className={`tweetCard-action tweetCard-likeButton ${
               isLiked ? 'tweetCard-likeButton-liked' : ''
             }`}
             onClick={() => handleLikeButton()}
           >
             ♥
           </button>
-          <div>{numOfLikes}</div>
+          <div className="tweetCard-stat">{numOfLikes}</div>
         </div>
-        <button className="tweetCard-action">
-          <span className="material-symbols-outlined">ios_share</span>
-        </button>
+        <div className="tweetCard-actionAndStats">
+          <button className="tweetCard-action" onClick={copyLink}>
+            <span className="material-symbols-outlined">ios_share</span>
+          </button>
+          <div
+            className={`alert-textCopied alert-textCopied-${tweeterInfo.id}_${tweetInfo.id}`}
+          >
+            URL copied!
+          </div>
+        </div>
       </div>
       {replying ? (
         <ComposeTweetPopUp

@@ -67,10 +67,8 @@
   align-items: center;
   font-size: 1.7rem;
 }
-.tweetCard-bottomRow * {
-  color: var(--clr-3);
-}
 .tweetCard-actionAndStats {
+  position: relative;
   display: flex;
   gap: 0.7rem;
   align-items: center;
@@ -79,6 +77,11 @@
   display: flex;
   align-items: center;
   background: none;
+}
+.tweetCard-action,
+.tweetCard-action > span,
+.tweetCard-stat {
+  color: var(--clr-3);
 }
 .tweetCard-action:hover,
 .tweetCard-action > span:hover {

@@ -6,14 +6,12 @@ Very much in progress.
 
 #### TODO NEXT
 
-- get X and title on same line for ComposeTweetPopUp
 - make middle section consistent widths
 
 #### TODO LATER
 
 ##### Features
 
-- make share button copy link
 - add notifications
 - add ability to retweet
 - add pinned tweet option
@@ -34,6 +32,7 @@ Very much in progress.
 
 ##### Style
 
+- add X icons for exiting and trash for deleting
 - figure out how to handle everything on mobile
 - style followers/ing list
 - style likes list
@@ -50,9 +49,16 @@ Very much in progress.
 - go through components and make sure all are styled
 - make replies have a line to indicate they're replies--at least in Big Tweets
 - ? add profile banner image
+- ? get X and title on same line for ComposeTweetPopUp
 - add credit
 
 #### DONE
+
+_0.8.5_
+
+- make big tweet share button copy link
+- make tweet card share button copy link
+- make share buttons display little confirmation
 
 _0.8.4_
 
