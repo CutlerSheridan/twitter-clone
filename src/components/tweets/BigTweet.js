@@ -114,25 +114,29 @@ const BigTweet = (props) => {
   } else {
     return tweetInfo && tweeterInfo && currentUserInfo ? (
       <div className="bigTweet-wrapper">
-        {tweetInfo.isReply && threadTweets ? (
-          <TweetFeed
-            tweetAndUserInfoArray={threadTweets.previousTweetsAndUsersInfo}
-            includeReplies={true}
-            currentUserInfo={currentUserInfo}
-          />
-        ) : (
-          <></>
-        )}
         <section className="bigTweet-innerContainer">
           <div className="bigTweet-header">
             {isPartOfPopupReply ? (
               <></>
             ) : (
-              <button onClick={goBack}>{'<'}</button>
+              <button className="bigTweet-backButton" onClick={goBack}>
+                <span className="material-symbols-outlined">arrow_back</span>
+              </button>
             )}
             <h1>Tweet</h1>
           </div>
+          {tweetInfo.isReply && threadTweets ? (
+            <TweetFeed
+              tweetAndUserInfoArray={threadTweets.previousTweetsAndUsersInfo}
+              includeReplies={true}
+              currentUserInfo={currentUserInfo}
+            />
+          ) : (
+            <></>
+          )}
+
           <div className="bigTweet-tweetWrapper">
+            <div className="bigTweet-divider"></div>
             <div className="bigTweet-middleRow">
               <img
                 src={tweeterInfo.avi}
@@ -247,7 +251,6 @@ const BigTweet = (props) => {
             <></>
           ) : (
             <div>
-              {/* <ComposeTweet repliedToIdsObj={{ userId, tweetId }} /> */}
               {replying ? (
                 <ComposeTweetPopUp
                   repliedToIdsObj={{

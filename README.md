@@ -6,13 +6,14 @@ Very much in progress.
 
 #### TODO NEXT
 
-- style profile headers
+- get X and title on same line for ComposeTweetPopUp
 - make middle section consistent widths
 
 #### TODO LATER
 
 ##### Features
 
+- make share button copy link
 - add notifications
 - add ability to retweet
 - add pinned tweet option
@@ -48,9 +49,29 @@ Very much in progress.
 - style compose tweet modal
 - go through components and make sure all are styled
 - make replies have a line to indicate they're replies--at least in Big Tweets
+- ? add profile banner image
 - add credit
 
 #### DONE
+
+_0.8.4_
+
+- style header
+  - add avi
+  - grey out handle
+  - increase display name size
+  - move edit button to top right
+  - move follow button to top right
+  - restyle inactive selector tabs
+  - move and recolor follows label
+  - add user's join date
+  - restyle following/ers buttons
+  - adjust font sizes all around
+  - adjust header padding
+- make dark grey darker
+- make follows label style in user list popup match style on profile
+- move back / X button in popups to be on same line as title
+- move back button to top of big tweet thread
 
 _0.8.3_
 

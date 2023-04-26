@@ -14,8 +14,14 @@
   background: var(--clr-1);
   box-shadow: 0 0 1rem 0.3rem var(--clr-3-dark);
 }
+.userList-topRow {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
 .userList-title {
   margin: 1rem 0;
+  font-size: 2.5rem;
   color: var(--clr-2);
 }
 .userList-list {
@@ -59,13 +65,14 @@
 }
 .userList-handleAndFollowLabel {
   display: flex;
-  align-items: baseline;
-  gap: 0.3rem;
+  align-items: center;
+  gap: 0.5rem;
 }
 .userList-followLabel {
   padding: 0.3rem;
   width: max-content;
-  font-size: 1.6rem;
-  background: var(--clr-3);
+  font-size: 1.3rem;
+  color: var(--clr-3);
+  background: var(--clr-3-dark);
   border-radius: 0.5rem;
 }

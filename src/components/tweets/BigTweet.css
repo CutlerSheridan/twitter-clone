@@ -13,11 +13,25 @@
   border-top: 1px solid var(--clr-3-dark);
 }
 .bigTweet-header {
+  margin-bottom: 2rem;
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
+  align-items: center;
+  font-size: 2.5rem;
 }
-.bigTweet-tweetWrapper {
-  margin-top: 2rem;
+.bigTweet-backButton {
+  display: flex;
+  justify-content: center;
+}
+
+.bigTweet-divider {
+  margin: 2rem 0;
+  height: 0.1rem;
+  background: var(--clr-3-dark);
+}
+
+.bigTweet-tweetWrapper > .bigTweet-divider {
+  margin-top: 1rem;
 }
 .bigTweet-middleRow {
   display: flex;
@@ -71,12 +85,6 @@
 .bigTweet-replyLabel > a {
   text-decoration: none;
   color: var(--clr-4);
-}
-
-.bigTweet-divider {
-  margin: 2rem 0;
-  height: 0.1rem;
-  background: var(--clr-3-dark);
 }
 
 .bigTweet-statsRow {

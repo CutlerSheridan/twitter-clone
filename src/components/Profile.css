@@ -1,3 +1,56 @@
+.profile-header {
+  padding: 3rem 2rem 2rem 2rem;
+}
+.profile-header h1 {
+  font-size: 2.6rem;
+}
+.profile-aviAndEditRow {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.profile-avi {
+  --avi-size: 11rem;
+  border-radius: 10rem;
+  width: var(--avi-size);
+  height: var(--avi-size);
+  background: var(--clr-3);
+}
+.profile-handleRow {
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  align-items: center;
+}
+.profile-handle {
+  font-size: 1.7rem;
+  color: var(--clr-3);
+}
+.profile-followLabel {
+  padding: 0.3rem;
+  width: max-content;
+  font-size: 1.3rem;
+  color: var(--clr-3);
+  background: var(--clr-3-dark);
+  border-radius: 0.5rem;
+}
+.profile-bio {
+  margin: 1.3rem 0;
+}
+.profile-joinDate {
+  margin-bottom: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.7rem;
+  color: var(--clr-3);
+}
+.profile-joinDate > span {
+  font-size: inherit;
+  color: inherit;
+}
+
 .profile-headerForm {
   display: flex;
   flex-direction: column;
@@ -10,16 +63,26 @@
   visibility: visible;
   color: var(--clr-5);
 }
-.profile-followLabel {
-  padding: 0.3rem;
-  width: max-content;
-  font-size: 1.6rem;
-  background: var(--clr-3);
-  border-radius: 0.5rem;
-}
+
 .profile-followsWrapper {
   display: flex;
   gap: 1rem;
+  font-size: 1.7rem;
+}
+.profile-followsStat {
+  color: var(--clr-2);
+}
+.profile-followsStat > a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: bold;
+}
+.profile-followsStat > a:hover {
+  text-decoration: underline;
+}
+.profile-followsStat > a > span {
+  color: var(--clr-3);
+  font-weight: normal;
 }
 
 .profile-feedSelectorWrapper {
@@ -31,11 +94,16 @@
   padding-bottom: 0.5rem;
   width: 7rem;
   text-align: center;
-  border-bottom: 3px solid var(--clr-2);
+  border-bottom: 3px solid transparent;
   cursor: pointer;
+  color: var(--clr-3);
   transition: all 0.15s;
 }
+.profile-feedSelector:hover {
+  color: var(--clr-2);
+}
 .profile-feedSelector-active {
+  color: var(--clr-2);
   border-bottom-color: var(--clr-4);
 }
 

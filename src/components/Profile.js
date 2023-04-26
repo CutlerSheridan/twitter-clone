@@ -57,20 +57,45 @@ const Profile = () => {
     }
   }, [currentUserInfo, userInfo]);
 
+  const getJoinDateString = () => {
+    if (userInfo) {
+      const creationMilliseconds = userInfo.joinDate.seconds * 1000;
+      const dateString = new Date(creationMilliseconds).toLocaleDateString(
+        undefined,
+        { month: 'long', year: 'numeric' }
+      );
+      return dateString;
+    }
+  };
+
   const createHeader = () => {
     const isUsersProfile = currentUserAuth.uid === userInfo.id;
     return (
       <div className="profile-header">
         {!editingHeader ? (
           <div>
+            <div className="profile-aviAndEditRow">
+              <img
+                src={userInfo.avi}
+                className="profile-avi"
+                referrerPolicy="no-referrer"
+              ></img>
+              {!isUsersProfile ? (
+                createFollowButton()
+              ) : (
+                <button onClick={() => setEditingHeader(true)}>Edit</button>
+              )}
+            </div>
             <h1>{userInfo.displayName}</h1>
-            <div>@{userInfo.handle}</div>
-            <div>{userInfo.bio}</div>
-            {!isUsersProfile ? (
-              createFollowLabels()
-            ) : (
-              <button onClick={() => setEditingHeader(true)}>Edit</button>
-            )}
+            <div className="profile-handleRow">
+              <div className="profile-handle">@{userInfo.handle}</div>
+              {!isUsersProfile ? createFollowLabels() : <></>}
+            </div>
+            <div className="profile-bio">{userInfo.bio}</div>
+            <div className="profile-joinDate">
+              <span className="material-symbols-outlined">calendar_month</span>{' '}
+              Joined {userInfo ? getJoinDateString() : '...'}
+            </div>
           </div>
         ) : (
           <form className="profile-headerForm" onSubmit={handleEditSubmit}>
@@ -121,26 +146,30 @@ const Profile = () => {
         <div className="profile-followsWrapper">
           {/* -1 to following length to account for following yourself */}
           {/* filter out user's ID from following for state */}
-          <Link
-            to="following"
-            state={{
-              userIds: userInfo.following
-                .filter((x) => x !== userInfo.id)
-                .reverse(),
-              title: 'Following',
-            }}
-          >
-            {userInfo.following.length - 1} Following
-          </Link>
-          <Link
-            to="followers"
-            state={{
-              userIds: userInfo.followers.reverse(),
-              title: 'Followers',
-            }}
-          >
-            {numOfFollowers} Followers
-          </Link>
+          <div className="profile-followsStat">
+            <Link
+              to="following"
+              state={{
+                userIds: userInfo.following
+                  .filter((x) => x !== userInfo.id)
+                  .reverse(),
+                title: 'Following',
+              }}
+            >
+              {userInfo.following.length - 1} <span>Following</span>
+            </Link>
+          </div>
+          <div className="profile-followsStat">
+            <Link
+              to="followers"
+              state={{
+                userIds: userInfo.followers.reverse(),
+                title: 'Followers',
+              }}
+            >
+              {numOfFollowers} <span>Followers</span>
+            </Link>
+          </div>
         </div>
         <Outlet />
       </div>
@@ -202,10 +231,19 @@ const Profile = () => {
       return (
         <div>
           {isFollowedByCurrentUser ? (
-            <div className="profile-followLabel">(follows you)</div>
+            <div className="profile-followLabel">Follows you</div>
           ) : (
             <></>
           )}
+        </div>
+      );
+    }
+    return <></>;
+  };
+  const createFollowButton = () => {
+    if (currentUserInfo) {
+      return (
+        <div>
           {isFollowingCurrentUser ? (
             <button
               onClick={() => {
@@ -230,7 +268,6 @@ const Profile = () => {
         </div>
       );
     }
-    return <></>;
   };
   const createFeed = () => {
     if (currentUserInfo && userInfo) {

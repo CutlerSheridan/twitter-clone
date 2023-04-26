@@ -24,8 +24,10 @@ const UserListPopup = () => {
   return (
     <div className="userList-wrapper">
       <section className="userList-innerContainer">
-        <button onClick={goBack}>X</button>
-        <h2 className="userList-title">{title}</h2>
+        <div className="userList-topRow">
+          <button onClick={goBack}>X</button>
+          <h2 className="userList-title">{title}</h2>
+        </div>
         <div className="userList-list">
           {userObjs.length ? (
             userObjs.map((x) => (
@@ -45,9 +47,7 @@ const UserListPopup = () => {
                       <div className="userList-handle">@{x.handle}</div>
                       {x.following.some((y) => y === currentUserAuth.uid) &&
                       x.id !== currentUserAuth.uid ? (
-                        <div className="userList-followLabel">
-                          (follows you)
-                        </div>
+                        <div className="userList-followLabel">Follows you</div>
                       ) : (
                         <></>
                       )}
