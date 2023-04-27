@@ -19,10 +19,14 @@ const SignIn = () => {
   return (
     <div className="signIn-wrapper layout-element">
       {user ? (
-        <div>
+        <div className="signIn-container">
           <div>{user.displayName}</div>
-          <button onClick={signOutUser}>Sign out</button>
-          <button onClick={launchTweetPopup}>New tweet</button>
+          <button onClick={signOutUser} className="signIn-signOutButton">
+            Sign out
+          </button>
+          <button onClick={launchTweetPopup} className="signIn-tweetButton">
+            <span className="material-symbols-outlined">history_edu</span>
+          </button>
           {isTweeting ? (
             <ComposeTweetPopUp handleExit={exitTweetPopup} />
           ) : (

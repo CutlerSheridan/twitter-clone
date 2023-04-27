@@ -6,7 +6,7 @@ Very much in progress.
 
 #### TODO NEXT
 
-- style signin sidebar
+- ? add colored banner to profile pages
 - put tweetCard delete button on same line as display name
 
 #### TODO LATER
@@ -26,7 +26,6 @@ Very much in progress.
 - ? fix promise error triggered when exiting big tweet
 - ? fix promise error in compose reply popup
 - ? add confirmation to delete tweet button
-- investigate if I need to pass currentUserInfo to TweetCard or if I can just use context
 - handle manually navigating to UserListPopup component without a user IDs array in state from Link
 - handle visiting pages when not signed in
 - fix how when signed out, nav elements not there (correct behavior), but when signing in (or maybe only new user signing in?), they don't populate, which they should
@@ -43,8 +42,6 @@ Very much in progress.
 - style compose tweet modal on home page
 - style tweet card
   - should whole card highlight upon hover?
-- style compose tweet modal
-- go through components and make sure all are styled
 - make replies have a line to indicate they're replies--at least in Big Tweets
 - ? make "follow" button white if not following, black if following
 - ? add profile banner image
@@ -53,6 +50,11 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.8.9_
+
+- add icon to New Tweet button
+- refactor layout grid css to properly size everything so left and right bars are equal sizes and popups are properly centered
 
 _0.8.8_
 

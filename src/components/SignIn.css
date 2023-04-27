@@ -1,1 +1,24 @@
-
+.signIn-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.signIn-signOutButton {
+  font-size: 1.7rem;
+}
+.signIn-tweetButton {
+  margin-top: 4rem;
+  /* padding: 0.7rem 0.7rem 0.7rem 1.05rem; */
+  padding: 1.3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5rem;
+}
+.signIn-tweetButton > span {
+  /* display: block; */
+  font-size: 5rem;
+  transform: scale(-1, 1);
+  font-variation-settings: 'FILL' 1, 'wght' 350, 'GRAD' 0, 'opsz' 48;
+}

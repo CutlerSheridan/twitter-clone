@@ -43,7 +43,7 @@ textarea {
   border: 1px solid var(--clr-3);
 }
 button {
-  padding: 0.3rem;
+  padding: 0.3rem 0.4rem;
   background: var(--clr-4);
   border: none;
   border-radius: 0.2rem;
