@@ -30,21 +30,29 @@ const Navbar = () => {
   const optionsForUser = () => {
     return (
       <nav>
-        <Link to="/">Home</Link>
-        <Link to={`${currentUserHandle}`}>Profile</Link>
+        <div className="navbar-button">
+          <Link to="/">
+            <span className="material-symbols-outlined">home</span> Home
+          </Link>
+        </div>
+        <div className="navbar-button">
+          <Link to={`${currentUserHandle}`}>
+            <span className="material-symbols-outlined">account_circle</span>{' '}
+            Profile
+          </Link>
+        </div>
         <form className="navbar-findUserForm" onSubmit={handleFindUser}>
           <label>
             Find user:
             <input type="text"></input>
-            <button type="submit">Go</button>
           </label>
+          <button type="submit">Go</button>
         </form>
       </nav>
     );
   };
   return (
     <div className="navbar-wrapper layout-element">
-      <h2>Navigation elements</h2>
       {currentUserHandle ? optionsForUser() : ''}
     </div>
   );

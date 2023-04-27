@@ -6,7 +6,6 @@ Very much in progress.
 
 #### TODO NEXT
 
-- style navbar
 - style signin sidebar
 
 #### TODO LATER
@@ -47,11 +46,19 @@ Very much in progress.
 - style compose tweet modal
 - go through components and make sure all are styled
 - make replies have a line to indicate they're replies--at least in Big Tweets
+- ? make "follow" button white if not following, black if following
 - ? add profile banner image
 - ? get X and title on same line for ComposeTweetPopUp
 - add credit
 
 #### DONE
+
+_0.8.7_
+
+- style navbar
+  - add icons to navbar
+  - add hover behavior for navbar links
+  - make user search prettier
 
 _0.8.6_
 

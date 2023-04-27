@@ -1,7 +1,35 @@
 nav {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.navbar-button {
+}
+.navbar-button > a {
+  padding: 0.6rem 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+.navbar-button > a > span {
+  font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 48;
+  font-size: 2.4rem;
+}
+.navbar-button > a:hover {
+  background: var(--clr-3-dark);
+  border-radius: 0.5rem;
+}
+.navbar-findUserForm {
+  padding: 0 0.7rem;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.8rem;
+  font-weight: bold;
 }
 .navbar-findUserForm > label > input {
+  margin-top: 0.6rem;
   width: min(20rem, 100%);
 }
