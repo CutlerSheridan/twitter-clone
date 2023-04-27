@@ -1,10 +1,9 @@
 nav {
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 1rem;
-}
-.navbar-button {
 }
 .navbar-button > a {
   padding: 0.6rem 0.7rem;
@@ -23,14 +22,14 @@ nav {
   border-radius: 0.5rem;
 }
 .navbar-findUserForm {
-  padding: 0 0.7rem;
+  padding: 0 0 0 0.7rem;
   display: flex;
-  align-items: flex-end;
-  gap: 0.8rem;
+  flex-direction: column;
+  gap: 0.7rem;
   font-weight: bold;
 }
-.navbar-findUserForm > label > input {
-  margin-top: 0.6rem;
+.navbar-searchFieldAndButton > input {
+  margin-right: 0.7rem;
   padding: 0.2rem 0.3rem;
-  width: min(20rem, 100%);
+  width: 12ch;
 }

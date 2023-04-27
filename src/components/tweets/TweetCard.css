@@ -32,12 +32,19 @@
   text-decoration: none;
   color: inherit;
 }
-.tweetCard-nameAndHandleWrapper {
+.tweetCard-topRow {
   position: relative;
   width: 100%;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 1rem;
   color: var(--clr-2);
+}
+.tweetCard-nameAndHandleWrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
 .tweetCard-displayName {
   font-weight: bold;
@@ -50,9 +57,13 @@
   color: var(--clr-3);
 }
 .tweetCard-delete {
-  position: absolute;
-  right: 0;
   width: 2rem;
+  height: 2rem;
+  font-size: 1.3rem;
+  background: var(--clr-5);
+}
+.tweetCard-delete:hover {
+  background: var(--clr-5-dark);
 }
 .tweetCard-replyLabel {
   color: var(--clr-3);

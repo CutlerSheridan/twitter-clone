@@ -3,19 +3,23 @@
   width: min(100%, 110rem);
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  justify-items: center;
-  justify-content: center;
+  /* align-items: start; */
+  /* justify-items: center; */
+  /* justify-content: center; */
 }
 .layout-wrapper > div:first-child,
 .layout-wrapper > div:last-child {
+  position: sticky;
   padding: 2rem;
   width: 100%;
+  min-height: 100vh;
 }
 .layout-wrapper > div:first-child {
   border-right: 2px solid var(--clr-3-dark);
 }
 .layout-wrapper > div:nth-child(2) {
   width: 60rem;
+  /* border: 2px solid var(--clr-3-dark); */
   border-top: none;
   border-bottom: none;
 }

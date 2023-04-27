@@ -42,11 +42,11 @@ const Navbar = () => {
           </Link>
         </div>
         <form className="navbar-findUserForm" onSubmit={handleFindUser}>
-          <label>
-            Find user:
-            <input type="text"></input>
-          </label>
-          <button type="submit">Go</button>
+          <label htmlFor="userSearchField">Find user:</label>
+          <div className="navbar-searchFieldAndButton">
+            <input type="text" id="userSearchField"></input>
+            <button type="submit">Go</button>
+          </div>
         </form>
       </nav>
     );

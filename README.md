@@ -6,8 +6,7 @@ Very much in progress.
 
 #### TODO NEXT
 
-- ? add colored banner to profile pages
-- put tweetCard delete button on same line as display name
+- add confirmation to delete tweet button
 
 #### TODO LATER
 
@@ -22,10 +21,10 @@ Very much in progress.
 
 ##### Behavior
 
+- fix how, when looking at popup thread long enough to have to scroll when background also is long enough to scroll, background layer stops covering background content
 - start profile edit inputs with current values
 - ? fix promise error triggered when exiting big tweet
 - ? fix promise error in compose reply popup
-- ? add confirmation to delete tweet button
 - handle manually navigating to UserListPopup component without a user IDs array in state from Link
 - handle visiting pages when not signed in
 - fix how when signed out, nav elements not there (correct behavior), but when signing in (or maybe only new user signing in?), they don't populate, which they should
@@ -47,9 +46,17 @@ Very much in progress.
 - ? add profile banner image
 - ? get X and title on same line for ComposeTweetPopUp
 - ? style unassigned avis
+- ? add colored banner to profile pages
 - add credit
 
 #### DONE
+
+_0.8.10_
+
+- put tweetCard delete button on same line as display name
+- refactor positioning of sidebars
+- refactor DOM structure of navbar search form
+- make sidebars sticky
 
 _0.8.9_
 

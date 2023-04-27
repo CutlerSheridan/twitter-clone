@@ -92,35 +92,37 @@ const TweetCard = ({
         <div className="tweetCard-tweetAndUserWrapper">
           {tweeterInfo ? (
             <Link to={`/${tweeterInfo.handle}`}>
-              <div className="tweetCard-nameAndHandleWrapper">
-                <div className="tweetCard-displayName">
-                  {tweeterInfo ? tweeterInfo.displayName : 'no user'}
+              <div className="tweetCard-topRow">
+                <div className="tweetCard-nameAndHandleWrapper">
+                  <div className="tweetCard-displayName">
+                    {tweeterInfo ? tweeterInfo.displayName : 'no user'}
+                  </div>
+                  <div className="tweetCard-handleAndDate">
+                    {tweeterInfo ? '@' + tweeterInfo.handle : 'no handle'} ·{' '}
+                    {new Date(creationMilliseconds).toLocaleDateString(
+                      undefined,
+                      {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric',
+                      }
+                    )}
+                  </div>
                 </div>
-                <div className="tweetCard-handleAndDate">
-                  {tweeterInfo ? '@' + tweeterInfo.handle : 'no handle'} ·{' '}
-                  {new Date(creationMilliseconds).toLocaleDateString(
-                    undefined,
-                    {
-                      month: 'short',
-                      day: 'numeric',
-                      year: 'numeric',
-                    }
-                  )}
-                  {tweeterInfo.id === userAuth.uid ? (
-                    <button
-                      className="tweetCard-delete"
-                      onClick={() => {
-                        deleteTweet(tweeterInfo.id, tweetInfo.id).then(() => {
-                          window.location.reload();
-                        });
-                      }}
-                    >
-                      X
-                    </button>
-                  ) : (
-                    <></>
-                  )}
-                </div>
+                {tweeterInfo.id === userAuth.uid ? (
+                  <button
+                    className="tweetCard-delete"
+                    onClick={() => {
+                      deleteTweet(tweeterInfo.id, tweetInfo.id).then(() => {
+                        window.location.reload();
+                      });
+                    }}
+                  >
+                    X
+                  </button>
+                ) : (
+                  <></>
+                )}
               </div>
             </Link>
           ) : (
