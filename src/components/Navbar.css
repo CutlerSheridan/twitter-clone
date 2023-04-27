@@ -31,5 +31,6 @@ nav {
 }
 .navbar-findUserForm > label > input {
   margin-top: 0.6rem;
+  padding: 0.2rem 0.3rem;
   width: min(20rem, 100%);
 }

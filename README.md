@@ -7,6 +7,7 @@ Very much in progress.
 #### TODO NEXT
 
 - style signin sidebar
+- put tweetCard delete button on same line as display name
 
 #### TODO LATER
 
@@ -23,6 +24,7 @@ Very much in progress.
 
 - start profile edit inputs with current values
 - ? fix promise error triggered when exiting big tweet
+- ? fix promise error in compose reply popup
 - ? add confirmation to delete tweet button
 - investigate if I need to pass currentUserInfo to TweetCard or if I can just use context
 - handle manually navigating to UserListPopup component without a user IDs array in state from Link
@@ -36,10 +38,8 @@ Very much in progress.
 - figure out how to handle everything on mobile
 - style followers/ing list
 - style likes list
-- style reply popup
 - style big tweet threads
   - ? remove "replying to" label from big tweets
-- style unassigned avis
 - style compose tweet modal on home page
 - style tweet card
   - should whole card highlight upon hover?
@@ -49,9 +49,24 @@ Very much in progress.
 - ? make "follow" button white if not following, black if following
 - ? add profile banner image
 - ? get X and title on same line for ComposeTweetPopUp
+- ? style unassigned avis
 - add credit
 
 #### DONE
+
+_0.8.8_
+
+- style compose reply modal
+  - move things
+  - color things
+- add "New tweet" button to right sidebar that brings up compose tweet popup
+- style compose tweet modal
+  - design layout
+  - autofocus textarea
+  - add char counter
+  - disable tweet button if char count too high
+  - make char counter red if char count too high
+  - make compose tweet textarea height dynamic
 
 _0.8.7_
 

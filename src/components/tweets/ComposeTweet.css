@@ -1,6 +1,34 @@
-.composeTweet-wrapper {
-  border: 1px solid var(--clr-3);
+.composeTweet-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.composeTweet-form > input {
-  width: min(20rem, 100%);
+.composeTweet-form > textarea {
+  margin: 1rem 0;
+  padding: 0.5rem;
+  width: 100%;
+  height: auto;
+  border-radius: 0.4rem;
+}
+.composeTweet-bottomRow {
+  align-self: flex-end;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.composeTweet-charCount {
+  color: var(--clr-3);
+  font-size: 1.7rem;
+  transition: color 0.15s;
+}
+.composeTweet-charCount-tooHigh {
+  color: var(--clr-5-dark);
+}
+.composeTweet-bottomRow > button {
+  padding: 0.4rem 0.5rem;
+}
+.composeTweet-bottomRow > button:disabled {
+  background: var(--clr-3-dark);
+  color: var(--clr-3);
+  cursor: auto;
 }
