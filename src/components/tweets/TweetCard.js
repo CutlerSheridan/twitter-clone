@@ -13,7 +13,7 @@ import ComposeTweetPopUp from './ComposeTweetPopUp';
 const TweetCard = ({
   tweet: tweetInfo,
   userInfo: tweeterInfo = null,
-  currentUserInfo,
+  currentUserInfo = {},
 }) => {
   const userAuth = useContext(UserContext);
   const creationMilliseconds = tweetInfo
@@ -30,7 +30,7 @@ const TweetCard = ({
 
   useEffect(() => {
     if (!isDeleted) {
-      if (currentUserInfo && tweetInfo.id) {
+      if (userAuth && currentUserInfo && tweetInfo.id) {
         if (
           currentUserInfo.likes.some(
             (x) => x.sentBy === tweeterInfo.id && x.tweetId === tweetInfo.id
@@ -119,7 +119,7 @@ const TweetCard = ({
                     )}
                   </div>
                 </div>
-                {tweeterInfo.id === userAuth.uid ? (
+                {userAuth && tweeterInfo.id === userAuth.uid ? (
                   <div className="tweetCard-deleteContainer">
                     <div
                       type="button"

@@ -69,7 +69,9 @@ const Profile = () => {
   };
 
   const createHeader = () => {
-    const isUsersProfile = currentUserAuth.uid === userInfo.id;
+    const isUsersProfile = currentUserAuth
+      ? currentUserAuth.uid === userInfo.id
+      : false;
     return (
       <div className="profile-header">
         {!editingHeader ? (
@@ -272,6 +274,7 @@ const Profile = () => {
     }
   };
   const createFeed = () => {
+    console.log('currentUserInfo', currentUserInfo, 'userInfo', userInfo);
     if (currentUserInfo && userInfo) {
       switch (selectedFeed) {
         case 'tweets':

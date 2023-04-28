@@ -6,7 +6,10 @@ Very much in progress.
 
 #### TODO NEXT
 
-- handle visiting pages when not signed in
+- make profiles show up if navigated to initially not signed in
+- make navbar show when not signed in
+- disable liking and replying if not signed in
+- make big tweets show if not signed in
 
 #### TODO LATER
 
@@ -40,6 +43,11 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.8.14_
+
+- make user profile headers display when signed out
+- make profile feed show when signed in then signing out
 
 _0.8.13_
 
