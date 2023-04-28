@@ -12,6 +12,7 @@ import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../UserContext';
 import ComposeTweetPopUp from './ComposeTweetPopUp';
 import TweetFeed from './TweetFeed';
+import * as model from '../../model';
 
 const BigTweet = (props) => {
   const { isPartOfPopupReply } = props;
@@ -48,6 +49,8 @@ const BigTweet = (props) => {
     });
     if (userAuth) {
       getUserInfo(userAuth.uid).then(setCurrentUserInfo);
+    } else {
+      setCurrentUserInfo(model.GuestUser());
     }
   }, [userAuth, userId, tweetId]);
   useEffect(() => {
@@ -166,7 +169,7 @@ const BigTweet = (props) => {
                     </div>
                     <div className="bigTweet-handle">
                       {tweeterInfo ? '@' + tweeterInfo.handle : 'loading...'}
-                      {tweeterInfo.id === userAuth.uid ? (
+                      {userAuth && tweeterInfo.id === userAuth.uid ? (
                         <div className="bigTweet-deleteContainer">
                           <div
                             type="button"

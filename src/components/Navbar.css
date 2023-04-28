@@ -21,6 +21,14 @@ nav {
   background: var(--clr-3-dark);
   border-radius: 0.5rem;
 }
+.navbar-button-disabled > a,
+.navbar-button-disabled > a > span {
+  color: var(--clr-3);
+  pointer-events: none;
+}
+.navbar-button-disabled > a:hover {
+  background: none;
+}
 .navbar-findUserForm {
   padding: 0 0 0 0.7rem;
   display: flex;

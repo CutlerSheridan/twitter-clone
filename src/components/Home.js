@@ -27,7 +27,11 @@ const Home = () => {
           currentUserInfo={currentUserInfo}
         />
       ) : (
-        <></>
+        <div className="home-guestMessage">
+          {currentUserAuth
+            ? 'Follow users to populate your home feed!\nYou could get started by following @cutler'
+            : 'Sign in to get started!'}
+        </div>
       )}
     </div>
   );

@@ -35,7 +35,11 @@ const Navbar = () => {
             <span className="material-symbols-outlined">home</span> Home
           </Link>
         </div>
-        <div className="navbar-button">
+        <div
+          className={`navbar-button ${
+            userAuth ? '' : 'navbar-button-disabled'
+          }`}
+        >
           <Link to={`${currentUserHandle}`}>
             <span className="material-symbols-outlined">account_circle</span>{' '}
             Profile
@@ -52,9 +56,7 @@ const Navbar = () => {
     );
   };
   return (
-    <div className="navbar-wrapper layout-element">
-      {currentUserHandle ? optionsForUser() : ''}
-    </div>
+    <div className="navbar-wrapper layout-element">{optionsForUser()}</div>
   );
 };
 

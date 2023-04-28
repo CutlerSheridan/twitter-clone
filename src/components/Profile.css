@@ -113,6 +113,7 @@
 }
 
 .profile-nonexistantUser {
-  margin: 2rem 3rem;
+  text-align: center;
+  margin: 7rem 3rem;
   font-style: italic;
 }

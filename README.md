@@ -6,12 +6,11 @@ Still in progress but the bones are there.
 
 #### TODO NEXT
 
-- make navbar show when not signed in
-- make big tweets show if not signed in
 - disable tweetcard reply button when not signed in
 - disable big tweet reply button when not signed in
 - disable tweetcard like button when not signed in
 - disable big tweet like button when not signed in
+- test signed in but no followers home feed message
 
 #### TODO LATER
 
@@ -45,6 +44,13 @@ Still in progress but the bones are there.
 - add credit
 
 #### DONE
+
+_0.8.16_
+
+- make navbar show when not signed in
+- make home show message when not signed in or when user follows no one
+- make Profile button in navbar greyed out when not signed in
+- make big tweets show if not signed in
 
 _0.8.15_
 
