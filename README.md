@@ -7,6 +7,7 @@ Very much in progress.
 #### TODO NEXT
 
 - add confirmation to delete tweet button
+- add trash icon for deleting
 
 #### TODO LATER
 
@@ -21,7 +22,6 @@ Very much in progress.
 
 ##### Behavior
 
-- fix how, when looking at popup thread long enough to have to scroll when background also is long enough to scroll, background layer stops covering background content
 - start profile edit inputs with current values
 - ? fix promise error triggered when exiting big tweet
 - ? fix promise error in compose reply popup
@@ -32,7 +32,7 @@ Very much in progress.
 
 ##### Style
 
-- add X icons for exiting and trash for deleting
+- add X icons for exiting
 - figure out how to handle everything on mobile
 - style followers/ing list
 - style likes list
@@ -50,6 +50,11 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.8.11_
+
+- fix New Tweet popup modal positioning
+- fix how, when looking at popup thread long enough to have to scroll when background also is long enough to scroll, background layer stops covering background content
 
 _0.8.10_
 

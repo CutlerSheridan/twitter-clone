@@ -1,15 +1,18 @@
 import './ComposeTweetPopUp.css';
 import BigTweet from './BigTweet';
 import ComposeTweet from './ComposeTweet';
-import { useContext, useState } from 'react';
-import { UserContext } from '../../UserContext';
+import { useState } from 'react';
 
 const ComposeTweetPopUp = ({ repliedToIdsObj = null, handleExit }) => {
-  const userAuth = useContext(UserContext);
-  const [isReply, setIsReply] = useState(repliedToIdsObj ? true : false);
+  const [isReply] = useState(repliedToIdsObj ? true : false);
 
   return (
-    <div className="composePopUp-wrapper">
+    <div
+      className={`composePopUp-wrapper ${
+        isReply ? 'composePopUp-wrapper-replying' : ''
+      }`}
+    >
+      <div className="composePopUp-background"></div>
       <div className="composePopUp-innerContainer">
         <button onClick={handleExit}>X</button>
         {isReply ? (
