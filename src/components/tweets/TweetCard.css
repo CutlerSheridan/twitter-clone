@@ -99,6 +99,10 @@
   color: var(--clr-4);
 }
 
+.tweetCard-tweet {
+  white-space: pre-wrap;
+}
+
 .tweetCard-bottomRow {
   display: flex;
   justify-content: space-around;

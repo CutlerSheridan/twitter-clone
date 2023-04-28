@@ -105,6 +105,7 @@
 
 .bigTweet-tweet {
   margin: 1rem 0;
+  white-space: pre-wrap;
 }
 .bigTweet-timestamp {
   margin: 1rem 0;

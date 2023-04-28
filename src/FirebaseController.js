@@ -270,12 +270,17 @@ const getThreadTweetsAndUsers = async ({
     for (let i = 0; i < bigTweetRepliesFromCurrentUser.length; i++) {
       const currentReply = bigTweetRepliesFromCurrentUser[i];
       futureThreadsArray.push([currentReply]);
-      let needNextTweet = currentReply.tweetInfo.replies.some(
-        (x) => x.userId === originalTweeter.id
-      );
+      let needNextTweet;
+      if (currentReply.tweetInfo) {
+        needNextTweet = currentReply.tweetInfo.replies.some(
+          (x) => x.userId === originalTweeter.id
+        );
+      } else {
+        needNextTweet = false;
+      }
       let nextUserId, nextTweetId;
       if (needNextTweet) {
-        // assuing oldest thread should come first
+        // assuming oldest thread should come first
         const nextIds = currentReply.tweetInfo.replies.find(
           (y) => y.userId === originalTweeter.id
         );

@@ -6,9 +6,7 @@ Very much in progress.
 
 #### TODO NEXT
 
-- ? fix promise error triggered when exiting big tweet
-- ? fix promise error in compose reply popup
-- fix going from big tweet to big tweet not properly reloading other tweets in thread, sometimes returning promise error
+- handle visiting pages when not signed in
 
 #### TODO LATER
 
@@ -23,10 +21,8 @@ Very much in progress.
 
 ##### Behavior
 
-- handle saving and displaying tweets with line breaks
-- handle visiting pages when not signed in
 - start profile edit inputs with current values
-- handle manually navigating to UserListPopup component without a user IDs array in state from Link
+- ? handle manually navigating to UserListPopup component without a user IDs array in state from Link
 - fix how when signed out, nav elements not there (correct behavior), but when signing in (or maybe only new user signing in?), they don't populate, which they should
 - ? prevent reply label from blinking twice times upon component mounting
 
@@ -34,9 +30,9 @@ Very much in progress.
 
 - figure out how to handle everything on mobile
 - ? make entire tweetCard link; whole thing highlight upon hover
-- ? get X and title on same line for ComposeTweetPopUp
+- ? get X and title on same line for Compose Reply Popup
 - make replies have a vertical line to indicate they're replies--at least in Big Tweet thread
-- ? make "follow" button white if not following, black if following
+- make "follow" button white if not following, black if following
 - ? add profile banner image
 - ? remove "replying to" label from big tweets
 - ? style unassigned avis
@@ -44,6 +40,13 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.8.13_
+
+- fix going from big tweet to big tweet not properly reloading other tweets in thread, sometimes returning promise error
+- fix promise error triggered when exiting big tweet
+- fix promise error in compose reply popup
+- handle saving and displaying tweets with line breaks
 
 _0.8.12_
 
