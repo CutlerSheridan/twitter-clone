@@ -56,7 +56,29 @@
 .tweetCard-handleAndDate {
   color: var(--clr-3);
 }
+
+.tweetCard-deleteContainer {
+  height: 2rem;
+  display: flex;
+}
+.tweetCard-preDelete {
+  height: 2rem;
+}
+.tweetCard-preDelete-hidden {
+  display: none;
+}
+.tweetCard-preDelete > span {
+  color: var(--clr-3);
+  font-variation-settings: 'FILL' 0, 'wght' 700, 'GRAD' 200, 'opsz' 20;
+}
+.tweetCard-preDelete > span:hover {
+  color: var(--clr-3-dark);
+}
+
 .tweetCard-delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 2rem;
   height: 2rem;
   font-size: 1.3rem;
@@ -65,6 +87,10 @@
 .tweetCard-delete:hover {
   background: var(--clr-5-dark);
 }
+.tweetCard-delete-hidden {
+  display: none;
+}
+
 .tweetCard-replyLabel {
   color: var(--clr-3);
 }
@@ -72,6 +98,7 @@
   text-decoration: none;
   color: var(--clr-4);
 }
+
 .tweetCard-bottomRow {
   display: flex;
   justify-content: space-around;

@@ -25,7 +25,8 @@ const TweetCard = ({
   );
   const [replying, setReplying] = useState(false);
   const [userReplyingTo, setUserReplyingTo] = useState(null);
-  const [isDeleted, setIsDeleted] = useState(!tweetInfo);
+  const [isDeleted] = useState(!tweetInfo);
+  const [showingDeleteButton, setShowingDeleteButton] = useState(false);
 
   useEffect(() => {
     if (!isDeleted) {
@@ -38,7 +39,7 @@ const TweetCard = ({
           setIsLiked(true);
         }
       }
-      if (tweetInfo && tweetInfo.isReply) {
+      if (tweetInfo && tweetInfo.isReply && !userReplyingTo) {
         getUserInfo(tweetInfo.repliedToTweet.userId).then((result) => {
           setUserReplyingTo(result.handle);
         });
@@ -76,6 +77,15 @@ const TweetCard = ({
       copiedIndicator.classList.remove('alert-textCopied-visible');
     }, 850);
   };
+  const showDeleteButton = (e) => {
+    e.preventDefault();
+    setShowingDeleteButton(true);
+    e.stopPropagation();
+    document.addEventListener('click', hideDeleteButton);
+  };
+  const hideDeleteButton = () => {
+    setShowingDeleteButton(false);
+  };
 
   return isDeleted ? (
     <div className="tweetCard-wrapper tweetCard-wrapper-deleted">
@@ -110,16 +120,31 @@ const TweetCard = ({
                   </div>
                 </div>
                 {tweeterInfo.id === userAuth.uid ? (
-                  <button
-                    className="tweetCard-delete"
-                    onClick={() => {
-                      deleteTweet(tweeterInfo.id, tweetInfo.id).then(() => {
-                        window.location.reload();
-                      });
-                    }}
-                  >
-                    X
-                  </button>
+                  <div className="tweetCard-deleteContainer">
+                    <div
+                      type="button"
+                      onClick={showDeleteButton}
+                      className={`tweetCard-preDelete ${
+                        showingDeleteButton ? 'tweetCard-preDelete-hidden' : ''
+                      }`}
+                    >
+                      <span className="material-symbols-outlined">
+                        more_horiz
+                      </span>
+                    </div>
+                    <button
+                      className={`tweetCard-delete ${
+                        showingDeleteButton ? '' : 'tweetCard-delete-hidden'
+                      }`}
+                      onClick={() => {
+                        deleteTweet(tweeterInfo.id, tweetInfo.id).then(() => {
+                          window.location.reload();
+                        });
+                      }}
+                    >
+                      <span className="material-symbols-outlined">delete</span>
+                    </button>
+                  </div>
                 ) : (
                   <></>
                 )}
@@ -128,10 +153,14 @@ const TweetCard = ({
           ) : (
             <div className="tweetCard-nameAndHandleWrapper-empty">...</div>
           )}
-          {userReplyingTo ? (
+          {tweetInfo.isReply ? (
             <div className="tweetCard-replyLabel">
               Replying to{' '}
-              <Link to={`/${userReplyingTo}`}>@{userReplyingTo}</Link>
+              {userReplyingTo ? (
+                <Link to={`/${userReplyingTo}`}>@{userReplyingTo}</Link>
+              ) : (
+                <>...</>
+              )}
             </div>
           ) : (
             <></>

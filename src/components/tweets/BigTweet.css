@@ -63,14 +63,46 @@
   text-decoration: underline;
 }
 .bigTweet-handle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 1.8rem;
   color: var(--clr-3);
 }
-.bigTweet-delete {
-  position: absolute;
-  right: 0;
-  width: 2rem;
+
+.bigTweet-deleteContainer {
+  height: 2rem;
+  display: flex;
 }
+.bigTweet-preDelete {
+  height: 2rem;
+}
+.bigTweet-preDelete-hidden {
+  display: none;
+}
+.bigTweet-preDelete > span {
+  color: var(--clr-3);
+  font-variation-settings: 'FILL' 0, 'wght' 700, 'GRAD' 200, 'opsz' 20;
+}
+.bigTweet-preDelete > span:hover {
+  color: var(--clr-3-dark);
+}
+.bigTweet-delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.3rem;
+  background: var(--clr-5);
+}
+.bigTweet-delete:hover {
+  background: var(--clr-5-dark);
+}
+.bigTweet-delete-hidden {
+  display: none;
+}
+
 .bigTweet-tweet {
   margin: 1rem 0;
 }

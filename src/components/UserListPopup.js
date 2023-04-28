@@ -25,7 +25,9 @@ const UserListPopup = () => {
     <div className="userList-wrapper">
       <section className="userList-innerContainer">
         <div className="userList-topRow">
-          <button onClick={goBack}>X</button>
+          <button onClick={goBack} className="userList-close">
+            <span className="material-symbols-outlined">close</span>
+          </button>
           <h2 className="userList-title">{title}</h2>
         </div>
         <div className="userList-list">

@@ -1,11 +1,5 @@
 import './BigTweet.css';
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-  Link,
-  Outlet,
-} from 'react-router-dom';
+import { useNavigate, useParams, Link, Outlet } from 'react-router-dom';
 import {
   getTweetAndUser,
   getUserInfo,
@@ -16,7 +10,6 @@ import {
 } from '../../FirebaseController';
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../UserContext';
-import ComposeTweet from './ComposeTweet';
 import ComposeTweetPopUp from './ComposeTweetPopUp';
 import TweetFeed from './TweetFeed';
 
@@ -40,6 +33,7 @@ const BigTweet = (props) => {
   const [userReplyingTo, setUserReplyingTo] = useState(null);
   const [isDeleted, setIsDeleted] = useState(false);
   const [replying, setReplying] = useState(false);
+  const [showingDeleteButton, setShowingDeleteButton] = useState(false);
 
   const navigate = useNavigate();
 
@@ -100,9 +94,17 @@ const BigTweet = (props) => {
       likeTweet(currentUserInfo.id, tweeterInfo.id, tweetInfo.id);
     }
   };
-
   const goBack = () => {
     navigate(-1);
+  };
+  const showDeleteButton = (e) => {
+    e.preventDefault();
+    setShowingDeleteButton(true);
+    e.stopPropagation();
+    document.addEventListener('click', hideDeleteButton);
+  };
+  const hideDeleteButton = () => {
+    setShowingDeleteButton(false);
   };
 
   const copyLink = () => {
@@ -165,18 +167,39 @@ const BigTweet = (props) => {
                     <div className="bigTweet-handle">
                       {tweeterInfo ? '@' + tweeterInfo.handle : 'loading...'}
                       {tweeterInfo.id === userAuth.uid ? (
-                        <button
-                          className="bigTweet-delete"
-                          onClick={() => {
-                            deleteTweet(tweeterInfo.id, tweetInfo.id).then(
-                              () => {
-                                window.location.reload();
-                              }
-                            );
-                          }}
-                        >
-                          X
-                        </button>
+                        <div className="bigTweet-deleteContainer">
+                          <div
+                            type="button"
+                            onClick={showDeleteButton}
+                            className={`bigTweet-preDelete ${
+                              showingDeleteButton
+                                ? 'bigTweet-preDelete-hidden'
+                                : ''
+                            }`}
+                          >
+                            <span className="material-symbols-outlined">
+                              more_horiz
+                            </span>
+                          </div>
+                          <button
+                            className={`bigTweet-delete ${
+                              showingDeleteButton
+                                ? ''
+                                : 'bigTweet-delete-hidden'
+                            }`}
+                            onClick={() => {
+                              deleteTweet(tweeterInfo.id, tweetInfo.id).then(
+                                () => {
+                                  window.location.reload();
+                                }
+                              );
+                            }}
+                          >
+                            <span className="material-symbols-outlined">
+                              delete
+                            </span>
+                          </button>
+                        </div>
                       ) : (
                         <></>
                       )}

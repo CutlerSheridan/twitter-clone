@@ -6,8 +6,9 @@ Very much in progress.
 
 #### TODO NEXT
 
-- add confirmation to delete tweet button
-- add trash icon for deleting
+- ? fix promise error triggered when exiting big tweet
+- ? fix promise error in compose reply popup
+- fix going from big tweet to big tweet not properly reloading other tweets in thread, sometimes returning promise error
 
 #### TODO LATER
 
@@ -22,34 +23,36 @@ Very much in progress.
 
 ##### Behavior
 
-- start profile edit inputs with current values
-- ? fix promise error triggered when exiting big tweet
-- ? fix promise error in compose reply popup
-- handle manually navigating to UserListPopup component without a user IDs array in state from Link
+- handle saving and displaying tweets with line breaks
 - handle visiting pages when not signed in
+- start profile edit inputs with current values
+- handle manually navigating to UserListPopup component without a user IDs array in state from Link
 - fix how when signed out, nav elements not there (correct behavior), but when signing in (or maybe only new user signing in?), they don't populate, which they should
-- ? prevent reply label from blinking a few times upon loading
+- ? prevent reply label from blinking twice times upon component mounting
 
 ##### Style
 
-- add X icons for exiting
 - figure out how to handle everything on mobile
-- style followers/ing list
-- style likes list
-- style big tweet threads
-  - ? remove "replying to" label from big tweets
-- style compose tweet modal on home page
-- style tweet card
-  - should whole card highlight upon hover?
-- make replies have a line to indicate they're replies--at least in Big Tweets
+- ? make entire tweetCard link; whole thing highlight upon hover
+- ? get X and title on same line for ComposeTweetPopUp
+- make replies have a vertical line to indicate they're replies--at least in Big Tweet thread
 - ? make "follow" button white if not following, black if following
 - ? add profile banner image
-- ? get X and title on same line for ComposeTweetPopUp
+- ? remove "replying to" label from big tweets
 - ? style unassigned avis
 - ? add colored banner to profile pages
 - add credit
 
 #### DONE
+
+_0.8.12_
+
+- restyle big tweet delete button to match tweetcard delete button
+- add confirmation to tweetCard delete button
+- add confirmation to big tweet delete button
+- add placeholder "replying to" text so height doesn't shift as other user's handle loads
+- add trash icon for deleting
+- add X icons for exiting
 
 _0.8.11_
 

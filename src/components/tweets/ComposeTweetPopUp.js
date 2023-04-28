@@ -14,7 +14,9 @@ const ComposeTweetPopUp = ({ repliedToIdsObj = null, handleExit }) => {
     >
       <div className="composePopUp-background"></div>
       <div className="composePopUp-innerContainer">
-        <button onClick={handleExit}>X</button>
+        <button onClick={handleExit} className="composePopUp-close">
+          <span className="material-symbols-outlined">close</span>
+        </button>
         {isReply ? (
           <BigTweet
             userId={repliedToIdsObj.userId}
