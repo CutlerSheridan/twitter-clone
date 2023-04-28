@@ -25,6 +25,16 @@ const User = (userAuth) => {
     // directMessages
   };
 };
+const GuestUser = () => {
+  return {
+    id: 'guest',
+    likes: [],
+    followers: [],
+    following: [],
+    bookmarks: [],
+    mentions: [],
+  };
+};
 
 const Tweet = ({
   tweet,
@@ -66,4 +76,4 @@ const Tweet = ({
   };
 };
 
-export { User, Tweet };
+export { User, GuestUser, Tweet };

@@ -12,6 +12,7 @@ import {
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import TweetFeed from './tweets/TweetFeed';
+import * as model from '../model';
 
 const Profile = () => {
   const currentUserAuth = useContext(UserContext);
@@ -36,6 +37,8 @@ const Profile = () => {
       if (currentUserAuth) {
         const info = await getUserInfo(currentUserAuth.uid);
         setCurrentUserInfo(info);
+      } else {
+        setCurrentUserInfo(model.GuestUser());
       }
     };
     fetchCurrentUserInfo();
@@ -245,7 +248,7 @@ const Profile = () => {
     return <></>;
   };
   const createFollowButton = () => {
-    if (currentUserInfo) {
+    if (currentUserInfo && currentUserInfo.id !== 'guest') {
       return (
         <div>
           {isFollowingCurrentUser ? (
@@ -274,7 +277,6 @@ const Profile = () => {
     }
   };
   const createFeed = () => {
-    console.log('currentUserInfo', currentUserInfo, 'userInfo', userInfo);
     if (currentUserInfo && userInfo) {
       switch (selectedFeed) {
         case 'tweets':

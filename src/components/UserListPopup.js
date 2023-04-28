@@ -20,6 +20,15 @@ const UserListPopup = () => {
   const goBack = () => {
     navigate(-1);
   };
+  const createFollowsLabel = (x) => {
+    if (
+      currentUserAuth &&
+      x.following.some((y) => y === currentUserAuth.uid) &&
+      x.id !== currentUserAuth.uid
+    ) {
+      return <div className="userList-followLabel">Follows you</div>;
+    }
+  };
 
   return (
     <div className="userList-wrapper">
@@ -47,12 +56,7 @@ const UserListPopup = () => {
                     <div className="userList-name">{x.displayName}</div>
                     <div className="userList-handleAndFollowLabel">
                       <div className="userList-handle">@{x.handle}</div>
-                      {x.following.some((y) => y === currentUserAuth.uid) &&
-                      x.id !== currentUserAuth.uid ? (
-                        <div className="userList-followLabel">Follows you</div>
-                      ) : (
-                        <></>
-                      )}
+                      {createFollowsLabel(x)}
                     </div>
                     <div>{x.bio}</div>
                   </div>

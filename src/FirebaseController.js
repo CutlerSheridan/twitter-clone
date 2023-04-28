@@ -2,7 +2,6 @@
 import { initializeApp } from 'firebase/app';
 import {
   getAuth,
-  onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
@@ -84,23 +83,23 @@ const createRandomHandle = () => {
   }
   return newHandle;
 };
-const _testRandomHandleGen = () => {
-  let testArray = [];
-  for (let i = 0; i < 10000; i++) {
-    testArray.push(createRandomHandle());
-  }
-  testArray = testArray.map((x) => x.slice(8));
-  const charCount = testArray.reduce((accumulator, x) => {
-    [...x].forEach((y) => {
-      if (!accumulator[y]) {
-        accumulator[y] = 1;
-      } else {
-        accumulator[y]++;
-      }
-    });
-    return accumulator;
-  }, {});
-};
+// const _testRandomHandleGen = () => {
+//   let testArray = [];
+//   for (let i = 0; i < 10000; i++) {
+//     testArray.push(createRandomHandle());
+//   }
+//   testArray = testArray.map((x) => x.slice(8));
+//   const charCount = testArray.reduce((accumulator, x) => {
+//     [...x].forEach((y) => {
+//       if (!accumulator[y]) {
+//         accumulator[y] = 1;
+//       } else {
+//         accumulator[y]++;
+//       }
+//     });
+//     return accumulator;
+//   }, {});
+// };
 // _testRandomHandleGen();
 
 const isHandleAvailable = async (newHandle) => {

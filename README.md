@@ -2,14 +2,16 @@
 
 ## Use it just like Twitter!
 
-Very much in progress.
+Still in progress but the bones are there.
 
 #### TODO NEXT
 
-- make profiles show up if navigated to initially not signed in
 - make navbar show when not signed in
-- disable liking and replying if not signed in
 - make big tweets show if not signed in
+- disable tweetcard reply button when not signed in
+- disable big tweet reply button when not signed in
+- disable tweetcard like button when not signed in
+- disable big tweet like button when not signed in
 
 #### TODO LATER
 
@@ -43,6 +45,13 @@ Very much in progress.
 - add credit
 
 #### DONE
+
+_0.8.15_
+
+- create guest user object factory to use in components that need current user info object
+- make profiles show up if navigated to when initially not signed in
+- prevent follow button from displaying when not signed in
+- handle "follows" labels in following/ers/likes lists
 
 _0.8.14_
 

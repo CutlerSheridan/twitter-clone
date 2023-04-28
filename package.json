@@ -1,6 +1,6 @@
 {
   "name": "twitter-clone",
-  "version": "0.8.14",
+  "version": "0.8.15",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
