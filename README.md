@@ -6,7 +6,11 @@ Still in progress but the bones are there.
 
 #### TODO NEXT
 
-- test signed in but no followers home feed message
+- add credit
+- add gh-pages deployment scripts
+- adjust firebase settings to enable google authenticator once it's deployed
+- add basename to router
+- ? add firebase rules to only allow signed-in users to read/write to db
 
 #### TODO LATER
 
@@ -29,17 +33,22 @@ Still in progress but the bones are there.
 ##### Style
 
 - figure out how to handle everything on mobile
+- make replies have a vertical line to indicate they're replies--at least in Big Tweet thread
 - ? make entire tweetCard link; whole thing highlight upon hover
 - ? get X and title on same line for Compose Reply Popup
-- make replies have a vertical line to indicate they're replies--at least in Big Tweet thread
 - make "follow" button white if not following, black if following
 - ? add profile banner image
 - ? remove "replying to" label from big tweets
 - ? style unassigned avis
 - ? add colored banner to profile pages
-- add credit
 
 #### DONE
+
+_0.8.18_
+
+- move empty home feed logic into tweetfeed component
+- test signed in but no followers home feed message
+- disable retweet button even when signed in since that feature is not yet available
 
 _0.8.17_
 

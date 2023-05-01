@@ -275,7 +275,7 @@ const BigTweet = (props) => {
               </button>
             )}
             <button
-              className={`bigTweet-action ${
+              className={`bigTweet-action bigTweet-action-disabled ${
                 !userAuth ? 'bigTweet-action-disabled' : ''
               }`}
             >

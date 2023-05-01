@@ -25,13 +25,15 @@ const Home = () => {
           idsForFeed={idsForFeed}
           includeReplies={true}
           currentUserInfo={currentUserInfo}
+          isHomeFeed={true}
         />
       ) : (
-        <div className="home-guestMessage">
-          {currentUserAuth
-            ? 'Follow users to populate your home feed!\nYou could get started by following @cutler'
-            : 'Sign in to get started!'}
-        </div>
+        <TweetFeed
+          idsForFeed={[]}
+          includeReplies={true}
+          currentUserInfo={null}
+          isHomeFeed={true}
+        />
       )}
     </div>
   );

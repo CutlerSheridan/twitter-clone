@@ -184,7 +184,7 @@ const TweetCard = ({
         </div>
         <div className="tweetCard-actionAndStats">
           <button
-            className={`tweetCard-action ${
+            className={`tweetCard-action tweetCard-action-disabled ${
               !userAuth ? 'tweetCard-action-disabled' : ''
             }`}
           >

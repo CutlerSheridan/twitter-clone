@@ -9,6 +9,7 @@ const TweetFeed = ({
   tweetAndUserInfoArray,
   includeReplies,
   currentUserInfo,
+  isHomeFeed = false,
 }) => {
   const [tweetsToDisplay, setTweetsToDisplay] = useState([]);
 
@@ -43,13 +44,23 @@ const TweetFeed = ({
             key={`${Math.random()}` + `${Math.random()}`}
           />
         ))}
+        {isHomeFeed && !tweetsToDisplay.length && currentUserInfo ? (
+          <div className="home-guestMessage">{`Follow users to populate your home feed!\nYou could get started by following @cutler`}</div>
+        ) : (
+          <></>
+        )}
+        {isHomeFeed && !currentUserInfo ? (
+          <div className="home-guestMessage">Sign in to get started!</div>
+        ) : (
+          <></>
+        )}
       </div>
     );
   };
 
   return (
     <section className="feed-wrapper">
-      {tweetsToDisplay.length ? createFeed() : <></>}
+      {tweetsToDisplay ? createFeed() : <></>}
     </section>
   );
 };
