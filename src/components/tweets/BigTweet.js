@@ -265,18 +265,27 @@ const BigTweet = (props) => {
             {isPartOfPopupReply ? (
               <></>
             ) : (
-              <button className="bigTweet-action" onClick={launchReplyPopup}>
+              <button
+                className={`bigTweet-action ${
+                  !userAuth ? 'bigTweet-action-disabled' : ''
+                }`}
+                onClick={launchReplyPopup}
+              >
                 <span className="material-symbols-outlined">chat_bubble</span>
               </button>
             )}
-            <button className="bigTweet-action">
+            <button
+              className={`bigTweet-action ${
+                !userAuth ? 'bigTweet-action-disabled' : ''
+              }`}
+            >
               <span className="material-symbols-outlined">laps</span>
             </button>
             <div className="bigTweet-action">
               <button
                 className={`bigTweet-action bigTweet-likeButton ${
                   isLiked ? 'bigTweet-likeButton-liked' : ''
-                }`}
+                } ${!userAuth ? 'bigTweet-action-disabled' : ''}`}
                 onClick={() => handleLikeButton()}
               >
                 ♥
@@ -334,7 +343,7 @@ const BigTweet = (props) => {
         </section>
       </div>
     ) : (
-      <div>Loading...</div>
+      <div className="bigTweet-loading">Loading...</div>
     );
   }
 };

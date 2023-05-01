@@ -84,3 +84,9 @@
   background: var(--clr-3-dark);
   border-radius: 0.5rem;
 }
+
+.userList-empty,
+.userList-loading {
+  margin: 3rem 2rem;
+  font-style: italic;
+}

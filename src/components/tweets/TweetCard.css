@@ -148,3 +148,8 @@
 .tweetCard-likeButton-liked {
   color: var(--clr-5);
 }
+.tweetCard-action-disabled,
+.tweetCard-action-disabled > span {
+  color: var(--clr-3-dark);
+  pointer-events: none;
+}

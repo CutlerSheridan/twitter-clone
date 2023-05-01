@@ -6,10 +6,6 @@ Still in progress but the bones are there.
 
 #### TODO NEXT
 
-- disable tweetcard reply button when not signed in
-- disable big tweet reply button when not signed in
-- disable tweetcard like button when not signed in
-- disable big tweet like button when not signed in
 - test signed in but no followers home feed message
 
 #### TODO LATER
@@ -44,6 +40,14 @@ Still in progress but the bones are there.
 - add credit
 
 #### DONE
+
+_0.8.17_
+
+- disable tweetCard actions when not signed in
+- style followers/ing/likes loading text
+- make following/ers lists show when not signed in
+- refactor likes list to show when no likes
+- disable big tweet actions when not signed in
 
 _0.8.16_
 

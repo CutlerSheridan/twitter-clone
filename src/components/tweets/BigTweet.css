@@ -181,3 +181,14 @@
 .bigTweet-likeButton-liked {
   color: var(--clr-5);
 }
+
+.bigTweet-action-disabled,
+.bigTweet-action-disabled > span {
+  color: var(--clr-3-dark);
+  pointer-events: none;
+}
+
+.bigTweet-loading {
+  margin: 5rem 3rem;
+  font-style: italic;
+}

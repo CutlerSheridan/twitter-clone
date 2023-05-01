@@ -172,13 +172,22 @@ const TweetCard = ({
       </div>
       <div className="tweetCard-bottomRow">
         <div className="tweetCard-actionAndStats">
-          <button className="tweetCard-action" onClick={launchReplyPopup}>
+          <button
+            className={`tweetCard-action ${
+              !userAuth ? 'tweetCard-action-disabled' : ''
+            }`}
+            onClick={launchReplyPopup}
+          >
             <span className="material-symbols-outlined">chat_bubble</span>
           </button>
           <div className="tweetCard-stat">{tweetInfo.replies.length}</div>
         </div>
         <div className="tweetCard-actionAndStats">
-          <button className="tweetCard-action">
+          <button
+            className={`tweetCard-action ${
+              !userAuth ? 'tweetCard-action-disabled' : ''
+            }`}
+          >
             <span className="material-symbols-outlined">laps</span>
           </button>
           <div className="tweetCard-stat">{tweetInfo.retweets.length}</div>
@@ -187,7 +196,7 @@ const TweetCard = ({
           <button
             className={`tweetCard-action tweetCard-likeButton ${
               isLiked ? 'tweetCard-likeButton-liked' : ''
-            }`}
+            } ${!userAuth ? 'tweetCard-action-disabled' : ''}`}
             onClick={() => handleLikeButton()}
           >
             ♥
@@ -195,7 +204,7 @@ const TweetCard = ({
           <div className="tweetCard-stat">{numOfLikes}</div>
         </div>
         <div className="tweetCard-actionAndStats">
-          <button className="tweetCard-action" onClick={copyLink}>
+          <button className={`tweetCard-action`} onClick={copyLink}>
             <span className="material-symbols-outlined">ios_share</span>
           </button>
           <div
