@@ -1,4 +1,5 @@
 .signIn-container {
+  padding: 0.6rem 0.7rem;
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -9,16 +10,23 @@
   font-size: 1.7rem;
 }
 .signIn-tweetButton {
-  margin-top: 4rem;
-  /* padding: 0.7rem 0.7rem 0.7rem 1.05rem; */
+  --size: 7rem;
+  margin-top: 7.7rem;
   padding: 1.3rem;
+  height: var(--size);
+  width: var(--size);
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 5rem;
 }
+@media only screen and (min-width: 700px) {
+  .signIn-tweetButton {
+    --size: 8rem;
+    margin-top: 7rem;
+  }
+}
 .signIn-tweetButton > span {
-  /* display: block; */
   font-size: 5rem;
   transform: scale(-1, 1);
   font-variation-settings: 'FILL' 1, 'wght' 350, 'GRAD' 0, 'opsz' 48;

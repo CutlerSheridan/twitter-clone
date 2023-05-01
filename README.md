@@ -2,11 +2,12 @@
 
 ## Use it just like Twitter!
 
-Still in progress but the bones are there.
+Still in progress but the bones are there. Currently looks better on desktop than on mobile.
 
 #### TODO NEXT
 
 - style for mobile
+  - figure out widths of middle column
 - add credit
 - add gh-pages deployment scripts
 - adjust firebase settings to enable google authenticator once it's deployed
@@ -44,6 +45,15 @@ Still in progress but the bones are there.
 - ? add colored banner to profile pages
 
 #### DONE
+
+_0.9.1_
+
+- adjust mobile hover on navbar buttons
+- make navbar button text disappear on mobile
+- add margin above user search
+- adding username padding and lower tweet button
+- make user search form "go" button wrap to next line on mobile
+- fix following/ers/likes list hovers on mobile
 
 _0.9.0_
 

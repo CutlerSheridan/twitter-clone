@@ -10,9 +10,15 @@
 .userList-innerContainer {
   margin: auto;
   padding: 3rem;
-  width: 60rem;
+  /* width: var(--middle-width-mobile); */
+  width: 32rem;
   background: var(--clr-1);
   box-shadow: 0 0 1rem 0.3rem var(--clr-3-dark);
+}
+@media only screen and (min-width: 700px) {
+  .userList-innerContainer {
+    width: var(--middle-width-desktop);
+  }
 }
 .userList-close {
   display: flex;
@@ -45,8 +51,13 @@
   display: flex;
   color: var(--clr-2);
 }
-.userList-userCard:hover {
+.userList-userCard:active {
   background: var(--clr-1-light);
+}
+@media only screen and (hover: hover) {
+  .userList-userCard:hover {
+    background: var(--clr-1-light);
+  }
 }
 .userList-avi {
   margin: 0.5rem;

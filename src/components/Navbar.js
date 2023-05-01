@@ -32,7 +32,8 @@ const Navbar = () => {
       <nav>
         <div className="navbar-button">
           <Link to="/">
-            <span className="material-symbols-outlined">home</span> Home
+            <span className="material-symbols-outlined">home</span>
+            <div className="navbar-button-text">Home</div>
           </Link>
         </div>
         <div
@@ -42,7 +43,7 @@ const Navbar = () => {
         >
           <Link to={`${currentUserHandle}`}>
             <span className="material-symbols-outlined">account_circle</span>{' '}
-            Profile
+            <div className="navbar-button-text">Profile</div>
           </Link>
         </div>
         <form className="navbar-findUserForm" onSubmit={handleFindUser}>

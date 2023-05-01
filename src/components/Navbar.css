@@ -6,7 +6,7 @@ nav {
   gap: 1rem;
 }
 .navbar-button > a {
-  padding: 0.6rem 0.7rem;
+  padding: 0.6rem 0.4rem;
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -15,11 +15,25 @@ nav {
 }
 .navbar-button > a > span {
   font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 48;
-  font-size: 2.4rem;
+  font-size: 4rem;
 }
-.navbar-button > a:hover {
+.navbar-button > a:active {
   background: var(--clr-3-dark);
   border-radius: 0.5rem;
+}
+@media only screen and (hover: hover) {
+  .navbar-button > a:hover {
+    background: var(--clr-3-dark);
+    border-radius: 0.5rem;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .navbar > a {
+    padding: 0.6rem 0.7rem;
+  }
+  .navbar-button > a > span {
+    font-size: 2.4rem;
+  }
 }
 .navbar-button-disabled > a,
 .navbar-button-disabled > a > span {
@@ -29,15 +43,35 @@ nav {
 .navbar-button-disabled > a:hover {
   background: none;
 }
+.navbar-button-text {
+  display: none;
+}
 .navbar-findUserForm {
+  margin-top: 4rem;
   padding: 0 0 0 0.7rem;
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
   font-weight: bold;
 }
+.navbar-searchFieldAndButton {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 .navbar-searchFieldAndButton > input {
-  margin-right: 0.7rem;
+  margin: 0 0.7rem 0.7rem 0;
   padding: 0.2rem 0.3rem;
-  width: 12ch;
+  width: 8ch;
+}
+@media only screen and (min-width: 600px) {
+  .navbar-button-text {
+    display: block;
+  }
+  .navbar-searchFieldAndButton {
+    flex-direction: row;
+  }
+  .navbar-searchFieldAndButton > input {
+    width: 12ch;
+  }
 }
