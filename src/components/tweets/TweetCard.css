@@ -125,9 +125,10 @@
 .tweetCard-stat {
   color: var(--clr-3);
 }
-.tweetCard-action:hover,
-.tweetCard-action > span:hover {
+.tweetCard-action:hover {
   background: none;
+}
+.tweetCard-action > span:active {
   color: var(--clr-4);
 }
 .tweetCard-likeWrapper {
@@ -138,12 +139,19 @@
   border: none;
   cursor: pointer;
 }
-.tweetCard-likeButton:hover {
-  color: var(--clr-5-light);
-  background: inherit;
-}
 .tweetCard-likeButton:active {
   color: var(--clr-5);
+}
+@media only screen and (hover: hover) {
+  .tweetCard-action:hover,
+  .tweetCard-action > span:hover {
+    background: none;
+    color: var(--clr-4);
+  }
+  .tweetCard-likeButton:hover {
+    color: var(--clr-5-light);
+    background: inherit;
+  }
 }
 .tweetCard-likeButton-liked {
   color: var(--clr-5);

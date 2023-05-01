@@ -14,10 +14,15 @@
   border-right: 2px solid var(--clr-3-dark);
 }
 .layout-wrapper > div:nth-child(2) {
-  width: 60rem;
+  width: 28rem;
   border-top: none;
   border-bottom: none;
 }
 .layout-wrapper > div:last-child {
   border-left: 2px solid var(--clr-3-dark);
+}
+@media only screen and (min-width: 700px) {
+  .layout-wrapper > div:nth-child(2) {
+    width: 60rem;
+  }
 }

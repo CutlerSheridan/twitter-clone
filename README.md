@@ -6,6 +6,7 @@ Still in progress but the bones are there.
 
 #### TODO NEXT
 
+- style for mobile
 - add credit
 - add gh-pages deployment scripts
 - adjust firebase settings to enable google authenticator once it's deployed
@@ -29,10 +30,10 @@ Still in progress but the bones are there.
 - ? handle manually navigating to UserListPopup component without a user IDs array in state from Link
 - fix how when signed out, nav elements not there (correct behavior), but when signing in (or maybe only new user signing in?), they don't populate, which they should
 - ? prevent reply label from blinking twice times upon component mounting
+- make sure share button copies correctly on iOS
 
 ##### Style
 
-- figure out how to handle everything on mobile
 - make replies have a vertical line to indicate they're replies--at least in Big Tweet thread
 - ? make entire tweetCard link; whole thing highlight upon hover
 - ? get X and title on same line for Compose Reply Popup
@@ -43,6 +44,12 @@ Still in progress but the bones are there.
 - ? add colored banner to profile pages
 
 #### DONE
+
+_0.9.0_
+
+- adjust bigtweet action hover style for mobile
+- adjust tweetcard action hover style for mobile
+- start playing with mobile widths
 
 _0.8.18_
 

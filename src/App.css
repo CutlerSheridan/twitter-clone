@@ -15,8 +15,13 @@
   --clr-5: red;
   --clr-5-light: pink;
   --clr-5-dark: rgb(204, 3, 3);
-  font-size: 62.5%;
+  font-size: 50%;
   background: var(--clr-1);
+}
+@media only screen and (min-width: 1000px) {
+  :root {
+    font-size: 62.5%;
+  }
 }
 *,
 *::before,
