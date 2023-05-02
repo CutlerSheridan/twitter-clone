@@ -1,6 +1,6 @@
 {
   "name": "twitter-clone",
-  "version": "0.9.5",
+  "version": "1.0.0",
   "homepage": "https://cutlersheridan.github.io/twitter-clone",
   "private": true,
   "dependencies": {

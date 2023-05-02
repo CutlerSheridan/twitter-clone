@@ -6,13 +6,13 @@ Still in progress but the bones are there. Currently looks better on desktop tha
 
 #### TODO NEXT
 
-- add basename to router
+- create notifications page
+- write notifications logic
 
 #### TODO LATER
 
 ##### Features
 
-- add notifications
 - add ability to retweet
 - add pinned tweet option
 - ? add ability to change avi
@@ -38,6 +38,10 @@ Still in progress but the bones are there. Currently looks better on desktop tha
 - ? remove "replying to" label from big tweets
 
 #### DONE
+
+_1.0.0_
+
+- add basename to router
 
 _0.9.5_
 
