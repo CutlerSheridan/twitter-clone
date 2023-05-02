@@ -6,10 +6,9 @@ Still in progress but the bones are there. Currently looks better on desktop tha
 
 #### TODO NEXT
 
-- add gh-pages deployment scripts
-- adjust firebase settings to enable google authenticator once it's deployed
+- make replies have a vertical line to indicate they're replies--at least in Big Tweet thread
 - add basename to router
-- ? add firebase rules to only allow signed-in users to read/write to db
+- add firebase rules to only allow signed-in users certain actions
 
 #### TODO LATER
 
@@ -32,16 +31,20 @@ Still in progress but the bones are there. Currently looks better on desktop tha
 
 ##### Style
 
-- make replies have a vertical line to indicate they're replies--at least in Big Tweet thread
-- ? make entire tweetCard link; whole thing highlight upon hover
-- ? get X and title on same line for Compose Reply Popup
+- make entire tweetCard link; whole thing highlight upon hover
+- get X and title on same line for Compose Reply Popup
 - make "follow" button white if not following, black if following
-- ? add profile banner image
+- ? add temp colored banner to profile pages
+- add profile banner image
+- style unassigned avis
 - ? remove "replying to" label from big tweets
-- ? style unassigned avis
-- ? add colored banner to profile pages
 
 #### DONE
+
+_0.9.4_
+
+- add gh-pages deployment scripts
+- adjust firebase settings to enable google authenticator on cutlersheridan.github.io once it's deployed
 
 _0.9.3_
 
