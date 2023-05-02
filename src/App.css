@@ -16,6 +16,8 @@
   --clr-5-light: pink;
   --clr-5-dark: rgb(204, 3, 3);
   --middle-width-mobile: 28rem;
+  --middle-width-2: 40rem;
+  --middle-width-3: 50rem;
   --middle-width-desktop: 60rem;
   font-size: 50%;
   background: var(--clr-1);

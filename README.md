@@ -6,8 +6,6 @@ Still in progress but the bones are there. Currently looks better on desktop tha
 
 #### TODO NEXT
 
-- style for mobile
-  - figure out widths of middle column
 - add credit
 - add gh-pages deployment scripts
 - adjust firebase settings to enable google authenticator once it's deployed
@@ -45,6 +43,11 @@ Still in progress but the bones are there. Currently looks better on desktop tha
 - ? add colored banner to profile pages
 
 #### DONE
+
+_0.9.2_
+
+- adjust following/ers/likes list width for mobile
+- add more breakpoints for middle column width
 
 _0.9.1_
 

@@ -21,6 +21,16 @@
 .layout-wrapper > div:last-child {
   border-left: 2px solid var(--clr-3-dark);
 }
+@media only screen and (min-width: 425px) {
+  .layout-wrapper > div:nth-child(2) {
+    width: var(--middle-width-2);
+  }
+}
+@media only screen and (min-width: 575px) {
+  .layout-wrapper > div:nth-child(2) {
+    width: var(--middle-width-3);
+  }
+}
 @media only screen and (min-width: 700px) {
   .layout-wrapper > div:first-child,
   .layout-wrapper > div:last-child {
