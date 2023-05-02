@@ -30,10 +30,23 @@
   background: var(--clr-3-dark);
 }
 .bigTweet-tweetWrapper > .bigTweet-divider {
-  margin-top: 1rem;
+  margin-top: 0rem;
 }
-
+.bigTweet-tweetWrapper {
+  position: relative;
+}
+.bigTweet-threadLine::before {
+  position: absolute;
+  content: '';
+  width: 3px;
+  height: 5rem;
+  top: 0;
+  left: 4.5rem;
+  background: var(--clr-3);
+  z-index: -1;
+}
 .bigTweet-middleRow {
+  padding: 0.6rem 1.6rem;
   display: flex;
   gap: 1rem;
 }

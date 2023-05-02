@@ -14,6 +14,7 @@ const TweetCard = ({
   tweet: tweetInfo,
   userInfo: tweeterInfo = null,
   currentUserInfo = {},
+  threadLines = 'none',
 }) => {
   const userAuth = useContext(UserContext);
   const creationMilliseconds = tweetInfo
@@ -92,7 +93,7 @@ const TweetCard = ({
       This tweet has been deleted by its author.
     </div>
   ) : (
-    <div className="tweetCard-wrapper">
+    <div className={`tweetCard-wrapper tweetCard-lines-${threadLines}`}>
       <div className="tweetCard-middleRow">
         <img
           src={tweeterInfo.avi}

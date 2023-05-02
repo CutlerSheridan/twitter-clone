@@ -6,9 +6,7 @@ Still in progress but the bones are there. Currently looks better on desktop tha
 
 #### TODO NEXT
 
-- make replies have a vertical line to indicate they're replies--at least in Big Tweet thread
 - add basename to router
-- add firebase rules to only allow signed-in users certain actions
 
 #### TODO LATER
 
@@ -41,10 +39,19 @@ Still in progress but the bones are there. Currently looks better on desktop tha
 
 #### DONE
 
+_0.9.5_
+
+- add vertical thread lines in big tweet page threads to show what's been responding to what
+- align big tweet avi with tweetcard thread avis so their thread lines can match up
+- get first reply in future thread to never show top line
+- simplify thread lines logic
+- make big tweet show top thread line when necessary
+
 _0.9.4_
 
 - add gh-pages deployment scripts
 - adjust firebase settings to enable google authenticator on cutlersheridan.github.io once it's deployed
+- add firebase rules to only allow signed-in users certain actions
 
 _0.9.3_
 

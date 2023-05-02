@@ -148,6 +148,8 @@ const BigTweet = (props) => {
               tweetAndUserInfoArray={threadTweets.previousTweetsAndUsersInfo}
               includeReplies={true}
               currentUserInfo={currentUserInfo}
+              needsThreadLines={true}
+              previousOrFutureThread={'previous'}
             />
           ) : (
             <></>
@@ -155,10 +157,13 @@ const BigTweet = (props) => {
 
           <div className="bigTweet-tweetWrapper">
             <div className="bigTweet-divider"></div>
+            <div
+              className={`${tweetInfo.isReply ? 'bigTweet-threadLine' : ''}`}
+            ></div>
             <div className="bigTweet-middleRow">
               <img
                 src={tweeterInfo.avi}
-                className="bigTweet-avi"
+                className={`bigTweet-avi`}
                 referrerPolicy="no-referrer"
               ></img>
               {tweeterInfo ? (
@@ -331,6 +336,8 @@ const BigTweet = (props) => {
                           ? true
                           : false
                       }
+                      needsThreadLines={true}
+                      previousOrFutureThread="future"
                       key={`${Math.random()}` + `${Math.random()}`}
                     />
                   ))}

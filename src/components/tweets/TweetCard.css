@@ -1,4 +1,5 @@
 .tweetCard-wrapper {
+  position: relative;
   padding: 1.6rem;
   display: flex;
   flex-direction: column;
@@ -9,6 +10,28 @@
 .tweetCard-wrapper-deleted {
   padding: 3rem 1.65rem;
   font-style: italic;
+}
+.tweetCard-lines-top::before,
+.tweetCard-lines-both::before {
+  position: absolute;
+  content: '';
+  width: 3px;
+  height: 25%;
+  top: 0;
+  left: 4.5rem;
+  background: var(--clr-3);
+  z-index: -1;
+}
+.tweetCard-lines-bottom::after,
+.tweetCard-lines-both::after {
+  position: absolute;
+  content: '';
+  width: 3px;
+  height: 75%;
+  top: 25%;
+  left: 4.5rem;
+  background: var(--clr-3);
+  z-index: -1;
 }
 .tweetCard-middleRow {
   display: flex;

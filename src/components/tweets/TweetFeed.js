@@ -12,6 +12,8 @@ const TweetFeed = ({
   isHomeFeed = false,
   needsBottomBorder = false,
   needsCredit = false,
+  needsThreadLines = false,
+  previousOrFutureThread = false,
 }) => {
   const [tweetsToDisplay, setTweetsToDisplay] = useState([]);
 
@@ -40,14 +42,64 @@ const TweetFeed = ({
       <div
         className={`feed ${needsBottomBorder ? 'feed-needsBottomBorder' : ''}`}
       >
-        {tweetsToDisplay.map((x) => (
-          <TweetCard
-            tweet={x.tweetInfo}
-            userInfo={x.userInfo}
-            currentUserInfo={currentUserInfo}
-            key={`${Math.random()}` + `${Math.random()}`}
-          />
-        ))}
+        {tweetsToDisplay.map((x, index) => {
+          if (!needsThreadLines) {
+            return (
+              <TweetCard
+                tweet={x.tweetInfo}
+                userInfo={x.userInfo}
+                currentUserInfo={currentUserInfo}
+                key={`${Math.random()}` + `${Math.random()}`}
+              />
+            );
+          } else if (
+            index === 0 &&
+            (previousOrFutureThread === 'previous' ||
+              tweetsToDisplay.length > 1)
+          ) {
+            return (
+              <TweetCard
+                tweet={x.tweetInfo}
+                userInfo={x.userInfo}
+                currentUserInfo={currentUserInfo}
+                threadLines="bottom"
+                key={`${Math.random()}` + `${Math.random()}`}
+              />
+            );
+          } else if (index === 0 && previousOrFutureThread === 'future') {
+            return (
+              <TweetCard
+                tweet={x.tweetInfo}
+                userInfo={x.userInfo}
+                currentUserInfo={currentUserInfo}
+                key={`${Math.random()}` + `${Math.random()}`}
+              />
+            );
+          } else if (
+            previousOrFutureThread === 'future' &&
+            index === tweetsToDisplay.length - 1
+          ) {
+            return (
+              <TweetCard
+                tweet={x.tweetInfo}
+                userInfo={x.userInfo}
+                currentUserInfo={currentUserInfo}
+                threadLines="top"
+                key={`${Math.random()}` + `${Math.random()}`}
+              />
+            );
+          } else {
+            return (
+              <TweetCard
+                tweet={x.tweetInfo}
+                userInfo={x.userInfo}
+                currentUserInfo={currentUserInfo}
+                threadLines="both"
+                key={`${Math.random()}` + `${Math.random()}`}
+              />
+            );
+          }
+        })}
         {isHomeFeed &&
         !tweetsToDisplay.length &&
         currentUserInfo.id !== 'guest' ? (
