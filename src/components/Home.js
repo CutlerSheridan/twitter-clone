@@ -3,38 +3,35 @@ import { getUserInfo } from '../FirebaseController';
 import { UserContext } from '../UserContext';
 import './Home.css';
 import TweetFeed from './tweets/TweetFeed';
+import * as model from '../model';
 
 const Home = () => {
   const currentUserAuth = useContext(UserContext);
   const [idsForFeed, setIdsForFeed] = useState([]);
-  const [currentUserInfo, setCurrentUserInfo] = useState(null);
+  const [currentUserInfo, setCurrentUserInfo] = useState(model.GuestUser());
 
   useEffect(() => {
-    if (currentUserAuth && !idsForFeed.length) {
+    if (currentUserAuth) {
       getUserInfo(currentUserAuth.uid).then((result) => {
         setIdsForFeed(result.following);
         setCurrentUserInfo(result);
       });
+    } else {
+      setCurrentUserInfo(model.GuestUser());
+      setIdsForFeed([]);
     }
   }, [currentUserAuth]);
 
   return (
     <div className="home-wrapper layout-element">
-      {currentUserAuth && idsForFeed.length ? (
-        <TweetFeed
-          idsForFeed={idsForFeed}
-          includeReplies={true}
-          currentUserInfo={currentUserInfo}
-          isHomeFeed={true}
-        />
-      ) : (
-        <TweetFeed
-          idsForFeed={[]}
-          includeReplies={true}
-          currentUserInfo={null}
-          isHomeFeed={true}
-        />
-      )}
+      <TweetFeed
+        idsForFeed={idsForFeed}
+        includeReplies={true}
+        currentUserInfo={currentUserInfo}
+        isHomeFeed={true}
+        needsBottomBorder={true}
+        needsCredit={true}
+      />
     </div>
   );
 };

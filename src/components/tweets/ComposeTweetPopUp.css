@@ -20,9 +20,14 @@
 .composePopUp-innerContainer {
   margin: auto;
   padding: 3rem;
-  width: 60rem;
+  width: min(100%, 50rem);
   background: var(--clr-1);
   box-shadow: 0 0 1rem 0.3rem var(--clr-3-dark);
+}
+@media only screen and (min-width: 700px) {
+  .composePopUp-innerContainer {
+    width: var(--middle-width-desktop);
+  }
 }
 .composePopUp-close {
   display: flex;

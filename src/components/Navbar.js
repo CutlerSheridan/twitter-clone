@@ -47,12 +47,21 @@ const Navbar = () => {
           </Link>
         </div>
         <form className="navbar-findUserForm" onSubmit={handleFindUser}>
-          <label htmlFor="userSearchField">Find user:</label>
+          <label className="navbar-searchLabel" htmlFor="userSearchField">
+            Find user:
+          </label>
           <div className="navbar-searchFieldAndButton">
             <input type="text" id="userSearchField"></input>
             <button type="submit">Go</button>
           </div>
         </form>
+        <div className="credit navbar-credit">
+          <p>Made by Cutler Sheridan.</p>
+          <p>
+            See more{' '}
+            <a href="https://cutlersheridan.github.com/portfolio">here</a>.
+          </p>
+        </div>
       </nav>
     );
   };

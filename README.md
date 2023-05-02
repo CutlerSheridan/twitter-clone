@@ -6,7 +6,6 @@ Still in progress but the bones are there. Currently looks better on desktop tha
 
 #### TODO NEXT
 
-- add credit
 - add gh-pages deployment scripts
 - adjust firebase settings to enable google authenticator once it's deployed
 - add basename to router
@@ -44,10 +43,22 @@ Still in progress but the bones are there. Currently looks better on desktop tha
 
 #### DONE
 
+_0.9.3_
+
+- add credit to navbar
+- add bottom border to tweet feeds
+- add width breakpoints for compose tweet popup
+- adjust breakpoints for user search layout
+- add conditional bottom border to tweetfeeds so final tweets in feed are closed at bottom on profile, home, and big tweet pages
+- add credit to big tweets
+- make credit show on navbar when wide enough; otherwise, show at bottom of middle column
+- adjust sign-out logic on home page to properly unload feed after signing out
+
 _0.9.2_
 
 - adjust following/ers/likes list width for mobile
 - add more breakpoints for middle column width
+- add the light blue color var back in for button hovers
 
 _0.9.1_
 

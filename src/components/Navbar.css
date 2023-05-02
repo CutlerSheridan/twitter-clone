@@ -27,7 +27,7 @@ nav {
     border-radius: 0.5rem;
   }
 }
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 635px) {
   .navbar > a {
     padding: 0.6rem 0.7rem;
   }
@@ -54,6 +54,9 @@ nav {
   gap: 0.7rem;
   font-weight: bold;
 }
+.navbar-searchLabel {
+  width: min-content;
+}
 .navbar-searchFieldAndButton {
   display: flex;
   flex-direction: column;
@@ -62,12 +65,29 @@ nav {
 .navbar-searchFieldAndButton > input {
   margin: 0 0.7rem 0.7rem 0;
   padding: 0.2rem 0.3rem;
-  width: 8ch;
+  width: 4ch;
 }
-@media only screen and (min-width: 600px) {
+.navbar-searchFieldAndButton > input:focus {
+  width: 15rem;
+}
+
+@media only screen and (min-width: 525px) {
+  .navbar-searchLabel {
+    width: max-content;
+  }
+  .navbar-searchFieldAndButton > input {
+    width: 7ch;
+  }
+}
+@media only screen and (min-width: 635px) {
   .navbar-button-text {
     display: block;
   }
+  .navbar-searchFieldAndButton > input {
+    width: 10ch;
+  }
+}
+@media only screen and (min-width: 840px) {
   .navbar-searchFieldAndButton {
     flex-direction: row;
   }

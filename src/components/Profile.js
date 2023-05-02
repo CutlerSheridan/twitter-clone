@@ -285,6 +285,8 @@ const Profile = () => {
               idsForFeed={[userInfo.id]}
               includeReplies={false}
               currentUserInfo={currentUserInfo}
+              needsBottomBorder={true}
+              needsCredit={true}
             />
           );
         case 'replies':
@@ -293,6 +295,8 @@ const Profile = () => {
               idsForFeed={[userInfo.id]}
               includeReplies={true}
               currentUserInfo={currentUserInfo}
+              needsBottomBorder={true}
+              needsCredit={true}
             />
           );
         case 'likes':
@@ -301,6 +305,8 @@ const Profile = () => {
               likes={userInfo.likes}
               includeReplies={true}
               currentUserInfo={currentUserInfo}
+              needsBottomBorder={true}
+              needsCredit={true}
             />
           );
       }

@@ -319,11 +319,18 @@ const BigTweet = (props) => {
               )}
               {tweetInfo.replies.length && threadTweets ? (
                 <div>
-                  {threadTweets.futureThreadsArray.map((x) => (
+                  {threadTweets.futureThreadsArray.map((x, index) => (
                     <TweetFeed
                       tweetAndUserInfoArray={x}
                       includeReplies={true}
                       currentUserInfo={tweeterInfo}
+                      needsBottomBorder={
+                        threadTweets.futureThreadsArray.length &&
+                        index === threadTweets.futureThreadsArray.length - 1 &&
+                        !threadTweets.replyTweetsAndUsersInfo.length
+                          ? true
+                          : false
+                      }
                       key={`${Math.random()}` + `${Math.random()}`}
                     />
                   ))}
@@ -331,6 +338,9 @@ const BigTweet = (props) => {
                     tweetAndUserInfoArray={threadTweets.replyTweetsAndUsersInfo}
                     includeReplies={true}
                     currentUserInfo={currentUserInfo}
+                    needsBottomBorder={
+                      threadTweets.replyTweetsAndUsersInfo.length ? true : false
+                    }
                   />
                 </div>
               ) : (
@@ -341,6 +351,13 @@ const BigTweet = (props) => {
 
           <Outlet />
         </section>
+        <div className="credit bigTweet-credit">
+          <p>Made by Cutler Sheridan.</p>
+          <p>
+            See more{' '}
+            <a href="https://cutlersheridan.github.com/portfolio">here</a>.
+          </p>
+        </div>
       </div>
     ) : (
       <div className="bigTweet-loading">Loading...</div>

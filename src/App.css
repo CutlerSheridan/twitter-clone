@@ -12,7 +12,7 @@
   --clr-4: dodgerblue;
   --clr-4-light: rgb(78, 167, 255);
   /* red */
-  --clr-5: red;
+  --clr-5: crimson;
   --clr-5-light: pink;
   --clr-5-dark: rgb(204, 3, 3);
   --middle-width-mobile: 28rem;
@@ -79,4 +79,41 @@ button:hover {
 .alert-textCopied-visible {
   opacity: 100%;
   z-index: 0;
+}
+
+.credit {
+  font-family: monospace;
+  font-size: 1.4rem;
+  color: var(--clr-3);
+}
+.credit > p,
+.credit > p > a {
+  color: inherit;
+}
+.credit > p > a:active {
+  color: var(--clr-2);
+}
+@media only screen and (hover: hover) {
+  .credit > p > a:hover {
+    color: var(--clr-2);
+  }
+}
+.navbar-credit {
+  display: none;
+  padding: 0.6rem;
+}
+@media only screen and (min-width: 840px) {
+  .navbar-credit {
+    display: block;
+  }
+}
+.tweetFeed-credit,
+.bigTweet-credit {
+  padding: 1.5rem;
+}
+@media only screen and (min-width: 840px) {
+  .tweetFeed-credit,
+  .bigTweet-credit {
+    display: none;
+  }
 }

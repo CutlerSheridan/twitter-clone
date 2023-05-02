@@ -1,0 +1,3 @@
+.feed-needsBottomBorder {
+  border-bottom: 1px solid var(--clr-3-dark);
+}
