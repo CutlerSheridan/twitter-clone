@@ -59,7 +59,7 @@ const Navbar = () => {
           <p>Made by Cutler Sheridan.</p>
           <p>
             See more{' '}
-            <a href="https://cutlersheridan.github.com/portfolio">here</a>.
+            <a href="https://cutlersheridan.github.io/portfolio">here</a>.
           </p>
         </div>
       </nav>

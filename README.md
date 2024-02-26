@@ -39,6 +39,10 @@ Still in progress but the bones are there. Currently looks better on desktop tha
 
 #### DONE
 
+_1.0.1_
+
+- fix portfolio link
+
 _1.0.0_
 
 - add basename to router
